@@ -809,9 +809,9 @@ input, select, textarea { font-size:max(16px,1em) !important; }
   .settings-panel{width:min(240px,90vw);right:8px;bottom:60px;}
   .ps-chart-fab{font-size:10px;padding:6px 12px;bottom:8px;left:8px;}
   /* Login */
-  #compass-login{flex-direction:column;}
-  .login-left{flex:none!important;min-height:44vh;max-height:48vh;padding:24px 22px 20px;justify-content:flex-end;}
-  .login-stats{display:none;}
+  #compass-login{flex-direction:column;overflow:hidden;}
+  .login-left{justify-content:center!important;padding:28px 22px!important;}
+  .login-stats{display:flex!important;flex-wrap:wrap;gap:8px;justify-content:center;}
   .login-left-content svg{width:64px!important;height:64px!important;}
   .login-right{width:100%!important;flex:1;padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .login-form-wrap{width:100%!important;max-width:100%!important;}
@@ -841,6 +841,622 @@ input, select, textarea { font-size:max(16px,1em) !important; }
   .login-btn{min-height:54px;}
   .login-guest-btn{min-height:48px;}
   *{-webkit-tap-highlight-color:rgba(26,107,191,.15);}
+}
+
+/* ═══════════════════════════════════════
+   UX IMPROVEMENTS — Intuitive & User-Friendly
+═══════════════════════════════════════ */
+
+/* ── GLOBAL READABILITY ── */
+body { font-size: 14px; }
+.f label { font-size: 10px !important; color: var(--tx2) !important; font-weight: 600 !important; letter-spacing: 0.5px !important; }
+.f input, .f select { font-size: 14px !important; padding: 8px 10px !important; min-height: 40px !important; border-radius: 6px !important; }
+.f input::placeholder { color: var(--tx3); opacity: 0.7; }
+
+/* ── SMOOTH TRANSITIONS ── */
+.abcde-section { transition: all 0.25s ease; }
+.abcde-section:hover { box-shadow: 0 2px 12px var(--shadow2); }
+
+/* ── COLLAPSIBLE ABCDE SECTIONS ── */
+.abcde-hdr { cursor: pointer; user-select: none; padding-bottom: 8px !important; }
+.abcde-hdr:hover .abcde-label { opacity: 0.8; }
+.abcde-toggle-arrow {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--tx3);
+  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg3);
+}
+.abcde-toggle-arrow.collapsed { transform: rotate(-90deg); }
+.abcde-body {
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  max-height: 800px;
+  opacity: 1;
+}
+.abcde-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── SECTION SUMMARY (visible when collapsed) ── */
+.abcde-summary {
+  display: none;
+  font-size: 11px;
+  color: var(--tx2);
+  font-family: var(--mono);
+  padding: 4px 0 2px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.abcde-summary.show { display: flex; }
+.abcde-summary-val {
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.abcde-summary-val.has-val { border-color: var(--blue); color: var(--blue); background: rgba(26,107,191,0.06); }
+
+/* ── STEP PROGRESS INDICATOR ── */
+.step-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 14px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-family: var(--mono);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  color: var(--tx3);
+  background: transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.step-item.active { color: var(--blue); background: rgba(26,107,191,0.08); }
+.step-item.done { color: var(--green); }
+.step-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--tx3);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.step-item.active .step-dot { border-color: var(--blue); background: var(--blue); }
+.step-item.done .step-dot { border-color: var(--green); background: var(--green); }
+.step-line {
+  width: 20px; height: 1px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+/* ── IMPROVED HEADER ── */
+.hdr {
+  height: auto !important;
+  padding: 8px 16px !important;
+  gap: 8px !important;
+}
+.logo-sub { font-size: 8px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── BETTER MONITOR BAR ── */
+.monbar { padding: 10px 16px !important; gap: 6px !important; }
+.mc { border-radius: 10px !important; padding: 8px 10px !important; }
+.mv { font-size: 20px !important; }
+.ml { font-size: 9px !important; font-weight: 600 !important; }
+.ms { font-size: 9px !important; }
+
+/* ── IMPROVED TIMER CARDS ── */
+.tc { border-radius: 10px !important; padding: 8px 12px !important; }
+.tn { font-size: 8px !important; font-weight: 600 !important; }
+.td { font-size: 16px !important; }
+.tc-hint { font-size: 8px; color: var(--tx3); margin-top: 2px; font-style: italic; }
+
+/* ── BETTER EVENT BAR ── */
+.ev-btn { border-radius: 10px !important; }
+.ev-label { font-size: 9px !important; font-weight: 600 !important; }
+
+/* ── IMPROVED CTA BUTTON ── */
+.abtn {
+  font-size: 14px !important;
+  padding: 14px !important;
+  border-radius: 10px !important;
+  margin-top: 12px !important;
+  position: relative;
+  overflow: hidden;
+}
+.abtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.abtn:hover::after { transform: translateX(100%); }
+
+/* ── BETTER HINTS ── */
+.hint {
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+  border-left: 3px solid var(--blue) !important;
+}
+
+/* ── FIELD TOOLTIPS ── */
+.f { position: relative; }
+.f .field-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  color: var(--tx3);
+  font-size: 8px;
+  font-weight: 700;
+  cursor: help;
+  margin-left: 4px;
+  vertical-align: middle;
+  position: relative;
+}
+.f .field-help:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tx);
+  color: var(--bg2);
+  font-size: 10px;
+  font-weight: 400;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+  max-width: 200px;
+  white-space: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+/* ── WELCOME MODAL OVERLAY ── */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: welcomeFadeIn 0.4s ease;
+}
+@keyframes welcomeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.welcome-overlay.dismissing {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.welcome-modal {
+  background: var(--bg2);
+  border: 1.5px solid var(--blue);
+  border-radius: 20px;
+  padding: 32px 36px;
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(26,107,191,0.1);
+  animation: welcomeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+  overflow: hidden;
+}
+@keyframes welcomeSlideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.welcome-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--blue), var(--lav), var(--amber));
+  border-radius: 20px 20px 0 0;
+}
+.welcome-modal .welcome-icon {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, var(--blue), var(--lav));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(26,107,191,0.25);
+}
+.welcome-modal h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--tx);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+.welcome-modal .welcome-subtitle {
+  font-size: 13px;
+  color: var(--tx2);
+  line-height: 1.7;
+  margin: 0;
+}
+.welcome-modal .welcome-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 4px 0;
+}
+.welcome-modal .ws {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--tx2);
+  line-height: 1.4;
+  transition: all 0.15s;
+}
+.welcome-modal .ws:hover {
+  border-color: var(--blue);
+  background: rgba(26,107,191,0.04);
+}
+.welcome-modal .ws-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: var(--mono);
+}
+.welcome-modal .ws:nth-child(2) .ws-num { background: var(--lav); }
+.welcome-modal .ws:nth-child(3) .ws-num { background: var(--green); }
+.welcome-modal .ws b { color: var(--blue); }
+.welcome-dismiss-btn {
+  width: 100%;
+  background: var(--blue);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px;
+  cursor: pointer;
+  font-family: var(--mono);
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(26,107,191,0.3);
+  margin-top: 4px;
+}
+.welcome-dismiss-btn:hover {
+  background: var(--blued);
+  box-shadow: 0 6px 24px rgba(26,107,191,0.4);
+  transform: translateY(-1px);
+}
+.welcome-dismiss-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--tx3);
+  cursor: pointer;
+  margin-top: 2px;
+}
+.welcome-dismiss-check input {
+  width: 16px; height: 16px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+@media(max-width:640px) {
+  .welcome-modal { padding: 24px 22px; border-radius: 16px; }
+  .welcome-modal h3 { font-size: 17px; }
+  .welcome-modal .ws { padding: 10px 12px; font-size: 12px; }
+  .welcome-dismiss-btn { font-size: 13px; padding: 13px; }
+  .welcome-modal .welcome-icon { width: 44px; height: 44px; font-size: 22px; border-radius: 12px; }
+}
+
+/* ── TOAST NOTIFICATIONS ── */
+.toast-container {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  max-width: 380px;
+  width: calc(100% - 32px);
+}
+.toast {
+  pointer-events: all;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--bg2);
+  border: 1.5px solid var(--line);
+  box-shadow: 0 8px 32px var(--shadow2), 0 0 0 1px var(--shadow);
+  animation: toastSlideIn 0.4s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.toast.dismissing {
+  opacity: 0;
+  transform: translateX(100px);
+}
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.toast.warning .toast-icon { background: rgba(194,122,0,0.12); }
+.toast.critical .toast-icon { background: rgba(192,57,43,0.12); }
+.toast.info .toast-icon { background: rgba(26,107,191,0.12); }
+.toast.success .toast-icon { background: rgba(26,127,75,0.12); }
+.toast-body { flex: 1; min-width: 0; }
+.toast-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 2px;
+  font-family: var(--mono);
+  letter-spacing: 0.3px;
+}
+.toast.warning .toast-title { color: var(--amber); }
+.toast.critical .toast-title { color: var(--red); }
+.toast.info .toast-title { color: var(--blue); }
+.toast.success .toast-title { color: var(--green); }
+.toast-msg {
+  font-size: 11px;
+  color: var(--tx2);
+  line-height: 1.5;
+}
+.toast-time {
+  font-size: 9px;
+  color: var(--tx3);
+  font-family: var(--mono);
+  margin-top: 4px;
+}
+.toast-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--tx3);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: all 0.15s;
+}
+.toast-close:hover { background: var(--bg3); color: var(--tx); }
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 0 0 12px 12px;
+  transition: width linear;
+}
+.toast.warning .toast-progress { background: var(--amber); }
+.toast.critical .toast-progress { background: var(--red); }
+.toast.info .toast-progress { background: var(--blue); }
+.toast.success .toast-progress { background: var(--green); }
+
+/* Toast pulse for critical */
+.toast.critical {
+  border-color: rgba(192,57,43,0.4);
+  animation: toastSlideIn 0.4s cubic-bezier(0.16,1,0.3,1), toastCritPulse 2s ease infinite 0.4s;
+}
+@keyframes toastCritPulse {
+  0%, 100% { box-shadow: 0 8px 32px var(--shadow2), 0 0 0 0 rgba(192,57,43,0.2); }
+  50% { box-shadow: 0 8px 32px var(--shadow2), 0 0 0 4px rgba(192,57,43,0.1); }
+}
+.toast.warning {
+  border-color: rgba(194,122,0,0.4);
+}
+
+/* Toast sound animation */
+.toast-icon.ringing {
+  animation: bellRing 0.6s ease;
+}
+@keyframes bellRing {
+  0%, 100% { transform: rotate(0); }
+  15% { transform: rotate(14deg); }
+  30% { transform: rotate(-12deg); }
+  45% { transform: rotate(8deg); }
+  60% { transform: rotate(-6deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@media(max-width:640px) {
+  .toast-container { top: auto; bottom: 60px; right: 8px; left: 8px; max-width: none; width: auto; }
+  .toast { padding: 12px 14px; }
+}
+
+/* ── IMPROVED RISK BANNER ── */
+.rbanner { border-radius: 10px !important; padding: 14px 16px !important; }
+.ri { font-size: 28px !important; }
+.rt { font-size: 13px !important; }
+
+/* ── BETTER PLACEHOLDER ── */
+.ph {
+  border: 2px dashed var(--line);
+  border-radius: 16px;
+  padding: 40px 30px;
+}
+.phi { font-size: 48px !important; margin-bottom: 12px; }
+.pht2 { font-size: 13px !important; line-height: 1.8 !important; }
+
+/* ── SMOOTH SCROLL ── */
+.lp, .cp, .rp { scroll-behavior: smooth; }
+
+/* ── IMPROVED POPUP ── */
+.popup-box { border-radius: 16px !important; }
+.popup-header { border-radius: 16px 16px 0 0; }
+.popup-title { font-size: 16px !important; }
+.popup-act-text { font-size: 13px !important; }
+.popup-next-btn { border-radius: 10px !important; font-size: 13px !important; padding: 14px !important; }
+
+/* ── PATIENT ID CARD ── */
+.pt-id-card { border-radius: 12px !important; padding: 14px !important; }
+.pt-name-input { font-size: 16px !important; padding: 6px 4px !important; }
+
+/* ── KEYBOARD NAV FOCUS ── */
+.f input:focus, .f select:focus {
+  box-shadow: 0 0 0 3px rgba(26,107,191,0.15) !important;
+  border-color: var(--blue) !important;
+}
+
+/* ── SETTINGS FAB ── */
+.settings-fab { border-radius: 14px !important; width: auto !important; padding: 0 14px !important; height: 44px; gap: 6px; font-size: 12px !important; }
+.settings-panel { border-radius: 14px !important; }
+
+/* ── MOBILE UX OVERRIDES ── */
+@media(max-width:640px) {
+  .step-progress { padding: 8px 10px; }
+  .step-item { font-size: 9px; padding: 4px 8px; }
+  .step-line { width: 10px; }
+  .welcome-banner { padding: 12px 14px; }
+  .welcome-banner .ws { min-width: 100px; }
+  .settings-fab { width: 44px !important; padding: 0 !important; border-radius: 50% !important; }
+  .mv { font-size: 16px !important; }
+}
+
+/* ── ANIMATION FOR SECTION EXPAND ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.abcde-body:not(.collapsed) {
+  animation: fadeSlideIn 0.3s ease;
+}
+
+/* ── LOG BUTTON PULSE ── */
+@keyframes logPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(26,107,191,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(26,107,191,0); }
+}
+.cam-btn[title*="Log"]:hover { animation: logPulse 1.5s infinite; }
+
+/* ── MOBILE SPLASH CONTINUE BUTTON ── */
+.splash-continue-btn {
+  display: none;
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  animation: splashBtnFadeIn 0.8s ease both 2s;
+}
+@keyframes splashBtnFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.splash-continue-inner {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  padding: 14px 32px;
+  color: #fff;
+  font-family: 'Montserrat', var(--mono), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.splash-continue-inner:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(77,163,255,0.6);
+  box-shadow: 0 8px 40px rgba(26,107,191,0.35);
+  transform: translateY(-2px);
+}
+.splash-continue-inner .splash-arrow {
+  font-size: 18px;
+  animation: splashArrowBounce 1.5s ease-in-out infinite;
+}
+@keyframes splashArrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+.splash-continue-hint {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  font-family: var(--mono);
 }
 
 </style>
@@ -946,20 +1562,67 @@ body.dark .login-guest-btn{border-color:#2d3748;color:#94a3b8;}
 body.dark .login-footer{border-color:#2d3748;}
 .login-footer-note{font-size:9px;color:#b8c2d4;line-height:1.5;max-width:160px;}
 .login-szeged-logo{height:32px;object-fit:contain;opacity:.85;}
-@media(max-width:700px){.login-left{display:none;}.login-right{width:100%;padding:36px 28px;}}
-#compass-login[data-theme="light"] .login-right{background:#f0f4fa!important;}
-#compass-login[data-theme="light"] .login-field input,
-#compass-login[data-theme="light"] .login-field select{background:#fff!important;border-color:#c5d0e0!important;color:#1a1f2e!important;}
-#compass-login[data-theme="light"] .login-welcome{color:#1a1f2e!important;}
-#compass-login[data-theme="light"] .login-welcome-sub{color:#5a6880!important;}
-#compass-login[data-theme="light"] .login-field label{color:#3d4f6b!important;}
-#compass-login[data-theme="light"] .login-app-name{color:#1a6bbf!important;}
-#compass-login[data-theme="light"] .login-app-sub{color:#5a6880!important;}
-#compass-login[data-theme="light"] .login-check-label{color:#3d4f6b!important;}
-#compass-login[data-theme="light"] .login-divider{color:#8a9ab8!important;}
-#compass-login[data-theme="light"] .login-footer{border-color:#d8e0ec!important;}
-#compass-login[data-theme="light"] .login-footer-note{color:#8a9ab8!important;}
-#compass-login[data-theme="light"] .login-guest-btn{border-color:#c5d0e0!important;color:#3d4f6b!important;}
+@media(max-width:700px){
+  #compass-login{
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .login-left{
+    display:flex!important;
+    position:absolute;
+    inset:0;
+    z-index:2;
+    flex:none!important;
+    width:100%!important;
+    height:100vh!important;
+    min-height:100vh!important;
+    max-height:none!important;
+    padding:32px 28px 28px;
+    justify-content:center;
+    align-items:center;
+    transition:transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
+  }
+  .login-left.splash-exit{
+    transform:translateY(-100%);
+    opacity:0;
+    pointer-events:none;
+  }
+  .login-left-content{
+    display:flex!important;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    max-width:340px;
+  }
+  .login-left-content div[style*="font-size:72px"]{
+    font-size:42px!important;
+    letter-spacing:6px!important;
+  }
+  .login-left-content div[style*="font-size:11px"][style*="letter-spacing:5px"]{
+    font-size:9px!important;
+    letter-spacing:3px!important;
+  }
+  .login-stats{
+    display:flex!important;
+    position:relative;
+    z-index:2;
+    margin-top:20px;
+  }
+  .login-right{
+    width:100%;
+    padding:36px 28px;
+    position:relative;
+    z-index:1;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  /* Mobile splash continue button */
+  .splash-continue-btn{
+    display:flex!important;
+  }
+}
 </style>
 
 <div id="compass-login">
@@ -1274,14 +1937,17 @@ body.dark .login-footer{border-color:#2d3748;}
         <div class="login-badge">Educational Use Only</div>
       </div>
     </div>
+    <!-- MOBILE SPLASH CONTINUE BUTTON -->
+    <div class="splash-continue-btn" id="splash-continue-btn" onclick="exitSplash()">
+      <div class="splash-continue-inner">
+        Sign In <span class="splash-arrow">↓</span>
+      </div>
+      <div class="splash-continue-hint">tap to continue</div>
+    </div>
   </div>
 
   <div class="login-right">
     <div class="login-form-wrap">
-      <!-- Light / Dark toggle -->
-      <div style="position:absolute;top:16px;right:16px;">
-        <button onclick="toggleLoginTheme()" id="login-theme-btn" style="background:rgba(26,107,191,.1);border:1px solid rgba(26,107,191,.25);border-radius:20px;padding:5px 12px;font-size:10px;color:#1a6bbf;cursor:pointer;font-family:monospace;letter-spacing:1px;transition:all .2s;">🌙 DARK</button>
-      </div>
       <div class="login-logo-row" style="justify-content:space-between;align-items:center;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="login-logo-box">C</div>
@@ -1469,20 +2135,35 @@ function filterHospitals(){
   };
 }
 
-function toggleLoginTheme(){
-  const r=document.getElementById('compass-login');
-  const btn=document.getElementById('login-theme-btn');
-  if(r.getAttribute('data-theme')==='light'){
-    r.removeAttribute('data-theme'); btn.textContent='🌙 DARK'; btn.style.color='#1a6bbf';
-  } else {
-    r.setAttribute('data-theme','light'); btn.textContent='☀️ LIGHT'; btn.style.color='#e67e00';
-  }
-}
-
 function toggleLoginPw(){
   var inp=document.getElementById('login-password');
   inp.type=inp.type==='password'?'text':'password';
 }
+function exitSplash(){
+  var left=document.querySelector('.login-left');
+  if(left){
+    left.classList.add('splash-exit');
+    // Also allow swipe up on mobile
+  }
+}
+
+// Allow swipe-up gesture on mobile splash
+(function(){
+  var startY=0,left=null;
+  document.addEventListener('touchstart',function(e){
+    left=document.querySelector('.login-left');
+    if(!left||left.classList.contains('splash-exit'))return;
+    if(window.innerWidth>700)return;
+    startY=e.touches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!left||left.classList.contains('splash-exit'))return;
+    if(window.innerWidth>700)return;
+    var endY=e.changedTouches[0].clientY;
+    if(startY-endY>60) exitSplash();
+  },{passive:true});
+})();
+
 function doLogin(){
   var user=document.getElementById('login-username').value.trim().toLowerCase();
   var pass=document.getElementById('login-password').value;
@@ -1532,6 +2213,9 @@ function doLogout(){
   var ol=document.getElementById('compass-login');
   ol.style.display='flex';ol.classList.remove('signing-out');
   ol.style.opacity='1';ol.style.transform='';
+  // Reset mobile splash
+  var left=document.querySelector('.login-left');
+  if(left)left.classList.remove('splash-exit');
   document.getElementById('login-password').value='';
   document.getElementById('login-btn').disabled=false;
   document.getElementById('login-btn').textContent='Sign In →';
@@ -1658,13 +2342,46 @@ document.addEventListener('keydown',function(e){
 </div>
 
 <!-- MAIN -->
+<!-- STEP PROGRESS -->
+<div class="step-progress" id="step-progress">
+  <div class="step-item active" id="step-patient" onclick="scrollToSection('pt-id-card')">
+    <span class="step-dot"></span> Patient
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" id="step-airway" onclick="scrollToSection('abcde-a-sec')">
+    <span class="step-dot"></span> A · Airway
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" id="step-breathing" onclick="scrollToSection('abcde-b-sec')">
+    <span class="step-dot"></span> B · Breathing
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" id="step-circ" onclick="scrollToSection('abcde-c-sec')">
+    <span class="step-dot"></span> C · Circulation
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" id="step-disability" onclick="scrollToSection('abcde-d-sec')">
+    <span class="step-dot"></span> D · Disability
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" id="step-exposure" onclick="scrollToSection('abcde-e-sec')">
+    <span class="step-dot"></span> E · Exposure
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" id="step-analyze" onclick="scrollToSection('abtn')">
+    <span class="step-dot"></span> Analyze
+  </div>
+</div>
+
 <div class="main">
 
 <!-- LEFT PANEL -->
 <div class="lp" id="lp">
 
   <!-- PATIENT IDENTITY -->
-  <div class="pt-id-card">
+  <!-- WELCOME BANNER (moved to overlay — see bottom of file) -->
+
+  <div class="pt-id-card" id="pt-id-card">
     <div class="pt-name-row">
       <label class="pt-name-label" data-i18n="lbl-name">Patient Name</label>
       <input class="pt-name-input" type="text" id="pt-name" placeholder="Family Name, Given Name" autocomplete="off">
@@ -1708,57 +2425,64 @@ document.addEventListener('keydown',function(e){
   </div>
 
   <!-- ── A — AIRWAY ── -->
-  <div class="abcde-section abcde-a">
-    <div class="abcde-hdr"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span></div>
+  <div class="abcde-section abcde-a" id="abcde-a-sec">
+    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><span class="abcde-toggle-arrow" id="abcde-a-arrow">▾</span></div>
+    <div class="abcde-body" id="abcde-a-body">
     <div class="ig i2" style="margin-bottom:0">
-      <div class="f"><label data-i18n="lbl-int">Intubated</label><select id="int-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
-      <div class="f"><label>Airway Status</label><select id="airway-status"><option value="patent">Patent</option><option value="threatened">Threatened</option><option value="compromised">Compromised</option></select></div>
+      <div class="f"><label data-i18n="lbl-int">Intubated<span class="field-help" data-tip="Is the patient intubated for airway protection?">?</span></label><select id="int-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+      <div class="f"><label>Airway Status<span class="field-help" data-tip="Patent = clear, Threatened = at risk, Compromised = blocked">?</span></label><select id="airway-status"><option value="patent">Patent</option><option value="threatened">Threatened</option><option value="compromised">Compromised</option></select></div>
+    </div>
     </div>
   </div>
 
   <!-- ── B — BREATHING ── -->
-  <div class="abcde-section abcde-b">
-    <div class="abcde-hdr"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span></div>
+  <div class="abcde-section abcde-b" id="abcde-b-sec">
+    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><span class="abcde-toggle-arrow" id="abcde-b-arrow">▾</span></div>
+    <div class="abcde-body" id="abcde-b-body">
     <div class="ig i3" style="margin-bottom:4px">
-      <div class="f"><label data-i18n="lbl-rr">RR (/min)</label><input type="number" id="rr" placeholder="16" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-pco2">pCO₂ (kPa)</label><input type="number" id="pco2" placeholder="5.3" step="0.1" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-po2">pO₂ (kPa)</label><input type="number" id="po2" placeholder="12" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-rr">RR (/min)<span class="field-help" data-tip="Respiratory rate: breaths per minute. Normal 12–20.">?</span></label><input type="number" id="rr" placeholder="16" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-pco2">pCO₂ (kPa)<span class="field-help" data-tip="Partial pressure of CO₂. Normal 4.7–6.0 kPa.">?</span></label><input type="number" id="pco2" placeholder="5.3" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-po2">pO₂ (kPa)<span class="field-help" data-tip="Partial pressure of O₂. Normal 10–13.3 kPa.">?</span></label><input type="number" id="po2" placeholder="12" step="0.1" oninput="live()"></div>
     </div>
     <div class="ig i3" style="margin-bottom:0">
-      <div class="f"><label>SpO₂ (%)</label><input type="number" id="spo2" placeholder="98" min="0" max="100" step="1" oninput="live()"></div>
-      <div class="f"><label>pH</label><input type="number" id="ph" placeholder="7.40" step="0.01" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-cd">Chest Drain</label><select id="cd-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+      <div class="f"><label>SpO₂ (%)<span class="field-help" data-tip="Oxygen saturation. Normal ≥95%.">?</span></label><input type="number" id="spo2" placeholder="98" min="0" max="100" step="1" oninput="live()"></div>
+      <div class="f"><label>pH<span class="field-help" data-tip="Blood acidity. Normal 7.35–7.45.">?</span></label><input type="number" id="ph" placeholder="7.40" step="0.01" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-cd">Chest Drain<span class="field-help" data-tip="Has a chest drain / thoracostomy been placed?">?</span></label><select id="cd-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+    </div>
     </div>
   </div>
 
   <!-- ── C — CIRCULATION ── -->
-  <div class="abcde-section abcde-c">
-    <div class="abcde-hdr">
+  <div class="abcde-section abcde-c" id="abcde-c-sec">
+    <div class="abcde-hdr" onclick="toggleAbcde('c')">
       <span class="abcde-letter">C</span><span class="abcde-label">Circulation</span>
-      <button class="cam-btn" onclick="logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button>
+      <div class="abcde-summary" id="abcde-c-summary"></div>
+      <button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button>
+      <span class="abcde-toggle-arrow" id="abcde-c-arrow">▾</span>
     </div>
+    <div class="abcde-body" id="abcde-c-body">
     <div class="ig i2" style="margin-bottom:4px">
-      <div class="f"><label data-i18n="lbl-sbp">SBP (mmHg)</label><input type="number" id="sbp" placeholder="120" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-hr">HR (bpm)</label><input type="number" id="hr" placeholder="80" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-sbp">SBP (mmHg)<span class="field-help" data-tip="Systolic Blood Pressure. Normal 100–140 mmHg. <90 = hypotension.">?</span></label><input type="number" id="sbp" placeholder="120" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-hr">HR (bpm)<span class="field-help" data-tip="Heart rate. Normal 60–100 bpm. Tachycardia >100 may indicate shock.">?</span></label><input type="number" id="hr" placeholder="80" oninput="live()"></div>
     </div>
     <div class="ig i3" style="margin-bottom:4px">
-      <div class="f"><label data-i18n="lbl-hgb">Hgb (g/dL)</label><input type="number" id="hgb" placeholder="13" step="0.1" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-inr">INR</label><input type="number" id="inr" placeholder="1.0" step="0.1" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-ica">iCa (mmol/L)</label><input type="number" id="ica" placeholder="1.15" step="0.01" oninput="liveIca()"></div>
+      <div class="f"><label data-i18n="lbl-hgb">Hgb (g/dL)<span class="field-help" data-tip="Haemoglobin. Normal M:13.5–17.5 F:12–16. <7 = critical.">?</span></label><input type="number" id="hgb" placeholder="13" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-inr">INR<span class="field-help" data-tip="International Normalized Ratio. Normal ~1.0. >1.5 = coagulopathy.">?</span></label><input type="number" id="inr" placeholder="1.0" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-ica">iCa (mmol/L)<span class="field-help" data-tip="Ionised Calcium. Normal 1.1–1.3. <1.1 = hypocalcaemia.">?</span></label><input type="number" id="ica" placeholder="1.15" step="0.01" oninput="liveIca()"></div>
     </div>
     <div class="ig i3" style="margin-bottom:4px">
-      <div class="f"><label data-i18n="lbl-lac">Lactate</label><input type="number" id="lac" placeholder="1.5" step="0.1" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-be">Base Excess</label><input type="number" id="be" placeholder="-2" step="0.1" oninput="live()"></div>
-      <div class="f"><label data-i18n="lbl-fib">Fibrinogen</label><input type="number" id="fib" placeholder="2.5" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-lac">Lactate<span class="field-help" data-tip="Blood lactate (mmol/L). Normal <2. Elevated = tissue hypoperfusion.">?</span></label><input type="number" id="lac" placeholder="1.5" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-be">Base Excess<span class="field-help" data-tip="Base Excess (mmol/L). Normal -2 to +2. Negative = metabolic acidosis.">?</span></label><input type="number" id="be" placeholder="-2" step="0.1" oninput="live()"></div>
+      <div class="f"><label data-i18n="lbl-fib">Fibrinogen<span class="field-help" data-tip="Fibrinogen (g/L). Normal 2–4. <1.5 = replacement needed.">?</span></label><input type="number" id="fib" placeholder="2.5" step="0.1" oninput="live()"></div>
     </div>
     <div class="ig i3" style="margin-bottom:4px">
-      <div class="f"><label data-i18n="lbl-tr">Transfused</label><select id="tr-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
-      <div class="f"><label>TXA</label><select id="txa-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
-      <div class="f"><label data-i18n="lbl-ca">Calcium</label><select id="ca-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+      <div class="f"><label data-i18n="lbl-tr">Transfused<span class="field-help" data-tip="Has the patient received blood products?">?</span></label><select id="tr-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+      <div class="f"><label>TXA<span class="field-help" data-tip="Tranexamic acid. Give within 3h of injury per CRASH-2.">?</span></label><select id="txa-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+      <div class="f"><label data-i18n="lbl-ca">Calcium<span class="field-help" data-tip="Has calcium been given (e.g. CaCl₂ or Ca gluconate)?">?</span></label><select id="ca-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
     </div>
     <div class="ig i2" style="margin-bottom:0">
       <div class="f">
-        <label>FAST Exam</label>
+        <label>FAST Exam<span class="field-help" data-tip="Focused Assessment with Sonography for Trauma. Detects free fluid.">?</span></label>
         <select id="fast-exam">
           <option value="">— Not done —</option>
           <option value="negative">Negative</option>
@@ -1767,7 +2491,7 @@ document.addEventListener('keydown',function(e){
         </select>
       </div>
       <div class="f">
-        <label>eFAST Done</label>
+        <label>eFAST Done<span class="field-help" data-tip="Extended FAST includes pneumothorax assessment.">?</span></label>
         <select id="efast-done">
           <option value="no">No</option>
           <option value="yes">Yes</option>
@@ -1782,25 +2506,29 @@ document.addEventListener('keydown',function(e){
       </div>
       <div id="vitals-log-table"></div>
     </div>
+    </div>
   </div>
 
   <!-- ── D — DISABILITY ── -->
-  <div class="abcde-section abcde-d">
-    <div class="abcde-hdr"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span></div>
+  <div class="abcde-section abcde-d" id="abcde-d-sec">
+    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><span class="abcde-toggle-arrow" id="abcde-d-arrow">▾</span></div>
+    <div class="abcde-body" id="abcde-d-body">
     <div class="ig i2" style="margin-bottom:0">
-      <div class="f"><label data-i18n="lbl-gcs">GCS Total</label><input type="number" id="gcs" placeholder="15" min="3" max="15" oninput="live()"></div>
-      <div class="f"><label>Pupils</label><select id="pupils"><option value="equal">Equal &amp; reactive</option><option value="unequal">Unequal</option><option value="fixed">Fixed / dilated</option></select></div>
+      <div class="f"><label data-i18n="lbl-gcs">GCS Total<span class="field-help" data-tip="Glasgow Coma Scale (3–15). 15 = alert. ≤8 = severe TBI, consider intubation.">?</span></label><input type="number" id="gcs" placeholder="15" min="3" max="15" oninput="live()"></div>
+      <div class="f"><label>Pupils<span class="field-help" data-tip="Pupil reactivity. Fixed/dilated = poor prognosis.">?</span></label><select id="pupils"><option value="equal">Equal &amp; reactive</option><option value="unequal">Unequal</option><option value="fixed">Fixed / dilated</option></select></div>
+    </div>
     </div>
   </div>
 
   <!-- ── E — EXPOSURE / ENVIRONMENT ── -->
-  <div class="abcde-section abcde-e">
-    <div class="abcde-hdr"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span></div>
+  <div class="abcde-section abcde-e" id="abcde-e-sec">
+    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><span class="abcde-toggle-arrow" id="abcde-e-arrow">▾</span></div>
+    <div class="abcde-body" id="abcde-e-body">
     <div class="ig i2" style="margin-bottom:6px">
-      <div class="f"><label data-i18n="lbl-pb">Pelvic Binder</label><select id="pb-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
-      <div class="f"><label>Temperature</label><select id="temp-status"><option value="normal">Normothermic</option><option value="mild">Mild hypothermia</option><option value="severe">Severe hypothermia</option></select></div>
+      <div class="f"><label data-i18n="lbl-pb">Pelvic Binder<span class="field-help" data-tip="Has a pelvic binder been applied for suspected pelvic fracture?">?</span></label><select id="pb-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
+      <div class="f"><label>Temperature<span class="field-help" data-tip="Core temperature status. Hypothermia worsens coagulopathy (lethal triad).">?</span></label><select id="temp-status"><option value="normal">Normothermic</option><option value="mild">Mild hypothermia</option><option value="severe">Severe hypothermia</option></select></div>
     </div>
-    <div class="sh" data-i18n="sh-ais" style="margin-bottom:6px">AIS Scores</div>
+    <div class="sh" data-i18n="sh-ais" style="margin-bottom:6px">AIS Scores <span class="field-help" data-tip="Abbreviated Injury Scale (0–6 per region). Used to calculate ISS. 0=none, 6=unsurvivable.">?</span></div>
     <div class="ig i3" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-head">Head</label><input type="number" id="a-hd" placeholder="0" min="0" max="6" oninput="live()"></div>
       <div class="f"><label data-i18n="lbl-face">Face</label><input type="number" id="a-fc" placeholder="0" min="0" max="6" oninput="live()"></div>
@@ -1811,6 +2539,7 @@ document.addEventListener('keydown',function(e){
       <div class="f"><label data-i18n="lbl-pelvis">Pelvis</label><input type="number" id="a-pv" placeholder="0" min="0" max="6" oninput="live()"></div>
       <div class="f"><label data-i18n="lbl-ue">Upper Ext</label><input type="number" id="a-ue" placeholder="0" min="0" max="6" oninput="live()"></div>
       <div class="f"><label data-i18n="lbl-le">Lower Ext</label><input type="number" id="a-le" placeholder="0" min="0" max="6" oninput="live()"></div>
+    </div>
     </div>
   </div>
 
@@ -1915,6 +2644,34 @@ document.addEventListener('keydown',function(e){
 </div>
 
 <!-- ACTION POPUP -->
+
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- WELCOME MODAL OVERLAY -->
+<div class="welcome-overlay" id="welcome-overlay">
+  <div class="welcome-modal">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="welcome-icon">🧭</div>
+      <div>
+        <h3>Welcome to COMPASS EDU</h3>
+        <div style="font-size:11px;color:var(--tx3);font-family:var(--mono);letter-spacing:0.5px;margin-top:2px">Trauma Protocol Education Platform</div>
+      </div>
+    </div>
+    <p class="welcome-subtitle">COMPASS EDU helps you practice trauma assessment using the <b style="color:var(--blue)">ABCDE</b> systematic approach and compare how <b>ATLS</b>, <b>European Whole-Blood</b>, and <b>JATEC</b> protocols differ in their recommendations.</p>
+    <div class="welcome-steps">
+      <div class="ws"><span class="ws-num">1</span> <span>Enter patient <b>demographics</b> and <b>vital signs</b> in the left panel — scores update live</span></div>
+      <div class="ws"><span class="ws-num">2</span> <span>Fill in <b>AIS injury scores</b> (section E) to calculate ISS and survival probability</span></div>
+      <div class="ws"><span class="ws-num">3</span> <span>Click <b style="color:var(--green)">Run COMPASS</b> to see protocol-specific recommendations side by side</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;background:var(--bg3);border-radius:10px;padding:10px 14px;border:1px solid var(--line)">
+      <span style="font-size:18px">⚠️</span>
+      <span style="font-size:11px;color:var(--tx2);line-height:1.5"><b style="color:var(--amber)">Educational use only.</b> This platform is designed for learning and is not intended for clinical decision-making.</span>
+    </div>
+    <button class="welcome-dismiss-btn" onclick="dismissWelcome()">I Understand — Let's Begin</button>
+    <label class="welcome-dismiss-check"><input type="checkbox" id="welcome-no-show" checked> Don't show this again next time</label>
+  </div>
+</div>
 <div class="popup-overlay" id="action-popup" style="display:none" onclick="if(event.target===this)closePopup()">
   <div class="popup-box">
     <div class="popup-header">
@@ -3714,6 +4471,465 @@ window.addEventListener("beforeinstallprompt",e=>{
   b.onclick=()=>{_dp.prompt();b.remove();};
   document.body.appendChild(b);
   setTimeout(()=>b.remove(),8000);
+});
+</script>
+
+<script>
+// ═══════════════════════════════════════
+// UX IMPROVEMENTS — JavaScript
+// ═══════════════════════════════════════
+
+// ── COLLAPSIBLE ABCDE SECTIONS ──
+const abcdeState = { a: true, b: true, c: true, d: true, e: true };
+
+function toggleAbcde(key) {
+  const body = document.getElementById('abcde-' + key + '-body');
+  const arrow = document.getElementById('abcde-' + key + '-arrow');
+  const summary = document.getElementById('abcde-' + key + '-summary');
+  if (!body || !arrow) return;
+
+  abcdeState[key] = !abcdeState[key];
+
+  if (abcdeState[key]) {
+    body.classList.remove('collapsed');
+    arrow.classList.remove('collapsed');
+    arrow.textContent = '▾';
+    if (summary) summary.classList.remove('show');
+  } else {
+    body.classList.add('collapsed');
+    arrow.classList.add('collapsed');
+    arrow.textContent = '▸';
+    updateAbcdeSummary(key);
+    if (summary) summary.classList.add('show');
+  }
+}
+
+function updateAbcdeSummary(key) {
+  const summary = document.getElementById('abcde-' + key + '-summary');
+  if (!summary) return;
+
+  const summaryMap = {
+    a: [
+      { id: 'int-g', label: 'Intubated' },
+      { id: 'airway-status', label: 'Status' }
+    ],
+    b: [
+      { id: 'rr', label: 'RR' },
+      { id: 'spo2', label: 'SpO₂' },
+      { id: 'ph', label: 'pH' },
+      { id: 'pco2', label: 'pCO₂' }
+    ],
+    c: [
+      { id: 'sbp', label: 'SBP' },
+      { id: 'hr', label: 'HR' },
+      { id: 'hgb', label: 'Hgb' },
+      { id: 'lac', label: 'Lac' }
+    ],
+    d: [
+      { id: 'gcs', label: 'GCS' },
+      { id: 'pupils', label: 'Pupils' }
+    ],
+    e: [
+      { id: 'pb-g', label: 'Pelvic' },
+      { id: 'temp-status', label: 'Temp' }
+    ]
+  };
+
+  const fields = summaryMap[key] || [];
+  let html = '';
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    if (!el) return;
+    const v = el.value;
+    const hasVal = v && v !== '' && v !== '0' && v !== 'no' && v !== 'patent' && v !== 'equal' && v !== 'normal';
+    const display = el.tagName === 'SELECT' ? el.options[el.selectedIndex]?.text : v;
+    if (display && display !== '—') {
+      html += '<span class="abcde-summary-val' + (hasVal ? ' has-val' : '') + '">' + f.label + ': ' + display + '</span>';
+    }
+  });
+  summary.innerHTML = html;
+}
+
+// ── SCROLL TO SECTION ──
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const sectionKey = { 'abcde-a-sec': 'a', 'abcde-b-sec': 'b', 'abcde-c-sec': 'c', 'abcde-d-sec': 'd', 'abcde-e-sec': 'e' }[id];
+  if (sectionKey && !abcdeState[sectionKey]) {
+    toggleAbcde(sectionKey);
+  }
+
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  el.style.transition = 'box-shadow 0.3s ease';
+  el.style.boxShadow = '0 0 0 3px rgba(26,107,191,0.3)';
+  setTimeout(() => { el.style.boxShadow = ''; }, 1200);
+}
+
+// ── STEP PROGRESS TRACKING ──
+function updateStepProgress() {
+  const steps = {
+    'step-patient': () => {
+      const age = document.getElementById('age')?.value;
+      const sex = document.getElementById('sex')?.value;
+      return age && sex;
+    },
+    'step-airway': () => true,
+    'step-breathing': () => {
+      const rr = document.getElementById('rr')?.value;
+      return !!rr;
+    },
+    'step-circ': () => {
+      const sbp = document.getElementById('sbp')?.value;
+      const hr = document.getElementById('hr')?.value;
+      return sbp && hr;
+    },
+    'step-disability': () => {
+      const gcs = document.getElementById('gcs')?.value;
+      return !!gcs;
+    },
+    'step-exposure': () => {
+      const ais = ['a-hd','a-fc','a-nk','a-th','a-ab','a-sp','a-pv','a-ue','a-le'];
+      return ais.some(id => { const v = document.getElementById(id)?.value; return v && v !== '0' && v !== ''; });
+    },
+    'step-analyze': () => false
+  };
+
+  let lastDone = true;
+  Object.entries(steps).forEach(([id, check]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const done = check();
+    el.classList.remove('active', 'done');
+    if (done) {
+      el.classList.add('done');
+    } else if (lastDone) {
+      el.classList.add('active');
+    }
+    lastDone = done;
+  });
+}
+
+// ═══════════════════════════════════════
+// TOAST NOTIFICATION SYSTEM
+// ═══════════════════════════════════════
+const _toastHistory = {};  // track which notifications have fired
+let _toastCounter = 0;
+
+const TIMER_LABELS = {
+  ct:  { name: 'CT Window',       icon: '🔬' },
+  txa: { name: 'TXA Window',      icon: '💉' },
+  mtp: { name: 'MTP Activation',  icon: '🩸' },
+  air: { name: 'Airway',          icon: '🫁' },
+  emb: { name: 'Embolisation',    icon: '🩻' },
+  ca:  { name: 'Calcium Repl.',   icon: '🧪' }
+};
+
+function showToast(opts) {
+  // opts: { type: 'warning'|'critical'|'info'|'success', title, msg, icon, duration, id }
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  // Prevent duplicate toasts with same id
+  if (opts.id && document.getElementById('toast-' + opts.id)) return;
+
+  const toastId = opts.id || ('toast-' + (++_toastCounter));
+  const duration = opts.duration || 8000;
+
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + (opts.type || 'info');
+  toast.id = 'toast-' + toastId;
+  toast.onclick = function(e) {
+    if (e.target.classList.contains('toast-close')) return;
+    dismissToast(toast);
+  };
+
+  toast.innerHTML = `
+    <div class="toast-icon ringing">${opts.icon || '🔔'}</div>
+    <div class="toast-body">
+      <div class="toast-title">${opts.title || 'Notification'}</div>
+      <div class="toast-msg">${opts.msg || ''}</div>
+      <div class="toast-time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'})}</div>
+    </div>
+    <button class="toast-close" onclick="event.stopPropagation();dismissToast(this.closest('.toast'))">✕</button>
+    <div class="toast-progress" style="width:100%;transition:width ${duration}ms linear"></div>
+  `;
+
+  container.appendChild(toast);
+
+  // Start progress bar countdown
+  requestAnimationFrame(() => {
+    const bar = toast.querySelector('.toast-progress');
+    if (bar) bar.style.width = '0%';
+  });
+
+  // Play alert sound for warning/critical
+  if (opts.type === 'warning' || opts.type === 'critical') {
+    playAlertBeep(opts.type === 'critical' ? 'critical' : 'warning');
+  }
+
+  // Auto dismiss
+  setTimeout(() => dismissToast(toast), duration);
+
+  // Cap at 4 visible toasts
+  const toasts = container.querySelectorAll('.toast:not(.dismissing)');
+  if (toasts.length > 4) {
+    dismissToast(toasts[0]);
+  }
+
+  return toast;
+}
+
+function dismissToast(el) {
+  if (!el || el.classList.contains('dismissing')) return;
+  el.classList.add('dismissing');
+  setTimeout(() => el.remove(), 350);
+}
+
+// ── AUDIO ALERTS ──
+function playAlertBeep(type) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    if (type === 'critical') {
+      // Urgent double beep
+      osc.frequency.value = 880;
+      osc.type = 'square';
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.frequency.value = 880;
+      osc2.type = 'square';
+      gain2.gain.setValueAtTime(0.08, ctx.currentTime + 0.2);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      osc2.start(ctx.currentTime + 0.2);
+      osc2.stop(ctx.currentTime + 0.35);
+    } else {
+      // Single gentle tone
+      osc.frequency.value = 660;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.25);
+    }
+
+    setTimeout(() => ctx.close(), 1000);
+  } catch(e) {
+    // Audio not available — silent fallback
+  }
+}
+
+// ── TIMER NOTIFICATION HOOKS ──
+// We override tick() to add notification triggers
+(function hookTimerNotifications() {
+  // Wait for tick to be defined
+  const waitForTick = setInterval(() => {
+    if (typeof window.tick !== 'function') return;
+    clearInterval(waitForTick);
+
+    const origTick = window.tick;
+
+    window.tick = function(id) {
+      // Call original tick first
+      origTick(id);
+
+      // Now check if we should fire a notification
+      const t = timers[id];
+      if (!t || t.done) return;
+
+      const cfg = TCFG[id] || { warn: 10, target: 60 };
+      const elapsed = Math.floor((Date.now() - t.start) / 1000);
+      const remain = cfg.target * 60 - elapsed;
+      const warnSec = cfg.warn * 60;
+      const label = TIMER_LABELS[id] || { name: id, icon: '⏱' };
+
+      // Notification thresholds (fire once each)
+      const checkpoints = [];
+
+      // Warning threshold notification
+      if (warnSec > 0) {
+        checkpoints.push({
+          key: id + '-warn',
+          trigger: remain <= warnSec && remain > warnSec - 2,
+          type: 'warning',
+          title: '⚠ ' + label.name + ' — Warning',
+          msg: fmtCountdown(remain) + ' remaining. ' + label.name + ' closing in ' + cfg.warn + ' min.',
+          icon: label.icon,
+          duration: 10000
+        });
+      }
+
+      // Half-time notification (halfway through warning period)
+      if (warnSec > 120) {
+        const halfWarn = Math.floor(warnSec / 2);
+        checkpoints.push({
+          key: id + '-halfwarn',
+          trigger: remain <= halfWarn && remain > halfWarn - 2,
+          type: 'warning',
+          title: label.name + ' — Closing Soon',
+          msg: fmtCountdown(remain) + ' remaining until target is exceeded.',
+          icon: label.icon,
+          duration: 8000
+        });
+      }
+
+      // 60-second final warning
+      checkpoints.push({
+        key: id + '-60s',
+        trigger: remain <= 60 && remain > 58,
+        type: 'critical',
+        title: '🚨 ' + label.name + ' — FINAL MINUTE',
+        msg: 'Less than 1 minute remaining! Act now.',
+        icon: label.icon,
+        duration: 12000
+      });
+
+      // Exceeded notification
+      checkpoints.push({
+        key: id + '-exceeded',
+        trigger: remain <= 0 && remain > -2,
+        type: 'critical',
+        title: '❌ ' + label.name + ' — TIME EXCEEDED',
+        msg: 'Target window has been exceeded. Timer overrunning.',
+        icon: label.icon,
+        duration: 15000
+      });
+
+      checkpoints.forEach(cp => {
+        if (cp.trigger && !_toastHistory[cp.key]) {
+          _toastHistory[cp.key] = true;
+          showToast({
+            type: cp.type,
+            title: cp.title,
+            msg: cp.msg,
+            icon: cp.icon,
+            duration: cp.duration,
+            id: cp.key
+          });
+        }
+      });
+    };
+  }, 200);
+})();
+
+// Reset notification history when timer resets
+(function hookTimerReset() {
+  const waitForReset = setInterval(() => {
+    if (typeof window.resetTimer !== 'function') return;
+    clearInterval(waitForReset);
+
+    const origReset = window.resetTimer;
+    window.resetTimer = function(id) {
+      origReset(id);
+      // Clear notification history for this timer
+      Object.keys(_toastHistory).forEach(k => {
+        if (k.startsWith(id + '-')) delete _toastHistory[k];
+      });
+    };
+  }, 200);
+})();
+
+// ═══════════════════════════════════════
+// WELCOME MODAL OVERLAY
+// ═══════════════════════════════════════
+function dismissWelcome() {
+  const overlay = document.getElementById('welcome-overlay');
+  if (!overlay) return;
+
+  const noShow = document.getElementById('welcome-no-show');
+  if (noShow && noShow.checked) {
+    try { localStorage.setItem('compassedu-welcome-dismissed', '1'); } catch(e) {}
+  }
+
+  overlay.classList.add('dismissing');
+  setTimeout(() => overlay.remove(), 400);
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if welcome was previously dismissed
+  try {
+    if (localStorage.getItem('compassedu-welcome-dismissed') === '1') {
+      const overlay = document.getElementById('welcome-overlay');
+      if (overlay) overlay.remove();
+    }
+  } catch(e) {}
+
+  // Override live() to include step progress updates
+  if (typeof window.live === 'function') {
+    const origLive = window.live;
+    window.live = function() {
+      origLive.apply(this, arguments);
+      try { updateStepProgress(); } catch(e) {}
+    };
+  }
+
+  // Initial step progress
+  setTimeout(updateStepProgress, 500);
+
+  // Observe scroll in left panel to highlight active step
+  const lp = document.getElementById('lp');
+  if (lp) {
+    const sectionIds = ['pt-id-card', 'abcde-a-sec', 'abcde-b-sec', 'abcde-c-sec', 'abcde-d-sec', 'abcde-e-sec'];
+    const stepIds = ['step-patient', 'step-airway', 'step-breathing', 'step-circ', 'step-disability', 'step-exposure'];
+
+    lp.addEventListener('scroll', function() {
+      const scrollTop = lp.scrollTop;
+      let activeIdx = 0;
+      sectionIds.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop - lp.offsetTop <= scrollTop + 80) {
+          activeIdx = i;
+        }
+      });
+
+      stepIds.forEach((id, i) => {
+        const step = document.getElementById(id);
+        if (!step) return;
+        if (i === activeIdx && !step.classList.contains('done')) {
+          step.classList.add('active');
+        }
+      });
+    });
+  }
+
+  // Keyboard Enter-to-advance navigation
+  const lpEl = document.getElementById('lp');
+  if (lpEl) {
+    const inputs = lpEl.querySelectorAll('input[type="number"], input[type="text"], input[type="date"], input[type="time"], select');
+    inputs.forEach((inp, i) => {
+      inp.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          const next = inputs[i + 1];
+          if (next) {
+            const sec = next.closest('.abcde-body');
+            if (sec && sec.classList.contains('collapsed')) {
+              const secEl = sec.closest('.abcde-section');
+              if (secEl) {
+                const key = secEl.id.replace('abcde-','').replace('-sec','');
+                toggleAbcde(key);
+              }
+            }
+            next.focus();
+            next.select?.();
+          }
+        }
+      });
+    });
+  }
 });
 </script>
 
