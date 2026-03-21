@@ -706,7 +706,11 @@ body.dark .mort-chart-card { background: var(--bg3); }
   background: var(--bg2);
   box-shadow: 0 1px 3px var(--shadow);
 }
-body.dark .abcde-section { background: var(--bg3); }
+body.dark .abcde-section.abcde-a { background: linear-gradient(135deg, rgba(14,138,122,.12), rgba(14,138,122,.04)); }
+body.dark .abcde-section.abcde-b { background: linear-gradient(135deg, rgba(26,107,191,.12), rgba(26,107,191,.04)); }
+body.dark .abcde-section.abcde-c { background: linear-gradient(135deg, rgba(192,57,43,.12), rgba(192,57,43,.04)); }
+body.dark .abcde-section.abcde-d { background: linear-gradient(135deg, rgba(91,74,207,.12), rgba(91,74,207,.04)); }
+body.dark .abcde-section.abcde-e { background: linear-gradient(135deg, rgba(194,122,0,.12), rgba(194,122,0,.04)); }
 .abcde-hdr {
   display: flex;
   align-items: center;
@@ -726,25 +730,25 @@ body.dark .abcde-section { background: var(--bg3); }
   font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px;
   font-weight: 700; color: var(--tx2);
 }
-.abcde-a { border-color: rgba(14,138,122,.4); }
-.abcde-a .abcde-letter { background: var(--teal); }
-.abcde-a .abcde-label { color: var(--teal); }
+.abcde-a { border-color: rgba(14,138,122,.6); background: linear-gradient(135deg, rgba(14,138,122,.08), rgba(14,138,122,.02)); }
+.abcde-a .abcde-letter { background: var(--teal); box-shadow: 0 2px 8px rgba(14,138,122,.4); }
+.abcde-a .abcde-label { color: var(--teal); font-weight: 700; }
 
-.abcde-b { border-color: rgba(26,107,191,.4); }
-.abcde-b .abcde-letter { background: var(--blue); }
-.abcde-b .abcde-label { color: var(--blue); }
+.abcde-b { border-color: rgba(26,107,191,.6); background: linear-gradient(135deg, rgba(26,107,191,.08), rgba(26,107,191,.02)); }
+.abcde-b .abcde-letter { background: var(--blue); box-shadow: 0 2px 8px rgba(26,107,191,.4); }
+.abcde-b .abcde-label { color: var(--blue); font-weight: 700; }
 
-.abcde-c { border-color: rgba(192,57,43,.4); }
-.abcde-c .abcde-letter { background: var(--red); }
-.abcde-c .abcde-label { color: var(--red); }
+.abcde-c { border-color: rgba(192,57,43,.6); background: linear-gradient(135deg, rgba(192,57,43,.08), rgba(192,57,43,.02)); }
+.abcde-c .abcde-letter { background: var(--red); box-shadow: 0 2px 8px rgba(192,57,43,.4); }
+.abcde-c .abcde-label { color: var(--red); font-weight: 700; }
 
-.abcde-d { border-color: rgba(91,74,207,.4); }
-.abcde-d .abcde-letter { background: var(--lav); }
-.abcde-d .abcde-label { color: var(--lav); }
+.abcde-d { border-color: rgba(91,74,207,.6); background: linear-gradient(135deg, rgba(91,74,207,.08), rgba(91,74,207,.02)); }
+.abcde-d .abcde-letter { background: var(--lav); box-shadow: 0 2px 8px rgba(91,74,207,.4); }
+.abcde-d .abcde-label { color: var(--lav); font-weight: 700; }
 
-.abcde-e { border-color: rgba(194,122,0,.4); }
-.abcde-e .abcde-letter { background: var(--amber); }
-.abcde-e .abcde-label { color: var(--amber); }
+.abcde-e { border-color: rgba(194,122,0,.6); background: linear-gradient(135deg, rgba(194,122,0,.08), rgba(194,122,0,.02)); }
+.abcde-e .abcde-letter { background: var(--amber); box-shadow: 0 2px 8px rgba(194,122,0,.4); }
+.abcde-e .abcde-label { color: var(--amber); font-weight: 700; }
 
 /* ═══════════════════════════════════════
    MOBILE / PWA — iOS & Android
@@ -2469,7 +2473,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── B — BREATHING ── -->
   <div class="abcde-section abcde-b" id="abcde-b-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><span class="abcde-toggle-arrow" id="abcde-b-arrow">▾</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow" id="abcde-b-arrow">▾</span></div>
     <div class="abcde-body" id="abcde-b-body">
     <div class="ig i3" style="margin-bottom:4px">
       <div class="f"><label data-i18n="lbl-rr">RR (/min)<span class="field-help" data-tip="Respiratory rate: breaths per minute. Normal 12–20.">?</span></label><input type="number" id="rr" placeholder="16" oninput="live()"></div>
@@ -2543,7 +2547,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── D — DISABILITY ── -->
   <div class="abcde-section abcde-d" id="abcde-d-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><span class="abcde-toggle-arrow" id="abcde-d-arrow">▾</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--lav);border-color:var(--lav);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow" id="abcde-d-arrow">▾</span></div>
     <div class="abcde-body" id="abcde-d-body">
     <div class="ig i2" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-gcs">GCS Total<span class="field-help" data-tip="Glasgow Coma Scale (3–15). 15 = alert. ≤8 = severe TBI, consider intubation.">?</span></label><input type="number" id="gcs" placeholder="15" min="3" max="15" oninput="live()"></div>
@@ -2575,8 +2579,8 @@ document.addEventListener('keydown',function(e){
     </div>
   </div>
 
-  <button class="abtn" id="abtn" onclick="analyze()" data-i18n="btn-analyze">▶ Run COMPASS</button>
-  <div class="hint"><b data-i18n="hint-live">Live:</b> <span data-i18n="hint-live-text">Ps/ISS/RTS update on each keystroke. Click Run COMPASS for a full educational protocol comparison.</span> <b data-i18n="hint-reg">Registry:</b> <span data-i18n="hint-reg-text">102 Hungarian trauma patients embedded.</span></div>
+  <button class="abtn" id="abtn" onclick="analyze()" data-i18n="btn-analyze">▶ Run COMPASS Analysis</button>
+  <div class="hint"><b data-i18n="hint-live">Live:</b> <span data-i18n="hint-live-text">Ps/ISS/RTS update on each keystroke. Click Run COMPASS Analysis for a full educational protocol comparison.</span> <b data-i18n="hint-reg">Registry:</b> <span data-i18n="hint-reg-text">102 Hungarian trauma patients embedded.</span></div>
 </div>
 
 <!-- DRAG HANDLE -->
@@ -2613,7 +2617,7 @@ document.addEventListener('keydown',function(e){
     <canvas id="vitals-chart-canvas" style="width:100%;height:220px;display:block"></canvas>
     <div class="mort-chart-legend" id="vitals-chart-legend"></div>
   </div>
-  <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run Protocol Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
+  <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run COMPASS Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
   <!-- Ps chart FAB -->
   <button class="ps-chart-fab" id="ps-chart-fab" onclick="togglePsChart()" title="Toggle Survival Probability chart">
     <span id="ps-fab-icon">📈</span>
@@ -2694,7 +2698,7 @@ document.addEventListener('keydown',function(e){
     <div class="welcome-steps">
       <div class="ws"><span class="ws-num">1</span> <span>Enter patient <b>demographics</b> and <b>vital signs</b> in the left panel — scores update live</span></div>
       <div class="ws"><span class="ws-num">2</span> <span>Fill in <b>AIS injury scores</b> (section E) to calculate ISS and survival probability</span></div>
-      <div class="ws"><span class="ws-num">3</span> <span>Click <b style="color:var(--green)">Run COMPASS</b> to see protocol-specific recommendations side by side</span></div>
+      <div class="ws"><span class="ws-num">3</span> <span>Click <b style="color:var(--green)">Run COMPASS Analysis</b> to see protocol-specific recommendations side by side</span></div>
     </div>
     <div style="display:flex;align-items:center;gap:12px;background:var(--bg3);border-radius:10px;padding:10px 14px;border:1px solid var(--line)">
       <span style="font-size:18px">⚠️</span>
@@ -3151,7 +3155,7 @@ function resetAll(){
         <div class="mort-chart-legend" id="live-mort-legend"></div>
       </div>
     </div>
-    <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run Protocol Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
+    <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run COMPASS Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
     <button class="ps-chart-fab" id="ps-chart-fab" onclick="togglePsChart()" title="Toggle Survival Probability chart">
       <span id="ps-fab-icon">📈</span>
       <span id="ps-fab-label">${psChartVisible?'Ps Chart':'Show Ps Chart'}</span>
@@ -3444,7 +3448,7 @@ Given: TXA=${fv('txa-g')} PelvicBinder=${fv('pb-g')} Intubated=${fv('int-g')} Tr
         <button class="abtn" style="margin-top:10px" onclick="analyze()">↩ Retry</button>
       </div>`;
   }
-  if(!silent){btn.disabled=false;btn.textContent=LANG[currentLang]['btn-analyze']||'▶ Run COMPASS';}
+  if(!silent){btn.disabled=false;btn.textContent=LANG[currentLang]['btn-analyze']||'▶ Run COMPASS Analysis';}
 }
 
 // ═══ TIME OF INJURY ═══
@@ -3664,12 +3668,14 @@ function maybePushLivePoint() {
 }
 
 // ═══ VITALS TIMELINE ═══
-let vitalsLog = []; // [{t: Date, label:'HH:MM', sbp, hr, rr, gcs, si}]
+let vitalsLog = []; // [{t, label, sbp, hr, rr, gcs, si, spo2, ph, pupils}]
 
 function logVitals() {
   const sbp = fn('sbp'), hr = fn('hr'), rr = fn('rr'), gcs = fn('gcs');
-  if (sbp === null && hr === null && rr === null && gcs === null) {
-    // Nothing to log
+  const spo2 = fn('spo2'), ph = fn('ph');
+  const pupilsSel = document.getElementById('pupils');
+  const pupils = pupilsSel ? pupilsSel.options[pupilsSel.selectedIndex].text : null;
+  if (sbp === null && hr === null && rr === null && gcs === null && spo2 === null && ph === null) {
     return;
   }
   const now = new Date();
@@ -3677,18 +3683,20 @@ function logVitals() {
   const entry = {
     t: now,
     label,
-    sbp: sbp,
-    hr: hr,
-    rr: rr,
-    gcs: gcs,
-    si: (sbp && hr) ? +(hr / sbp).toFixed(2) : null
+    sbp, hr, rr, gcs,
+    si: (sbp && hr) ? +(hr / sbp).toFixed(2) : null,
+    spo2, ph, pupils
   };
   vitalsLog.push(entry);
   renderVitalsLog();
   drawVitalsChart();
-  // Flash the LOG button green briefly
-  const btn = document.querySelector('[onclick="logVitals()"]');
-  if (btn) { btn.style.background='var(--green)'; btn.textContent='✓ OK'; setTimeout(()=>{ btn.style.background='var(--blue)'; btn.textContent='+ LOG'; }, 900); }
+  // Flash all LOG buttons green briefly
+  document.querySelectorAll('.cam-btn[title*="Log"]').forEach(btn => {
+    const origBg = btn.style.background;
+    const origTxt = btn.textContent;
+    btn.style.background='var(--green)'; btn.textContent='✓ OK';
+    setTimeout(()=>{ btn.style.background=origBg; btn.textContent='+ LOG'; }, 900);
+  });
 }
 
 function clearVitalsLog() {
@@ -3704,39 +3712,48 @@ function renderVitalsLog() {
   if (!wrap || !tbl) return;
   if (vitalsLog.length === 0) { wrap.style.display = 'none'; return; }
   wrap.style.display = 'block';
-  // Update count label
   const lbl = wrap.querySelector('span');
   if (lbl) lbl.textContent = `Logged vitals (${vitalsLog.length} entr${vitalsLog.length===1?'y':'ies'})`;
 
   // Color helpers
-  const sbpCol = v => v==null?'var(--tx3)':v<90?'var(--red)':v<100?'var(--amber)':'var(--green)';
-  const hrCol  = v => v==null?'var(--tx3)':v>120?'var(--red)':v>100?'var(--amber)':'var(--green)';
-  const rrCol  = v => v==null?'var(--tx3)':v>29||v<10?'var(--red)':v>20?'var(--amber)':'var(--green)';
-  const gcsCol = v => v==null?'var(--tx3)':v<=8?'var(--red)':v<=12?'var(--amber)':'var(--green)';
-  const siCol  = v => v==null?'var(--tx3)':v>=1.4?'var(--red)':v>=1.0?'var(--amber)':'var(--green)';
+  const sbpCol  = v => v==null?'var(--tx3)':v<90?'var(--red)':v<100?'var(--amber)':'var(--green)';
+  const hrCol   = v => v==null?'var(--tx3)':v>120?'var(--red)':v>100?'var(--amber)':'var(--green)';
+  const rrCol   = v => v==null?'var(--tx3)':v>29||v<10?'var(--red)':v>20?'var(--amber)':'var(--green)';
+  const gcsCol  = v => v==null?'var(--tx3)':v<=8?'var(--red)':v<=12?'var(--amber)':'var(--green)';
+  const siCol   = v => v==null?'var(--tx3)':v>=1.4?'var(--red)':v>=1.0?'var(--amber)':'var(--green)';
+  const spo2Col = v => v==null?'var(--tx3)':v<90?'var(--red)':v<95?'var(--amber)':'var(--green)';
+  const phCol   = v => v==null?'var(--tx3)':v<7.2?'var(--red)':v<7.35?'var(--amber)':'var(--green)';
 
-  let html = `<table style="width:100%;border-collapse:collapse;font-size:10px">
+  const th = 'padding:4px 5px;text-align:right;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)';
+  let html = `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:10px;min-width:420px">
     <thead><tr style="background:var(--bg3)">
-      <th style="padding:4px 5px;text-align:left;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)">Time</th>
-      <th style="padding:4px 5px;text-align:right;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)">SBP</th>
-      <th style="padding:4px 5px;text-align:right;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)">HR</th>
-      <th style="padding:4px 5px;text-align:right;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)">RR</th>
-      <th style="padding:4px 5px;text-align:right;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)">GCS</th>
-      <th style="padding:4px 5px;text-align:right;font-size:8px;color:var(--tx3);text-transform:uppercase;border-bottom:1px solid var(--line)">SI</th>
-      <th style="padding:4px 5px;border-bottom:1px solid var(--line)"></th>
+      <th style="${th};text-align:left">Time</th>
+      <th style="${th}">SBP</th>
+      <th style="${th}">HR</th>
+      <th style="${th};color:var(--blue)">RR</th>
+      <th style="${th};color:var(--blue)">SpO₂</th>
+      <th style="${th};color:var(--blue)">pH</th>
+      <th style="${th};color:var(--lav)">GCS</th>
+      <th style="${th};color:var(--lav)">Pupils</th>
+      <th style="${th}">SI</th>
+      <th style="${th}"></th>
     </tr></thead><tbody>`;
   vitalsLog.forEach((e, i) => {
+    const td = 'padding:4px 5px;text-align:right;font-family:var(--mono)';
     html += `<tr style="border-bottom:1px solid var(--line)">
       <td style="padding:4px 5px;font-family:var(--mono);font-weight:600;color:var(--tx)">${e.label}</td>
-      <td style="padding:4px 5px;text-align:right;font-family:var(--mono);font-weight:700;color:${sbpCol(e.sbp)}">${e.sbp??'—'}</td>
-      <td style="padding:4px 5px;text-align:right;font-family:var(--mono);font-weight:700;color:${hrCol(e.hr)}">${e.hr??'—'}</td>
-      <td style="padding:4px 5px;text-align:right;font-family:var(--mono);color:${rrCol(e.rr)}">${e.rr??'—'}</td>
-      <td style="padding:4px 5px;text-align:right;font-family:var(--mono);color:${gcsCol(e.gcs)}">${e.gcs??'—'}</td>
-      <td style="padding:4px 5px;text-align:right;font-family:var(--mono);color:${siCol(e.si)}">${e.si??'—'}</td>
-      <td style="padding:4px 5px;text-align:right"><button onclick="deleteVitalsEntry(${i})" style="font-size:9px;color:var(--tx3);background:none;border:none;cursor:pointer">✕</button></td>
+      <td style="${td};font-weight:700;color:${sbpCol(e.sbp)}">${e.sbp??'—'}</td>
+      <td style="${td};font-weight:700;color:${hrCol(e.hr)}">${e.hr??'—'}</td>
+      <td style="${td};color:${rrCol(e.rr)}">${e.rr??'—'}</td>
+      <td style="${td};color:${spo2Col(e.spo2)}">${e.spo2??'—'}</td>
+      <td style="${td};color:${phCol(e.ph)}">${e.ph!=null?e.ph.toFixed(2):'—'}</td>
+      <td style="${td};color:${gcsCol(e.gcs)}">${e.gcs??'—'}</td>
+      <td style="${td};font-size:9px;color:var(--tx2)">${e.pupils??'—'}</td>
+      <td style="${td};color:${siCol(e.si)}">${e.si??'—'}</td>
+      <td style="${td}"><button onclick="deleteVitalsEntry(${i})" style="font-size:9px;color:var(--tx3);background:none;border:none;cursor:pointer">✕</button></td>
     </tr>`;
   });
-  html += '</tbody></table>';
+  html += '</tbody></table></div>';
   tbl.innerHTML = html;
 }
 
@@ -4082,7 +4099,7 @@ function camFillFields(){
 
 // ═══ I18N ═══
 const LANG={
-  en:{'lbl-name':'Patient Name','lbl-dob':'Date of Birth','sh-hemo':'Haemodynamics','sh-labs':'Labs','sh-ais':'AIS Scores','sh-interventions':'Interventions Given','lbl-sbp':'SBP (mmHg)','lbl-hr':'HR (bpm)','lbl-rr':'RR (/min)','lbl-gcs':'GCS Total','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'Lactate','lbl-be':'Base Excess','lbl-fib':'Fibrinogen','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Head','lbl-face':'Face','lbl-neck':'Neck','lbl-thorax':'Thorax','lbl-abdomen':'Abdomen','lbl-spine':'Spine','lbl-pelvis':'Pelvis','lbl-ue':'Upper Ext','lbl-le':'Lower Ext','lbl-age':'Age (yrs)','lbl-sex':'Sex','lbl-mech':'Mechanism of Injury','lbl-tsi':'Time Since Injury','lbl-pb':'Pelvic binder','lbl-int':'Intubated','lbl-tr':'Transfused','lbl-ca':'Calcium','lbl-cd':'Chest drain','opt-male':'Male','opt-female':'Female','opt-high':'High Energy','opt-mid':'Middle Energy','opt-low':'Low Energy','opt-yes':'Yes','opt-no':'No','btn-analyze':'▶ Run COMPASS','hint-live':'Live:','hint-live-text':'Ps/ISS/RTS update on each keystroke. Click Run COMPASS for an educational protocol walkthrough.','hint-reg':'Registry:','hint-reg-text':'102 Hungarian trauma patients embedded.','ev-transport':'TRANSPORT STARTED','ev-arrival':'PATIENT IN BAY'},
+  en:{'lbl-name':'Patient Name','lbl-dob':'Date of Birth','sh-hemo':'Haemodynamics','sh-labs':'Labs','sh-ais':'AIS Scores','sh-interventions':'Interventions Given','lbl-sbp':'SBP (mmHg)','lbl-hr':'HR (bpm)','lbl-rr':'RR (/min)','lbl-gcs':'GCS Total','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'Lactate','lbl-be':'Base Excess','lbl-fib':'Fibrinogen','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Head','lbl-face':'Face','lbl-neck':'Neck','lbl-thorax':'Thorax','lbl-abdomen':'Abdomen','lbl-spine':'Spine','lbl-pelvis':'Pelvis','lbl-ue':'Upper Ext','lbl-le':'Lower Ext','lbl-age':'Age (yrs)','lbl-sex':'Sex','lbl-mech':'Mechanism of Injury','lbl-tsi':'Time Since Injury','lbl-pb':'Pelvic binder','lbl-int':'Intubated','lbl-tr':'Transfused','lbl-ca':'Calcium','lbl-cd':'Chest drain','opt-male':'Male','opt-female':'Female','opt-high':'High Energy','opt-mid':'Middle Energy','opt-low':'Low Energy','opt-yes':'Yes','opt-no':'No','btn-analyze':'▶ Run COMPASS Analysis','hint-live':'Live:','hint-live-text':'Ps/ISS/RTS update on each keystroke. Click Run COMPASS Analysis for an educational protocol walkthrough.','hint-reg':'Registry:','hint-reg-text':'102 Hungarian trauma patients embedded.','ev-transport':'TRANSPORT STARTED','ev-arrival':'PATIENT IN BAY'},
   hu:{'lbl-name':'Beteg neve','lbl-dob':'Születési dátum','sh-hemo':'Hemodinamika','sh-labs':'Laborértékek','sh-ais':'AIS Pontszámok','sh-interventions':'Elvégzett beavatkozások','lbl-sbp':'SBP (Hgmm)','lbl-hr':'Pulzus (/perc)','lbl-rr':'LF (/perc)','lbl-gcs':'GCS összeg','lbl-hgb':'Hgb (g/dl)','lbl-inr':'INR','lbl-ica':'iCa (mmol/l)','lbl-lac':'Laktát','lbl-be':'Bázistöbblet','lbl-fib':'Fibrinogén','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Fej','lbl-face':'Arc','lbl-neck':'Nyak','lbl-thorax':'Mellkas','lbl-abdomen':'Has','lbl-spine':'Gerinc','lbl-pelvis':'Medence','lbl-ue':'Felső végtag','lbl-le':'Alsó végtag','lbl-age':'Életkor','lbl-sex':'Nem','lbl-mech':'Sérülés mechanizmusa','lbl-tsi':'Sérülés óta eltelt idő','lbl-pb':'Medence szorító','lbl-int':'Intubálva','lbl-tr':'Transzfundálva','lbl-ca':'Kalcium','lbl-cd':'Mellkasi drén','opt-male':'Férfi','opt-female':'Nő','opt-high':'Nagysebességű','opt-mid':'Közepes sebességű','opt-low':'Kisebességű','opt-yes':'Igen','opt-no':'Nem','btn-analyze':'▶ COMPASS futtatása','hint-live':'Élő:','hint-live-text':'Ps/ISS/RTS minden billentyűleütésnél frissül.','hint-reg':'Regiszter:','hint-reg-text':'102 magyar traumás beteg beágyazva.','ev-transport':'SZÁLLÍTÁS MEGINDULT','ev-arrival':'BETEG A TRAUMABOXBAN'},
   ja:{'lbl-name':'患者氏名','lbl-dob':'生年月日','sh-hemo':'血行動態','sh-labs':'検査値','sh-ais':'AISスコア','sh-interventions':'実施済み処置','lbl-sbp':'収縮期血圧','lbl-hr':'心拍数','lbl-rr':'呼吸数','lbl-gcs':'GCS合計','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'乳酸','lbl-be':'塩基過剰','lbl-fib':'フィブリノゲン','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'頭部','lbl-face':'顔面','lbl-neck':'頸部','lbl-thorax':'胸部','lbl-abdomen':'腹部','lbl-spine':'脊椎','lbl-pelvis':'骨盤','lbl-ue':'上肢','lbl-le':'下肢','lbl-age':'年齢','lbl-sex':'性別','lbl-mech':'受傷機転','lbl-tsi':'受傷からの時間','lbl-pb':'骨盤ベルト','lbl-int':'挿管済み','lbl-tr':'輸血済み','lbl-ca':'カルシウム','lbl-cd':'胸腔ドレーン','opt-male':'男性','opt-female':'女性','opt-high':'高エネルギー','opt-mid':'中エネルギー','opt-low':'低エネルギー','opt-yes':'あり','opt-no':'なし','btn-analyze':'▶ COMPASSを実行','hint-live':'ライブ:','hint-live-text':'Ps/ISS/RTSはキー入力ごとに更新。','hint-reg':'レジストリ:','hint-reg-text':'102名のハンガリー外傷患者データ内蔵。','ev-transport':'搬送開始','ev-arrival':'患者到着'}
 };
@@ -4094,7 +4111,7 @@ function setLang(lc){
   if(!evState.transport.active)document.getElementById('ev-transport-lbl').textContent=L['ev-transport']||'TRANSPORT STARTED';
   if(!evState.arrival.active)document.getElementById('ev-arrival-lbl').textContent=L['ev-arrival']||'PATIENT IN BAY';
   ['en','hu','ja'].forEach(l=>{const el=document.getElementById('slb-'+l);if(el)el.classList.toggle('active',l===lc);});
-  const btn=document.getElementById('abtn');if(btn)btn.textContent=L['btn-analyze']||'▶ Run COMPASS';
+  const btn=document.getElementById('abtn');if(btn)btn.textContent=L['btn-analyze']||'▶ Run COMPASS Analysis';
 }
 function toggleLangModal(){}
 
