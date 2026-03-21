@@ -947,6 +947,19 @@ body.dark .login-footer{border-color:#2d3748;}
 .login-footer-note{font-size:9px;color:#b8c2d4;line-height:1.5;max-width:160px;}
 .login-szeged-logo{height:32px;object-fit:contain;opacity:.85;}
 @media(max-width:700px){.login-left{display:none;}.login-right{width:100%;padding:36px 28px;}}
+#compass-login[data-theme="light"] .login-right{background:#f0f4fa!important;}
+#compass-login[data-theme="light"] .login-field input,
+#compass-login[data-theme="light"] .login-field select{background:#fff!important;border-color:#c5d0e0!important;color:#1a1f2e!important;}
+#compass-login[data-theme="light"] .login-welcome{color:#1a1f2e!important;}
+#compass-login[data-theme="light"] .login-welcome-sub{color:#5a6880!important;}
+#compass-login[data-theme="light"] .login-field label{color:#3d4f6b!important;}
+#compass-login[data-theme="light"] .login-app-name{color:#1a6bbf!important;}
+#compass-login[data-theme="light"] .login-app-sub{color:#5a6880!important;}
+#compass-login[data-theme="light"] .login-check-label{color:#3d4f6b!important;}
+#compass-login[data-theme="light"] .login-divider{color:#8a9ab8!important;}
+#compass-login[data-theme="light"] .login-footer{border-color:#d8e0ec!important;}
+#compass-login[data-theme="light"] .login-footer-note{color:#8a9ab8!important;}
+#compass-login[data-theme="light"] .login-guest-btn{border-color:#c5d0e0!important;color:#3d4f6b!important;}
 </style>
 
 <div id="compass-login">
@@ -1265,6 +1278,10 @@ body.dark .login-footer{border-color:#2d3748;}
 
   <div class="login-right">
     <div class="login-form-wrap">
+      <!-- Light / Dark toggle -->
+      <div style="position:absolute;top:16px;right:16px;">
+        <button onclick="toggleLoginTheme()" id="login-theme-btn" style="background:rgba(26,107,191,.1);border:1px solid rgba(26,107,191,.25);border-radius:20px;padding:5px 12px;font-size:10px;color:#1a6bbf;cursor:pointer;font-family:monospace;letter-spacing:1px;transition:all .2s;">🌙 DARK</button>
+      </div>
       <div class="login-logo-row" style="justify-content:space-between;align-items:center;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="login-logo-box">C</div>
@@ -1290,17 +1307,17 @@ body.dark .login-footer{border-color:#2d3748;}
         </div>
       </div>
       <div class="login-field">
-        <label>Institution</label>
-        <select id="login-institution">
-          <option value="">&#8212; Select institution &#8212;</option>
-          <option value="szte">University of Szeged</option>
-          <option value="se">Semmelweis University</option>
-          <option value="pte">University of P&#233;cs</option>
-          <option value="dote">University of Debrecen</option>
-          <option value="other_hu">Other (Hungary)</option>
-          <option value="other_int">Other (International)</option>
-          <option value="guest">Guest / Demo</option>
+        <label>Country</label>
+        <select id="login-country" onchange="filterHospitals()" style="margin-bottom:8px;">
+          <option value="">— Select country —</option>
         </select>
+      </div>
+      <div class="login-field">
+        <label>Trauma Centre / Institution</label>
+        <select id="login-institution">
+          <option value="">— Select country first —</option>
+        </select>
+        <div id="hospital-meta" style="font-size:9px;color:#8a9ab8;margin-top:4px;min-height:14px;letter-spacing:.5px;"></div>
       </div>
       <div class="login-remember">
         <label class="login-check-label">
@@ -1327,6 +1344,141 @@ var COMPASS_USERS=[
   {user:'wari1',pass:'wari1',role:'user'},
   {user:'kazu1',pass:'kazu1',role:'user'},
 ];
+// ═══════════════════════════════════════════════════
+// EUROPEAN TRAUMA CENTRES — Hungary + Neighbours
+// ═══════════════════════════════════════════════════
+const TRAUMA_CENTRES = [
+  {c:"Hungary",city:"Szeged",name:"University of Szeged — Trauma Surgery",lvl:"I"},
+  {c:"Hungary",city:"Budapest",name:"Semmelweis University — Traumatology",lvl:"I"},
+  {c:"Hungary",city:"Budapest",name:"Nemzeti Traumatológiai Intézet",lvl:"I"},
+  {c:"Hungary",city:"Pécs",name:"University of Pécs — Traumatology",lvl:"I"},
+  {c:"Hungary",city:"Debrecen",name:"University of Debrecen — Traumatology",lvl:"I"},
+  {c:"Hungary",city:"Győr",name:"Petz Aladár County Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Miskolc",name:"Borsod County Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Nyíregyháza",name:"Jósa András Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Kecskemét",name:"Bács-Kiskun County Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Kaposvár",name:"Kaposi Mór Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Szombathely",name:"Markusovszky University Teaching Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Székesfehérvár",name:"Szent György University Hospital — Trauma",lvl:"II"},
+  {c:"Hungary",city:"Zalaegerszeg",name:"Zala County Hospital — Trauma",lvl:"III"},
+  {c:"Austria",city:"Vienna",name:"AKH Wien — Division of Trauma Surgery",lvl:"I"},
+  {c:"Austria",city:"Vienna",name:"Lorenz Böhler Trauma Centre (AUVA)",lvl:"I"},
+  {c:"Austria",city:"Graz",name:"LKH Graz — Unfallchirurgie",lvl:"I"},
+  {c:"Austria",city:"Innsbruck",name:"Medical University Innsbruck — Trauma Surgery",lvl:"I"},
+  {c:"Austria",city:"Linz",name:"Kepler Universitätsklinikum Linz — Trauma",lvl:"I"},
+  {c:"Austria",city:"Salzburg",name:"Salzburg University Hospital — Trauma",lvl:"I"},
+  {c:"Austria",city:"Klagenfurt",name:"LKH Klagenfurt — Unfallchirurgie",lvl:"II"},
+  {c:"Germany",city:"Berlin",name:"Charité — Centre for Musculoskeletal Surgery",lvl:"I"},
+  {c:"Germany",city:"Berlin",name:"BG Klinikum Unfallkrankenhaus Berlin",lvl:"I"},
+  {c:"Germany",city:"Munich",name:"Klinikum Rechts der Isar — Trauma Surgery",lvl:"I"},
+  {c:"Germany",city:"Hamburg",name:"BG Klinikum Hamburg",lvl:"I"},
+  {c:"Germany",city:"Frankfurt",name:"BG Unfallklinik Frankfurt am Main",lvl:"I"},
+  {c:"Germany",city:"Cologne",name:"University Hospital Cologne — Trauma",lvl:"I"},
+  {c:"Germany",city:"Hannover",name:"MHH Hannover — Trauma Surgery",lvl:"I"},
+  {c:"Germany",city:"Leipzig",name:"University Hospital Leipzig — Trauma",lvl:"I"},
+  {c:"Germany",city:"Freiburg",name:"University Medical Centre Freiburg — Trauma",lvl:"I"},
+  {c:"Germany",city:"Düsseldorf",name:"Düsseldorf University Hospital — Trauma",lvl:"I"},
+  {c:"Germany",city:"Tübingen",name:"University Hospital Tübingen — Trauma",lvl:"I"},
+  {c:"Germany",city:"Münster",name:"University Hospital Münster — Trauma",lvl:"I"},
+  {c:"Czech Republic",city:"Prague",name:"University Hospital Motol — Trauma",lvl:"I"},
+  {c:"Czech Republic",city:"Brno",name:"Úrazová nemocnice v Brně",lvl:"I"},
+  {c:"Czech Republic",city:"Ostrava",name:"University Hospital Ostrava — Trauma",lvl:"I"},
+  {c:"Czech Republic",city:"Olomouc",name:"University Hospital Olomouc — Trauma",lvl:"II"},
+  {c:"Czech Republic",city:"Hradec Králové",name:"University Hospital Hradec Králové — Trauma",lvl:"I"},
+  {c:"Czech Republic",city:"Plzeň",name:"University Hospital Plzeň — Trauma",lvl:"I"},
+  {c:"Slovakia",city:"Bratislava",name:"University Hospital Bratislava — Trauma",lvl:"I"},
+  {c:"Slovakia",city:"Košice",name:"Košice University Hospital — Trauma",lvl:"I"},
+  {c:"Slovakia",city:"Martin",name:"University Hospital Martin — Trauma",lvl:"II"},
+  {c:"Romania",city:"Bucharest",name:"Emergency Clinical Hospital Bucharest (Floreasca)",lvl:"I"},
+  {c:"Romania",city:"Cluj-Napoca",name:"Emergency County Clinical Hospital Cluj — Trauma",lvl:"I"},
+  {c:"Romania",city:"Timișoara",name:"Emergency County Hospital Timișoara — Trauma",lvl:"I"},
+  {c:"Romania",city:"Iași",name:"St. Spiridon Emergency Hospital Iași — Trauma",lvl:"I"},
+  {c:"Serbia",city:"Belgrade",name:"Clinical Centre of Serbia — Emergency Surgery",lvl:"I"},
+  {c:"Serbia",city:"Novi Sad",name:"Clinical Centre Vojvodina — Trauma",lvl:"I"},
+  {c:"Croatia",city:"Zagreb",name:"KBC Zagreb — Trauma & Emergency Surgery",lvl:"I"},
+  {c:"Croatia",city:"Zagreb",name:"KBC Sestre Milosrdnice — Trauma",lvl:"I"},
+  {c:"Croatia",city:"Split",name:"KBC Split — Trauma Surgery",lvl:"I"},
+  {c:"Croatia",city:"Rijeka",name:"KBC Rijeka — Trauma Surgery",lvl:"II"},
+  {c:"Slovenia",city:"Ljubljana",name:"University Medical Centre Ljubljana — Trauma",lvl:"I"},
+  {c:"Slovenia",city:"Maribor",name:"University Medical Centre Maribor — Trauma",lvl:"I"},
+  {c:"Poland",city:"Warsaw",name:"Central Clinical Hospital MSWiA — Trauma",lvl:"I"},
+  {c:"Poland",city:"Kraków",name:"University Hospital Kraków — Trauma",lvl:"I"},
+  {c:"Poland",city:"Gdańsk",name:"University Clinical Centre Gdańsk — Trauma",lvl:"I"},
+  {c:"Poland",city:"Wrocław",name:"University Clinical Hospital Wrocław — Trauma",lvl:"I"},
+  {c:"Poland",city:"Poznań",name:"Karol Marcinkowski University Hospital Poznań",lvl:"I"},
+  {c:"Ukraine",city:"Kyiv",name:"Kyiv City Clinical Emergency Hospital No.1 — Trauma",lvl:"I"},
+  {c:"Ukraine",city:"Lviv",name:"Lviv Regional Clinical Hospital — Trauma",lvl:"I"},
+  {c:"Switzerland",city:"Zurich",name:"UniversitätsSpital Zürich — Trauma Surgery",lvl:"I"},
+  {c:"Switzerland",city:"Bern",name:"Inselspital Bern — Trauma Surgery",lvl:"I"},
+  {c:"Switzerland",city:"Basel",name:"UniversitätsSpital Basel — Trauma",lvl:"I"},
+  {c:"Switzerland",city:"Geneva",name:"HUG Genève — Trauma & Emergency Surgery",lvl:"I"},
+  {c:"Switzerland",city:"Lausanne",name:"CHUV Lausanne — Trauma",lvl:"I"},
+  {c:"Italy",city:"Milan",name:"Ospedale Niguarda — Trauma Centre",lvl:"I"},
+  {c:"Italy",city:"Verona",name:"Ospedale Civile Maggiore Verona — Trauma",lvl:"I"},
+  {c:"Italy",city:"Trieste",name:"Ospedale di Cattinara — Trauma Surgery",lvl:"I"},
+  {c:"Italy",city:"Turin",name:"CTO Torino — Trauma Centre",lvl:"I"},
+  {c:"Italy",city:"Bologna",name:"Ospedale Maggiore Bologna — Trauma",lvl:"I"},
+  {c:"Italy",city:"Rome",name:"Policlinico Gemelli — Trauma",lvl:"I"},
+  {c:"Other",city:"",name:"Other — Not Listed",lvl:"–"},
+  {c:"Other",city:"",name:"Guest / Demo Access",lvl:"–"}
+];
+
+(function buildCountryDropdown(){
+  const sel = document.getElementById('login-country');
+  if(!sel) return;
+  const countries = [...new Set(TRAUMA_CENTRES.map(h=>h.c))].sort((a,b)=>
+    a==='Hungary'?-1:b==='Hungary'?1:a.localeCompare(b));
+  countries.forEach(c=>{
+    const o=document.createElement('option');
+    o.value=c; o.textContent=c; sel.appendChild(o);
+  });
+  sel.value='Hungary';
+  filterHospitals();
+})();
+
+function filterHospitals(){
+  const country=document.getElementById('login-country').value;
+  const hSel=document.getElementById('login-institution');
+  const meta=document.getElementById('hospital-meta');
+  hSel.innerHTML='';
+  if(!country){
+    hSel.innerHTML='<option value="">— Select country first —</option>';
+    if(meta) meta.textContent=''; return;
+  }
+  const hospitals=TRAUMA_CENTRES.filter(h=>h.c===country);
+  const ph=document.createElement('option');
+  ph.value=''; ph.textContent='— Select hospital —';
+  hSel.appendChild(ph);
+  hospitals.forEach(h=>{
+    const o=document.createElement('option');
+    o.value=h.name;
+    o.textContent=h.city?h.city+' — '+h.name:h.name;
+    o.dataset.level=h.lvl;
+    hSel.appendChild(o);
+  });
+  if(meta) meta.textContent=hospitals.length+' trauma centre'+(hospitals.length!==1?'s':'')+' · select to continue';
+  hSel.onchange=function(){
+    const opt=hSel.options[hSel.selectedIndex];
+    const lvl=opt&&opt.dataset.level;
+    const colours={'I':'#1a6bbf','II':'#1a7f4b','III':'#c27a00','–':'#888'};
+    if(meta&&opt&&opt.value)
+      meta.innerHTML=lvl&&lvl!=='–'
+        ?'<span style="color:'+(colours[lvl]||'#888')+';font-weight:700">Level '+lvl+' Trauma Centre</span> · '+opt.value.split('—')[0].trim()
+        :'<span style="color:#888">'+opt.value+'</span>';
+    else if(meta) meta.textContent=hospitals.length+' trauma centres · select to continue';
+  };
+}
+
+function toggleLoginTheme(){
+  const r=document.getElementById('compass-login');
+  const btn=document.getElementById('login-theme-btn');
+  if(r.getAttribute('data-theme')==='light'){
+    r.removeAttribute('data-theme'); btn.textContent='🌙 DARK'; btn.style.color='#1a6bbf';
+  } else {
+    r.setAttribute('data-theme','light'); btn.textContent='☀️ LIGHT'; btn.style.color='#e67e00';
+  }
+}
+
 function toggleLoginPw(){
   var inp=document.getElementById('login-password');
   inp.type=inp.type==='password'?'text':'password';
@@ -1398,7 +1550,6 @@ document.addEventListener('keydown',function(e){
 <!-- HEADER -->
 <div class="hdr">
   <div class="hdr-l">
-    <div class="logo">C</div>
     <div>
       <div class="logo-text" style="font-size:12px;letter-spacing:2px">COMPASS EDU</div>
       <div class="logo-sub">Clinical Optimised Multi-Protocol Adaptive Support System · Educational</div>
@@ -1423,7 +1574,6 @@ document.addEventListener('keydown',function(e){
       <span class="theme-pill-icon" id="theme-pill-icon">🌙</span>
       <span class="theme-pill-knob"></span>
     </button>
-      <img src="data:image/jpeg;base64,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" alt="University of Szeged" style="height:24px;object-fit:contain;vertical-align:middle;">
     </div>
     <span class="bdg warn">⚠ Educational use only</span>
   </div>
