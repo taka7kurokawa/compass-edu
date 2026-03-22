@@ -2503,8 +2503,8 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── A — AIRWAY ── -->
   <div class="abcde-section abcde-a" id="abcde-a-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><span class="abcde-toggle-arrow" id="abcde-a-arrow">▾</span></div>
-    <div class="abcde-body" id="abcde-a-body">
+    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><span class="abcde-toggle-arrow collapsed" id="abcde-a-arrow">▸</span></div>
+    <div class="abcde-body collapsed" id="abcde-a-body">
     <div class="ig i2" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-int">Intubated<span class="field-help" data-tip="Is the patient intubated for airway protection?">?</span></label><select id="int-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
       <div class="f"><label>Airway Status<span class="field-help" data-tip="Patent = clear, Threatened = at risk, Compromised = blocked">?</span></label><select id="airway-status"><option value="patent">Patent</option><option value="threatened">Threatened</option><option value="compromised">Compromised</option></select></div>
@@ -2514,8 +2514,8 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── B — BREATHING ── -->
   <div class="abcde-section abcde-b" id="abcde-b-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow" id="abcde-b-arrow">▾</span></div>
-    <div class="abcde-body" id="abcde-b-body">
+    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-b-arrow">▸</span></div>
+    <div class="abcde-body collapsed" id="abcde-b-body">
     <div class="ig i3" style="margin-bottom:4px">
       <div class="f"><label data-i18n="lbl-rr">RR (/min)<span class="field-help" data-tip="Respiratory rate: breaths per minute. Normal 12–20.">?</span></label><input type="number" id="rr" placeholder="16" oninput="live()"></div>
       <div class="f"><label data-i18n="lbl-pco2">pCO₂ (kPa)<span class="field-help" data-tip="Partial pressure of CO₂. Normal 4.7–6.0 kPa.">?</span></label><input type="number" id="pco2" placeholder="5.3" step="0.1" oninput="live()"></div>
@@ -2535,9 +2535,9 @@ document.addEventListener('keydown',function(e){
       <span class="abcde-letter">C</span><span class="abcde-label">Circulation</span>
       <div class="abcde-summary" id="abcde-c-summary"></div>
       <button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button>
-      <span class="abcde-toggle-arrow" id="abcde-c-arrow">▾</span>
+      <span class="abcde-toggle-arrow collapsed" id="abcde-c-arrow">▸</span>
     </div>
-    <div class="abcde-body" id="abcde-c-body">
+    <div class="abcde-body collapsed" id="abcde-c-body">
     <div class="ig i2" style="margin-bottom:4px">
       <div class="f"><label data-i18n="lbl-sbp">SBP (mmHg)<span class="field-help" data-tip="Systolic Blood Pressure. Normal 100–140 mmHg. <90 = hypotension.">?</span></label><input type="number" id="sbp" placeholder="120" oninput="live()"></div>
       <div class="f"><label data-i18n="lbl-hr">HR (bpm)<span class="field-help" data-tip="Heart rate. Normal 60–100 bpm. Tachycardia >100 may indicate shock.">?</span></label><input type="number" id="hr" placeholder="80" oninput="live()"></div>
@@ -2588,8 +2588,8 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── D — DISABILITY ── -->
   <div class="abcde-section abcde-d" id="abcde-d-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--lav);border-color:var(--lav);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow" id="abcde-d-arrow">▾</span></div>
-    <div class="abcde-body" id="abcde-d-body">
+    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--lav);border-color:var(--lav);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-d-arrow">▸</span></div>
+    <div class="abcde-body collapsed" id="abcde-d-body">
     <div class="ig i2" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-gcs">GCS Total<span class="field-help" data-tip="Glasgow Coma Scale (3–15). 15 = alert. ≤8 = severe TBI, consider intubation.">?</span></label><input type="number" id="gcs" placeholder="15" min="3" max="15" oninput="live()"></div>
       <div class="f"><label>Pupils<span class="field-help" data-tip="Pupil reactivity. Fixed/dilated = poor prognosis.">?</span></label><select id="pupils"><option value="equal">Equal &amp; reactive</option><option value="unequal">Unequal</option><option value="fixed">Fixed / dilated</option></select></div>
@@ -2599,8 +2599,8 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── E — EXPOSURE / ENVIRONMENT ── -->
   <div class="abcde-section abcde-e" id="abcde-e-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><span class="abcde-toggle-arrow" id="abcde-e-arrow">▾</span></div>
-    <div class="abcde-body" id="abcde-e-body">
+    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><span class="abcde-toggle-arrow collapsed" id="abcde-e-arrow">▸</span></div>
+    <div class="abcde-body collapsed" id="abcde-e-body">
     <div class="ig i2" style="margin-bottom:6px">
       <div class="f"><label data-i18n="lbl-pb">Pelvic Binder<span class="field-help" data-tip="Has a pelvic binder been applied for suspected pelvic fracture?">?</span></label><select id="pb-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
       <div class="f"><label>Temperature<span class="field-help" data-tip="Core temperature status. Hypothermia worsens coagulopathy (lethal triad).">?</span></label><select id="temp-status"><option value="normal">Normothermic</option><option value="mild">Mild hypothermia</option><option value="severe">Severe hypothermia</option></select></div>
@@ -4829,7 +4829,7 @@ window.addEventListener("beforeinstallprompt",e=>{
 // ═══════════════════════════════════════
 
 // ── COLLAPSIBLE ABCDE SECTIONS ──
-const abcdeState = { a: true, b: true, c: true, d: true, e: true };
+const abcdeState = { a: false, b: false, c: false, d: false, e: false };
 
 function toggleAbcde(key) {
   const body = document.getElementById('abcde-' + key + '-body');
