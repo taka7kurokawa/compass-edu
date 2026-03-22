@@ -1103,14 +1103,14 @@ body { font-size: 14px; }
 }
 .welcome-modal .welcome-icon {
   width: 56px; height: 56px;
-  background: linear-gradient(135deg, var(--blue), var(--lav));
-  border-radius: 16px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(26,107,191,0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  overflow: hidden;
+  padding: 0;
 }
 .welcome-modal h3 {
   font-size: 20px;
@@ -1118,6 +1118,8 @@ body { font-size: 14px; }
   color: var(--tx);
   margin: 0;
   letter-spacing: -0.3px;
+  text-align: center;
+  justify-content: center;
 }
 .welcome-modal .welcome-subtitle {
   font-size: 13px;
@@ -1165,7 +1167,7 @@ body { font-size: 14px; }
 .welcome-modal .ws:nth-child(3) .ws-num { background: var(--green); }
 .welcome-modal .ws b { color: var(--blue); }
 .welcome-dismiss-btn {
-  width: 100%;
+  flex: 1;
   background: var(--blue);
   border: none;
   border-radius: 12px;
@@ -1178,33 +1180,37 @@ body { font-size: 14px; }
   letter-spacing: 1px;
   transition: all 0.2s;
   box-shadow: 0 4px 16px rgba(26,107,191,0.3);
-  margin-top: 4px;
 }
 .welcome-dismiss-btn:hover {
   background: var(--blued);
   box-shadow: 0 6px 24px rgba(26,107,191,0.4);
   transform: translateY(-1px);
 }
-.welcome-dismiss-check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
+.welcome-decline-btn {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
   color: var(--tx3);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 14px 24px;
   cursor: pointer;
-  margin-top: 2px;
+  font-family: var(--mono);
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
 }
-.welcome-dismiss-check input {
-  width: 16px; height: 16px;
-  accent-color: var(--blue);
-  cursor: pointer;
+.welcome-decline-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(192,57,43,0.05);
 }
 @media(max-width:640px) {
   .welcome-modal { padding: 24px 22px; border-radius: 16px; }
   .welcome-modal h3 { font-size: 17px; }
   .welcome-modal .ws { padding: 10px 12px; font-size: 12px; }
   .welcome-dismiss-btn { font-size: 13px; padding: 13px; }
-  .welcome-modal .welcome-icon { width: 44px; height: 44px; font-size: 22px; border-radius: 12px; }
+  .welcome-modal .welcome-icon { width: 44px; height: 44px; border-radius: 10px; }
 }
 
 /* ── TOAST NOTIFICATIONS ── */
@@ -2241,13 +2247,9 @@ function enterApp(user,inst){
     badge.innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0"></span>'+user+' · '+inst;
     var hdrR=document.querySelector('.hdr-r');
     if(hdrR)hdrR.insertBefore(badge,hdrR.firstChild);
-    // Show welcome overlay if not previously dismissed
-    try{
-      if(localStorage.getItem('compassedu-welcome-dismissed')!=='1'){
-        var wel=document.getElementById('welcome-overlay');
-        if(wel)wel.style.display='flex';
-      }
-    }catch(e){}
+    // Always show welcome/disclaimer overlay after login
+    var wel=document.getElementById('welcome-overlay');
+    if(wel) wel.style.display='flex';
   },620);
 }
 function doLogout(){
@@ -2694,12 +2696,9 @@ document.addEventListener('keydown',function(e){
 <!-- WELCOME MODAL OVERLAY -->
 <div class="welcome-overlay" id="welcome-overlay" style="display:none">
   <div class="welcome-modal">
-    <div style="display:flex;align-items:center;gap:14px">
-      <div class="welcome-icon">🧭</div>
-      <div>
-        <h3>Welcome to COMPASS EDU</h3>
-        <div style="font-size:11px;color:var(--tx3);font-family:var(--mono);letter-spacing:0.5px;margin-top:2px">Trauma Protocol Education Platform</div>
-      </div>
+    <div style="text-align:center">
+      <h3 style="justify-content:center">Welcome to COMPASS EDU</h3>
+      <div style="font-size:11px;color:var(--tx3);font-family:var(--mono);letter-spacing:0.5px;margin-top:4px">Trauma Protocol Education Platform</div>
     </div>
     <p class="welcome-subtitle">COMPASS EDU helps you practice trauma assessment using the <b style="color:var(--blue)">ABCDE</b> systematic approach and compare how <b>ATLS</b>, <b>European Whole-Blood</b>, and <b>JATEC</b> protocols differ in their recommendations.</p>
     <div class="welcome-steps">
@@ -2707,12 +2706,14 @@ document.addEventListener('keydown',function(e){
       <div class="ws"><span class="ws-num">2</span> <span>Fill in <b>AIS injury scores</b> (section E) to calculate ISS and survival probability</span></div>
       <div class="ws"><span class="ws-num">3</span> <span>Click <b style="color:var(--green)">Run COMPASS Analysis</b> to see protocol-specific recommendations side by side</span></div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;background:var(--bg3);border-radius:10px;padding:10px 14px;border:1px solid var(--line)">
-      <span style="font-size:18px">⚠️</span>
-      <span style="font-size:11px;color:var(--tx2);line-height:1.5"><b style="color:var(--amber)">Educational use only.</b> This platform is designed for learning and is not intended for clinical decision-making.</span>
+    <div style="display:flex;align-items:center;gap:12px;background:rgba(194,122,0,.06);border-radius:10px;padding:12px 14px;border:1.5px solid rgba(194,122,0,.3)">
+      <span style="font-size:22px">⚠️</span>
+      <span style="font-size:12px;color:var(--tx2);line-height:1.6"><b style="color:var(--amber)">Disclaimer:</b> This platform is designed <b>solely for educational purposes</b> and is <b>not intended for clinical decision-making</b>. By accepting, you acknowledge that all outputs are for learning only.</span>
     </div>
-    <button class="welcome-dismiss-btn" onclick="dismissWelcome()">I Understand — Let's Begin</button>
-    <label class="welcome-dismiss-check"><input type="checkbox" id="welcome-no-show" checked> Don't show this again next time</label>
+    <div style="display:flex;gap:12px;margin-top:4px">
+      <button class="welcome-dismiss-btn" onclick="acceptWelcome()">✓ Accept &amp; Continue</button>
+      <button class="welcome-decline-btn" onclick="declineWelcome()">✕ Decline</button>
+    </div>
   </div>
 </div>
 <div class="popup-overlay" id="action-popup" style="display:none" onclick="if(event.target===this)closePopup()">
@@ -4898,30 +4899,29 @@ function playAlertBeep(type) {
 })();
 
 // ═══════════════════════════════════════
-// WELCOME MODAL OVERLAY
+// WELCOME MODAL — ACCEPT / DECLINE
 // ═══════════════════════════════════════
-function dismissWelcome() {
+function acceptWelcome() {
   const overlay = document.getElementById('welcome-overlay');
   if (!overlay) return;
-
-  const noShow = document.getElementById('welcome-no-show');
-  if (noShow && noShow.checked) {
-    try { localStorage.setItem('compassedu-welcome-dismissed', '1'); } catch(e) {}
-  }
-
   overlay.classList.add('dismissing');
-  setTimeout(() => overlay.remove(), 400);
+  setTimeout(() => { overlay.style.display = 'none'; overlay.classList.remove('dismissing'); }, 400);
+}
+
+function declineWelcome() {
+  const overlay = document.getElementById('welcome-overlay');
+  if (!overlay) return;
+  overlay.classList.add('dismissing');
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    overlay.classList.remove('dismissing');
+    // Return to login screen
+    doLogout();
+  }, 400);
 }
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', function() {
-  // Check if welcome was previously dismissed
-  try {
-    if (localStorage.getItem('compassedu-welcome-dismissed') === '1') {
-      const overlay = document.getElementById('welcome-overlay');
-      if (overlay) overlay.remove();
-    }
-  } catch(e) {}
 
   // Override live() to include step progress updates
   if (typeof window.live === 'function') {
