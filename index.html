@@ -2683,12 +2683,65 @@ document.addEventListener('keydown',function(e){
     <button onclick="exportPDF();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--teal);color:var(--teal);background:rgba(14,138,122,.06)">📄 PDF Report</button>
   </div>
   <div class="sp-divider"></div>
+  <div class="sp-row">
+    <span class="sp-label">Legal</span>
+    <button onclick="showLegalPopup();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--lav);color:var(--lav);background:rgba(91,74,207,.06)">⚖ Disclaimer</button>
+  </div>
+  <div class="sp-divider"></div>
   <button onclick="doLogout();toggleSettingsPanel()" class="icon-btn" style="width:100%;padding:8px;font-size:11px;">&#x2192; Sign Out</button>
   <div class="sp-divider"></div>
   <button onclick="resetAll();toggleSettingsPanel()" class="icon-btn danger" style="width:100%;padding:8px;font-size:11px">⟳ Reset All</button>
 </div>
 
 <!-- ACTION POPUP -->
+
+<!-- LEGAL DISCLAIMER POPUP -->
+<div class="popup-overlay" id="legal-popup" style="display:none" onclick="if(event.target===this)closeLegalPopup()">
+  <div class="popup-box" style="max-width:560px">
+    <div class="popup-header">
+      <div>
+        <div class="popup-title">⚖ Legal Disclaimer &amp; Terms of Use</div>
+        <div class="popup-subtitle">COMPASS EDU — Trauma Protocol Education Platform</div>
+      </div>
+      <button class="popup-close" onclick="closeLegalPopup()">✕</button>
+    </div>
+    <div class="popup-body" style="font-size:12px;line-height:1.8;color:var(--tx2)">
+
+      <div style="background:rgba(194,122,0,.06);border:1.5px solid rgba(194,122,0,.3);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px">
+        <span style="font-size:22px;flex-shrink:0;margin-top:2px">⚠️</span>
+        <div>
+          <div style="font-weight:700;color:var(--amber);font-size:13px;margin-bottom:4px">Not a Medical Device</div>
+          <div>This platform is <b>not a medical device</b> as defined under the <b>EU Medical Device Regulation (MDR 2017/745)</b>. It has not been certified, cleared, or approved by any regulatory authority for clinical use. It must not be used for diagnosis, treatment, or any form of clinical decision-making.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(26,107,191,.05);border:1px solid rgba(26,107,191,.2);border-radius:10px;padding:14px 16px">
+        <div style="font-weight:700;color:var(--blue);font-size:12px;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Educational Purpose Only</div>
+        <div>COMPASS EDU is designed exclusively for <b>educational and training purposes</b>. All protocol comparisons, scoring outputs (TRISS, ISS, RTS), and suggested actions are provided as learning references only. They do not constitute medical advice and should never replace professional clinical judgement.</div>
+      </div>
+
+      <div style="background:rgba(26,107,191,.05);border:1px solid rgba(26,107,191,.2);border-radius:10px;padding:14px 16px">
+        <div style="font-weight:700;color:var(--blue);font-size:12px;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Data &amp; Privacy</div>
+        <div>All patient data entered into this platform is processed <b>locally in your browser</b>. No patient data is transmitted to, or stored on, any external server. Session data may be stored temporarily in your browser's local storage for convenience and is cleared upon sign-out. The platform does not collect, share, or sell any personally identifiable information. Usage of the platform is subject to your institution's data governance policies.</div>
+      </div>
+
+      <div style="background:rgba(26,107,191,.05);border:1px solid rgba(26,107,191,.2);border-radius:10px;padding:14px 16px">
+        <div style="font-weight:700;color:var(--blue);font-size:12px;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Protocol References</div>
+        <div>This platform references trauma management guidelines from <b>ATLS (11th Edition)</b>, the <b>European Trauma Course / White Book</b>, and <b>JATEC</b> for comparative educational analysis. All referenced materials remain the intellectual property of their respective authors and organisations. Use of these references is for non-commercial educational purposes in accordance with fair use principles.</div>
+      </div>
+
+      <div style="background:rgba(26,107,191,.05);border:1px solid rgba(26,107,191,.2);border-radius:10px;padding:14px 16px">
+        <div style="font-weight:700;color:var(--blue);font-size:12px;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Limitation of Liability</div>
+        <div>The developers of COMPASS EDU accept <b>no liability</b> for any outcomes resulting from the use or misuse of this platform. By using this software, you acknowledge and accept that all outputs are for educational purposes only, and that you bear full responsibility for any clinical decisions made independently of this tool.</div>
+      </div>
+
+      <div style="text-align:center;font-size:10px;color:var(--tx3);padding-top:4px;font-family:var(--mono)">
+        COMPASS EDU · v2.0 · Educational Use Only · Not for Clinical Decision-Making
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- TOAST NOTIFICATION CONTAINER -->
 <div class="toast-container" id="toast-container"></div>
@@ -4897,6 +4950,18 @@ function playAlertBeep(type) {
     };
   }, 200);
 })();
+
+// ═══════════════════════════════════════
+// LEGAL DISCLAIMER POPUP
+// ═══════════════════════════════════════
+function showLegalPopup() {
+  const el = document.getElementById('legal-popup');
+  if (el) el.style.display = 'flex';
+}
+function closeLegalPopup() {
+  const el = document.getElementById('legal-popup');
+  if (el) el.style.display = 'none';
+}
 
 // ═══════════════════════════════════════
 // WELCOME MODAL — ACCEPT / DECLINE
