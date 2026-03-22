@@ -600,7 +600,7 @@ body.dark .mort-chart-card { background: var(--bg3); }
   background: var(--bg2); border: 1.5px solid var(--line);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 18px; z-index: 150;
+  cursor: pointer; font-size: 18px; z-index: 500;
   box-shadow: 0 2px 12px var(--shadow2);
   transition: all .2s;
 }
@@ -636,7 +636,7 @@ body.dark .mort-chart-card { background: var(--bg3); }
 .sp-lang-btn.active .sp-lang-name { color: var(--blue); }
 
 /* ── ACTION POPUP ── */
-.popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(4px); }
+.popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 9000; display: flex; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(4px); }
 .popup-box { background: var(--bg2); border: 1.5px solid var(--blue); border-radius: 12px; width: min(680px,95vw); max-height: 85vh; overflow-y: auto; display: flex; flex-direction: column; box-shadow: 0 8px 48px var(--shadow2); }
 .popup-header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--bg2); z-index: 2; }
 .popup-title { font-size: 15px; font-weight: 700; color: var(--tx); display: flex; align-items: center; gap: 10px; }
@@ -2099,7 +2099,7 @@ const TRAUMA_CENTRES = [
   {c:"Slovakia",city:"Martin",name:"University Hospital Martin — Trauma",lvl:"II"},
   {c:"Romania",city:"Bucharest",name:"Emergency Clinical Hospital Bucharest (Floreasca)",lvl:"I"},
   {c:"Romania",city:"Cluj-Napoca",name:"Emergency County Clinical Hospital Cluj — Trauma",lvl:"I"},
-  {c:"Romania",city:"Timișoara",name:"Emergency County Hospital Timișoara — Trauma",lvl:"I"},
+  {c:"Romania",city:"Endreșoara",name:"Emergency County Hospital Endreșoara — Trauma",lvl:"I"},
   {c:"Romania",city:"Iași",name:"St. Spiridon Emergency Hospital Iași — Trauma",lvl:"I"},
   {c:"Serbia",city:"Belgrade",name:"Clinical Centre of Serbia — Emergency Surgery",lvl:"I"},
   {c:"Serbia",city:"Novi Sad",name:"Clinical Centre Vojvodina — Trauma",lvl:"I"},
@@ -2434,7 +2434,7 @@ document.addEventListener('keydown',function(e){
     <div class="pt-meta-row">
       <div class="f">
         <label data-i18n="lbl-dob">Date of Birth</label>
-        <input type="date" id="dob" oninput="calcAge()" style="font-size:11px">
+        <input type="date" id="dob" lang="en-GB" oninput="calcAge()" style="font-size:11px" placeholder="YYYY-MM-DD">
       </div>
       <input type="hidden" id="age" value="">
       <div class="pt-age-box">
@@ -2621,8 +2621,8 @@ document.addEventListener('keydown',function(e){
     </div>
   </div>
 
-  <button class="abtn" id="abtn" onclick="analyze()" data-i18n="btn-analyze">▶ Run COMPASS Analysis</button>
-  <div class="hint"><b data-i18n="hint-live">Live:</b> <span data-i18n="hint-live-text">Ps/ISS/RTS update on each keystroke. Click Run COMPASS Analysis for a full educational protocol comparison.</span> <b data-i18n="hint-reg">Registry:</b> <span data-i18n="hint-reg-text">102 Hungarian trauma patients embedded.</span></div>
+  <button class="abtn" id="abtn" onclick="analyze()" data-i18n="btn-analyze">▶ Run Analysis</button>
+  <div class="hint"><b data-i18n="hint-live">Live:</b> <span data-i18n="hint-live-text">Ps/ISS/RTS update on each keystroke. Click Run Analysis for a full educational protocol comparison.</span> <b data-i18n="hint-reg">Registry:</b> <span data-i18n="hint-reg-text">102 Hungarian trauma patients embedded.</span></div>
 </div>
 
 <!-- DRAG HANDLE -->
@@ -2659,7 +2659,7 @@ document.addEventListener('keydown',function(e){
     <canvas id="vitals-chart-canvas" style="width:100%;height:220px;display:block"></canvas>
     <div class="mort-chart-legend" id="vitals-chart-legend"></div>
   </div>
-  <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run COMPASS Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
+  <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
   <!-- Ps chart FAB -->
   <button class="ps-chart-fab" id="ps-chart-fab" onclick="togglePsChart()" title="Toggle Survival Probability chart">
     <span id="ps-fab-icon">📈</span>
@@ -2793,7 +2793,7 @@ document.addEventListener('keydown',function(e){
     <div class="welcome-steps">
       <div class="ws"><span class="ws-num">1</span> <span>Enter patient <b>demographics</b> and <b>vital signs</b> in the left panel — scores update live</span></div>
       <div class="ws"><span class="ws-num">2</span> <span>Fill in <b>AIS injury scores</b> (section E) to calculate ISS and survival probability</span></div>
-      <div class="ws"><span class="ws-num">3</span> <span>Click <b style="color:var(--green)">Run COMPASS Analysis</b> to see protocol-specific recommendations side by side</span></div>
+      <div class="ws"><span class="ws-num">3</span> <span>Click <b style="color:var(--green)">Run Analysis</b> to see protocol-specific recommendations side by side</span></div>
     </div>
     <div style="display:flex;align-items:center;gap:12px;background:rgba(194,122,0,.06);border-radius:10px;padding:12px 14px;border:1.5px solid rgba(194,122,0,.3)">
       <span style="font-size:22px">⚠️</span>
@@ -3260,7 +3260,7 @@ function resetAll(){
         <div class="mort-chart-legend" id="live-mort-legend"></div>
       </div>
     </div>
-    <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run COMPASS Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
+    <div class="ph" id="cp-placeholder"><div class="phi">🏥</div><div class="pht2">Enter patient data and click<br><b>Run Analysis</b><br>to see what each protocol would suggest<br>across ATLS · Euro WB · JATEC</div></div>
     <button class="ps-chart-fab" id="ps-chart-fab" onclick="togglePsChart()" title="Toggle Survival Probability chart">
       <span id="ps-fab-icon">📈</span>
       <span id="ps-fab-label">${psChartVisible?'Ps Chart':'Show Ps Chart'}</span>
@@ -3566,7 +3566,7 @@ Modifiers: ${modifiers.length?modifiers.join(', '):'None'}`;
         <button class="abtn" style="margin-top:10px" onclick="analyze()">↩ Retry</button>
       </div>`;
   }
-  if(!silent){btn.disabled=false;btn.textContent=LANG[currentLang]['btn-analyze']||'▶ Run COMPASS Analysis';}
+  if(!silent){btn.disabled=false;btn.textContent=LANG[currentLang]['btn-analyze']||'▶ Run Analysis';}
 }
 
 // ═══ TIME OF INJURY ═══
@@ -4218,9 +4218,9 @@ function camFillFields(){
 
 // ═══ I18N ═══
 const LANG={
-  en:{'lbl-name':'Patient Name','lbl-dob':'Date of Birth','sh-hemo':'Haemodynamics','sh-labs':'Labs','sh-ais':'AIS Scores','sh-interventions':'Interventions Given','lbl-sbp':'SBP (mmHg)','lbl-hr':'HR (bpm)','lbl-rr':'RR (/min)','lbl-gcs':'GCS Total','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'Lactate','lbl-be':'Base Excess','lbl-fib':'Fibrinogen','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Head','lbl-face':'Face','lbl-neck':'Neck','lbl-thorax':'Thorax','lbl-abdomen':'Abdomen','lbl-spine':'Spine','lbl-pelvis':'Pelvis','lbl-ue':'Upper Ext','lbl-le':'Lower Ext','lbl-age':'Age (yrs)','lbl-sex':'Sex','lbl-mech':'Mechanism of Injury','lbl-tsi':'Time Since Injury','lbl-pb':'Pelvic binder','lbl-int':'Intubated','lbl-tr':'Transfused','lbl-ca':'Calcium','lbl-cd':'Chest drain','opt-male':'Male','opt-female':'Female','opt-high':'High Energy','opt-mid':'Middle Energy','opt-low':'Low Energy','opt-yes':'Yes','opt-no':'No','btn-analyze':'▶ Run COMPASS Analysis','hint-live':'Live:','hint-live-text':'Ps/ISS/RTS update on each keystroke. Click Run COMPASS Analysis for an educational protocol walkthrough.','hint-reg':'Registry:','hint-reg-text':'102 Hungarian trauma patients embedded.','ev-transport':'TRANSPORT STARTED','ev-arrival':'PATIENT IN BAY'},
-  hu:{'lbl-name':'Beteg neve','lbl-dob':'Születési dátum','sh-hemo':'Hemodinamika','sh-labs':'Laborértékek','sh-ais':'AIS Pontszámok','sh-interventions':'Elvégzett beavatkozások','lbl-sbp':'SBP (Hgmm)','lbl-hr':'Pulzus (/perc)','lbl-rr':'LF (/perc)','lbl-gcs':'GCS összeg','lbl-hgb':'Hgb (g/dl)','lbl-inr':'INR','lbl-ica':'iCa (mmol/l)','lbl-lac':'Laktát','lbl-be':'Bázistöbblet','lbl-fib':'Fibrinogén','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Fej','lbl-face':'Arc','lbl-neck':'Nyak','lbl-thorax':'Mellkas','lbl-abdomen':'Has','lbl-spine':'Gerinc','lbl-pelvis':'Medence','lbl-ue':'Felső végtag','lbl-le':'Alsó végtag','lbl-age':'Életkor','lbl-sex':'Nem','lbl-mech':'Sérülés mechanizmusa','lbl-tsi':'Sérülés óta eltelt idő','lbl-pb':'Medence szorító','lbl-int':'Intubálva','lbl-tr':'Transzfundálva','lbl-ca':'Kalcium','lbl-cd':'Mellkasi drén','opt-male':'Férfi','opt-female':'Nő','opt-high':'Nagysebességű','opt-mid':'Közepes sebességű','opt-low':'Kisebességű','opt-yes':'Igen','opt-no':'Nem','btn-analyze':'▶ COMPASS futtatása','hint-live':'Élő:','hint-live-text':'Ps/ISS/RTS minden billentyűleütésnél frissül.','hint-reg':'Regiszter:','hint-reg-text':'102 magyar traumás beteg beágyazva.','ev-transport':'SZÁLLÍTÁS MEGINDULT','ev-arrival':'BETEG A TRAUMABOXBAN'},
-  ja:{'lbl-name':'患者氏名','lbl-dob':'生年月日','sh-hemo':'血行動態','sh-labs':'検査値','sh-ais':'AISスコア','sh-interventions':'実施済み処置','lbl-sbp':'収縮期血圧','lbl-hr':'心拍数','lbl-rr':'呼吸数','lbl-gcs':'GCS合計','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'乳酸','lbl-be':'塩基過剰','lbl-fib':'フィブリノゲン','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'頭部','lbl-face':'顔面','lbl-neck':'頸部','lbl-thorax':'胸部','lbl-abdomen':'腹部','lbl-spine':'脊椎','lbl-pelvis':'骨盤','lbl-ue':'上肢','lbl-le':'下肢','lbl-age':'年齢','lbl-sex':'性別','lbl-mech':'受傷機転','lbl-tsi':'受傷からの時間','lbl-pb':'骨盤ベルト','lbl-int':'挿管済み','lbl-tr':'輸血済み','lbl-ca':'カルシウム','lbl-cd':'胸腔ドレーン','opt-male':'男性','opt-female':'女性','opt-high':'高エネルギー','opt-mid':'中エネルギー','opt-low':'低エネルギー','opt-yes':'あり','opt-no':'なし','btn-analyze':'▶ COMPASSを実行','hint-live':'ライブ:','hint-live-text':'Ps/ISS/RTSはキー入力ごとに更新。','hint-reg':'レジストリ:','hint-reg-text':'102名のハンガリー外傷患者データ内蔵。','ev-transport':'搬送開始','ev-arrival':'患者到着'}
+  en:{'lbl-name':'Patient Name','lbl-dob':'Date of Birth','sh-hemo':'Haemodynamics','sh-labs':'Labs','sh-ais':'AIS Scores','sh-interventions':'Interventions Given','lbl-sbp':'SBP (mmHg)','lbl-hr':'HR (bpm)','lbl-rr':'RR (/min)','lbl-gcs':'GCS Total','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'Lactate','lbl-be':'Base Excess','lbl-fib':'Fibrinogen','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Head','lbl-face':'Face','lbl-neck':'Neck','lbl-thorax':'Thorax','lbl-abdomen':'Abdomen','lbl-spine':'Spine','lbl-pelvis':'Pelvis','lbl-ue':'Upper Ext','lbl-le':'Lower Ext','lbl-age':'Age (yrs)','lbl-sex':'Sex','lbl-mech':'Mechanism of Injury','lbl-tsi':'Time Since Injury','lbl-pb':'Pelvic binder','lbl-int':'Intubated','lbl-tr':'Transfused','lbl-ca':'Calcium','lbl-cd':'Chest drain','opt-male':'Male','opt-female':'Female','opt-high':'High Energy','opt-mid':'Middle Energy','opt-low':'Low Energy','opt-yes':'Yes','opt-no':'No','btn-analyze':'▶ Run Analysis','hint-live':'Live:','hint-live-text':'Ps/ISS/RTS update on each keystroke. Click Run Analysis for an educational protocol walkthrough.','hint-reg':'Registry:','hint-reg-text':'102 Hungarian trauma patients embedded.','ev-transport':'TRANSPORT STARTED','ev-arrival':'PATIENT IN BAY'},
+  hu:{'lbl-name':'Beteg neve','lbl-dob':'Születési dátum','sh-hemo':'Hemodinamika','sh-labs':'Laborértékek','sh-ais':'AIS Pontszámok','sh-interventions':'Elvégzett beavatkozások','lbl-sbp':'SBP (Hgmm)','lbl-hr':'Pulzus (/perc)','lbl-rr':'LF (/perc)','lbl-gcs':'GCS összeg','lbl-hgb':'Hgb (g/dl)','lbl-inr':'INR','lbl-ica':'iCa (mmol/l)','lbl-lac':'Laktát','lbl-be':'Bázistöbblet','lbl-fib':'Fibrinogén','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'Fej','lbl-face':'Arc','lbl-neck':'Nyak','lbl-thorax':'Mellkas','lbl-abdomen':'Has','lbl-spine':'Gerinc','lbl-pelvis':'Medence','lbl-ue':'Felső végtag','lbl-le':'Alsó végtag','lbl-age':'Életkor','lbl-sex':'Nem','lbl-mech':'Sérülés mechanizmusa','lbl-tsi':'Sérülés óta eltelt idő','lbl-pb':'Medence szorító','lbl-int':'Intubálva','lbl-tr':'Transzfundálva','lbl-ca':'Kalcium','lbl-cd':'Mellkasi drén','opt-male':'Férfi','opt-female':'Nő','opt-high':'Nagysebességű','opt-mid':'Közepes sebességű','opt-low':'Kisebességű','opt-yes':'Igen','opt-no':'Nem','btn-analyze':'▶ Elemzés futtatása','hint-live':'Élő:','hint-live-text':'Ps/ISS/RTS minden billentyűleütésnél frissül.','hint-reg':'Regiszter:','hint-reg-text':'102 magyar traumás beteg beágyazva.','ev-transport':'SZÁLLÍTÁS MEGINDULT','ev-arrival':'BETEG A TRAUMABOXBAN'},
+  ja:{'lbl-name':'患者氏名','lbl-dob':'生年月日','sh-hemo':'血行動態','sh-labs':'検査値','sh-ais':'AISスコア','sh-interventions':'実施済み処置','lbl-sbp':'収縮期血圧','lbl-hr':'心拍数','lbl-rr':'呼吸数','lbl-gcs':'GCS合計','lbl-hgb':'Hgb (g/dL)','lbl-inr':'INR','lbl-ica':'iCa (mmol/L)','lbl-lac':'乳酸','lbl-be':'塩基過剰','lbl-fib':'フィブリノゲン','lbl-pco2':'pCO₂ (kPa)','lbl-po2':'pO₂ (kPa)','lbl-head':'頭部','lbl-face':'顔面','lbl-neck':'頸部','lbl-thorax':'胸部','lbl-abdomen':'腹部','lbl-spine':'脊椎','lbl-pelvis':'骨盤','lbl-ue':'上肢','lbl-le':'下肢','lbl-age':'年齢','lbl-sex':'性別','lbl-mech':'受傷機転','lbl-tsi':'受傷からの時間','lbl-pb':'骨盤ベルト','lbl-int':'挿管済み','lbl-tr':'輸血済み','lbl-ca':'カルシウム','lbl-cd':'胸腔ドレーン','opt-male':'男性','opt-female':'女性','opt-high':'高エネルギー','opt-mid':'中エネルギー','opt-low':'低エネルギー','opt-yes':'あり','opt-no':'なし','btn-analyze':'▶ 分析実行','hint-live':'ライブ:','hint-live-text':'Ps/ISS/RTSはキー入力ごとに更新。','hint-reg':'レジストリ:','hint-reg-text':'102名のハンガリー外傷患者データ内蔵。','ev-transport':'搬送開始','ev-arrival':'患者到着'}
 };
 let currentLang=localStorage.getItem('compassedu-lang')||'en';
 function setLang(lc){
@@ -4230,7 +4230,7 @@ function setLang(lc){
   if(!evState.transport.active)document.getElementById('ev-transport-lbl').textContent=L['ev-transport']||'TRANSPORT STARTED';
   if(!evState.arrival.active)document.getElementById('ev-arrival-lbl').textContent=L['ev-arrival']||'PATIENT IN BAY';
   ['en','hu','ja'].forEach(l=>{const el=document.getElementById('slb-'+l);if(el)el.classList.toggle('active',l===lc);});
-  const btn=document.getElementById('abtn');if(btn)btn.textContent=L['btn-analyze']||'▶ Run COMPASS Analysis';
+  const btn=document.getElementById('abtn');if(btn)btn.textContent=L['btn-analyze']||'▶ Run Analysis';
 }
 function toggleLangModal(){}
 
@@ -5378,16 +5378,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- ═══════════════════════════════════════════════════════
-     TIMEA — Trauma-Integrated Medical Education AI
+     ENDRE — Emergency Neural Decision and Reasoning Engine
      Integrated into COMPASS EDU
 ═══════════════════════════════════════════════════════ -->
 <style>
-/* ── TIMEA FAB BUTTON ── */
-.timea-fab {
+/* ── ENDRE FAB BUTTON ── */
+.endre-fab {
   position: fixed;
   bottom: 18px;
   right: 74px;
-  z-index: 9000;
+  z-index: 10000;
   width: auto;
   height: 44px;
   padding: 0 16px;
@@ -5406,22 +5406,22 @@ document.addEventListener('DOMContentLoaded', function() {
   box-shadow: 0 4px 20px rgba(26,107,191,.45), 0 2px 8px rgba(0,0,0,.25);
   transition: all .2s;
 }
-.timea-fab:hover {
+.endre-fab:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(26,107,191,.55), 0 3px 10px rgba(0,0,0,.3);
 }
-.timea-fab-dot {
+.endre-fab-dot {
   width: 7px; height: 7px; border-radius: 50%;
   background: #34d399;
   flex-shrink: 0;
   box-shadow: 0 0 6px #34d399;
-  animation: timea-pulse 2s infinite;
+  animation: endre-pulse 2s infinite;
 }
-.timea-fab-dot.off { background: #f87171; box-shadow: 0 0 6px #f87171; animation: none; }
-@keyframes timea-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+.endre-fab-dot.off { background: #f87171; box-shadow: 0 0 6px #f87171; animation: none; }
+@keyframes endre-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
 
-/* ── TIMEA PANEL ── */
-.timea-panel {
+/* ── ENDRE PANEL ── */
+.endre-panel {
   position: fixed;
   bottom: 72px;
   right: 14px;
@@ -5433,7 +5433,7 @@ document.addEventListener('DOMContentLoaded', function() {
   border: 1.5px solid var(--blue);
   border-radius: 16px;
   box-shadow: 0 16px 60px rgba(0,0,0,.3), 0 4px 20px rgba(26,107,191,.2);
-  z-index: 8999;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -5442,14 +5442,14 @@ document.addEventListener('DOMContentLoaded', function() {
   pointer-events: none;
   transition: transform .25s cubic-bezier(.16,1,.3,1), opacity .2s ease;
 }
-.timea-panel.open {
+.endre-panel.open {
   transform: scale(1) translateY(0);
   opacity: 1;
   pointer-events: all;
 }
 
-/* ── TIMEA PANEL HEADER ── */
-.timea-hdr {
+/* ── ENDRE PANEL HEADER ── */
+.endre-hdr {
   background: linear-gradient(135deg, rgba(26,107,191,.12), rgba(91,74,207,.06));
   border-bottom: 1px solid var(--line);
   padding: 10px 14px;
@@ -5458,7 +5458,7 @@ document.addEventListener('DOMContentLoaded', function() {
   gap: 10px;
   flex-shrink: 0;
 }
-.timea-avatar {
+.endre-avatar {
   width: 32px; height: 32px;
   background: linear-gradient(135deg, #1a6bbf, #5b4acf);
   border-radius: 8px;
@@ -5468,22 +5468,22 @@ document.addEventListener('DOMContentLoaded', function() {
   color: #fff; flex-shrink: 0;
   letter-spacing: 0;
 }
-.timea-hdr-text { flex: 1; min-width: 0; }
-.timea-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; color: var(--blue); letter-spacing: 1px; }
-.timea-sub { font-size: 9px; color: var(--tx3); letter-spacing: .5px; }
-.timea-hdr-btns { display: flex; gap: 5px; align-items: center; }
-.timea-hdr-btn {
+.endre-hdr-text { flex: 1; min-width: 0; }
+.endre-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; color: var(--blue); letter-spacing: 1px; }
+.endre-sub { font-size: 9px; color: var(--tx3); letter-spacing: .5px; }
+.endre-hdr-btns { display: flex; gap: 5px; align-items: center; }
+.endre-hdr-btn {
   background: var(--bg3); border: 1px solid var(--line);
   border-radius: 5px; width: 26px; height: 26px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-size: 12px; color: var(--tx3);
   transition: all .15s;
 }
-.timea-hdr-btn:hover { border-color: var(--blue); color: var(--blue); }
-.timea-hdr-btn.danger:hover { border-color: var(--red); color: var(--red); }
+.endre-hdr-btn:hover { border-color: var(--blue); color: var(--blue); }
+.endre-hdr-btn.danger:hover { border-color: var(--red); color: var(--red); }
 
 /* ── CONTEXT STRIP ── */
-.timea-ctx {
+.endre-ctx {
   background: var(--bg3);
   border-bottom: 1px solid var(--line);
   padding: 5px 10px;
@@ -5493,16 +5493,16 @@ document.addEventListener('DOMContentLoaded', function() {
   flex-shrink: 0;
   flex-wrap: wrap;
 }
-.timea-ctx-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; }
-.timea-ctx-badge {
+.endre-ctx-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; }
+.endre-ctx-badge {
   font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600;
   padding: 2px 7px; border-radius: 3px;
   display: inline-flex; align-items: center; gap: 3px;
   flex-shrink: 0;
 }
-.timea-ctx-badge.patient { background: rgba(26,107,191,.1); border: 1px solid rgba(26,107,191,.25); color: var(--blue); }
-.timea-ctx-badge.nodata { background: var(--bg4); border: 1px solid var(--line); color: var(--tx3); }
-.timea-read-btn {
+.endre-ctx-badge.patient { background: rgba(26,107,191,.1); border: 1px solid rgba(26,107,191,.25); color: var(--blue); }
+.endre-ctx-badge.nodata { background: var(--bg4); border: 1px solid var(--line); color: var(--tx3); }
+.endre-read-btn {
   margin-left: auto;
   background: rgba(26,107,191,.08);
   border: 1px solid rgba(26,107,191,.3);
@@ -5512,10 +5512,10 @@ document.addEventListener('DOMContentLoaded', function() {
   color: var(--blue); cursor: pointer; letter-spacing: .5px; white-space: nowrap;
   transition: all .15s; flex-shrink: 0;
 }
-.timea-read-btn:hover { background: rgba(26,107,191,.15); }
+.endre-read-btn:hover { background: rgba(26,107,191,.15); }
 
 /* ── QUICK ACTIONS ── */
-.timea-quick {
+.endre-quick {
   padding: 6px 10px;
   display: flex;
   gap: 4px;
@@ -5524,8 +5524,8 @@ document.addEventListener('DOMContentLoaded', function() {
   border-bottom: 1px solid var(--line);
   scrollbar-width: none;
 }
-.timea-quick::-webkit-scrollbar { display: none; }
-.timea-qbtn {
+.endre-quick::-webkit-scrollbar { display: none; }
+.endre-qbtn {
   background: var(--bg3);
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -5534,12 +5534,12 @@ document.addEventListener('DOMContentLoaded', function() {
   color: var(--tx3); cursor: pointer; white-space: nowrap; flex-shrink: 0;
   transition: all .15s; letter-spacing: .3px;
 }
-.timea-qbtn:hover { border-color: var(--blue); color: var(--blue); background: rgba(26,107,191,.06); }
-.timea-qbtn.fill { border-color: rgba(26,127,75,.4); color: var(--green); background: rgba(26,127,75,.06); }
-.timea-qbtn.fill:hover { background: rgba(26,127,75,.12); }
+.endre-qbtn:hover { border-color: var(--blue); color: var(--blue); background: rgba(26,107,191,.06); }
+.endre-qbtn.fill { border-color: rgba(26,127,75,.4); color: var(--green); background: rgba(26,127,75,.06); }
+.endre-qbtn.fill:hover { background: rgba(26,127,75,.12); }
 
 /* ── MESSAGES ── */
-.timea-msgs {
+.endre-msgs {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
@@ -5548,8 +5548,8 @@ document.addEventListener('DOMContentLoaded', function() {
   gap: 8px;
   scroll-behavior: smooth;
 }
-.timea-msgs::-webkit-scrollbar { width: 3px; }
-.timea-msgs::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
+.endre-msgs::-webkit-scrollbar { width: 3px; }
+.endre-msgs::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
 .tmsg { display: flex; gap: 7px; animation: tmsgFade .2s ease both; }
 @keyframes tmsgFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 .tmsg.user { flex-direction: row-reverse; }
@@ -5596,10 +5596,10 @@ document.addEventListener('DOMContentLoaded', function() {
 .tbadge.jatec{ background: rgba(26,127,75,.1);  border: 1px solid rgba(26,127,75,.25);  color: var(--green); }
 
 /* ── AI ANALYSIS POPUP ── */
-.timea-analysis-overlay {
+.endre-analysis-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.55);
-  z-index: 9200;
+  z-index: 10100;
   display: none;
   align-items: center;
   justify-content: center;
@@ -5607,8 +5607,8 @@ document.addEventListener('DOMContentLoaded', function() {
   -webkit-backdrop-filter: blur(4px);
   padding: 12px;
 }
-.timea-analysis-overlay.show { display: flex; }
-.timea-analysis-modal {
+.endre-analysis-overlay.show { display: flex; }
+.endre-analysis-modal {
   background: var(--bg2);
   border: 1.5px solid var(--blue);
   border-radius: 14px;
@@ -5619,45 +5619,45 @@ document.addEventListener('DOMContentLoaded', function() {
   animation: tmsgFade .3s cubic-bezier(.16,1,.3,1);
   overflow: hidden;
 }
-.timea-analysis-hdr {
+.endre-analysis-hdr {
   background: linear-gradient(135deg, rgba(26,107,191,.15), rgba(91,74,207,.08));
   border-bottom: 1px solid var(--line);
   padding: 14px 18px;
   display: flex; align-items: center; gap: 10px; flex-shrink: 0;
 }
-.timea-analysis-hdr-icon { font-size: 22px; flex-shrink: 0; }
-.timea-analysis-hdr-text { flex: 1; }
-.timea-analysis-hdr-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--blue); letter-spacing: .5px; }
-.timea-analysis-hdr-sub { font-size: 9px; color: var(--tx3); margin-top: 2px; letter-spacing: .5px; }
-.timea-analysis-close { background: rgba(192,57,43,.08); border: 1px solid rgba(192,57,43,.3); border-radius: 5px; color: var(--red); font-size: 13px; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; }
-.timea-analysis-close:hover { background: rgba(192,57,43,.18); }
-.timea-analysis-body {
+.endre-analysis-hdr-icon { font-size: 22px; flex-shrink: 0; }
+.endre-analysis-hdr-text { flex: 1; }
+.endre-analysis-hdr-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--blue); letter-spacing: .5px; }
+.endre-analysis-hdr-sub { font-size: 9px; color: var(--tx3); margin-top: 2px; letter-spacing: .5px; }
+.endre-analysis-close { background: rgba(192,57,43,.08); border: 1px solid rgba(192,57,43,.3); border-radius: 5px; color: var(--red); font-size: 13px; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; }
+.endre-analysis-close:hover { background: rgba(192,57,43,.18); }
+.endre-analysis-body {
   flex: 1; overflow-y: auto; padding: 16px 18px;
   display: flex; flex-direction: column; gap: 12px;
 }
-.timea-analysis-body::-webkit-scrollbar { width: 3px; }
-.timea-analysis-body::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
+.endre-analysis-body::-webkit-scrollbar { width: 3px; }
+.endre-analysis-body::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
 
 /* Risk banner inside popup */
-.timea-risk-banner {
+.endre-risk-banner {
   border-radius: 8px; padding: 10px 14px;
   display: flex; align-items: center; gap: 10px;
   border: 1.5px solid;
 }
-.timea-risk-banner.critical { background: rgba(192,57,43,.07); border-color: var(--red); }
-.timea-risk-banner.high { background: rgba(200,80,0,.07); border-color: #c85000; }
-.timea-risk-banner.moderate { background: rgba(194,122,0,.07); border-color: var(--amber); }
-.timea-risk-banner.low { background: rgba(26,127,75,.07); border-color: var(--green); }
-.timea-risk-icon { font-size: 20px; flex-shrink: 0; }
-.timea-risk-text { flex: 1; }
-.timea-risk-level { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-.timea-risk-summary { font-size: 11px; color: var(--tx2); margin-top: 3px; line-height: 1.5; }
+.endre-risk-banner.critical { background: rgba(192,57,43,.07); border-color: var(--red); }
+.endre-risk-banner.high { background: rgba(200,80,0,.07); border-color: #c85000; }
+.endre-risk-banner.moderate { background: rgba(194,122,0,.07); border-color: var(--amber); }
+.endre-risk-banner.low { background: rgba(26,127,75,.07); border-color: var(--green); }
+.endre-risk-icon { font-size: 20px; flex-shrink: 0; }
+.endre-risk-text { flex: 1; }
+.endre-risk-level { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.endre-risk-summary { font-size: 11px; color: var(--tx2); margin-top: 3px; line-height: 1.5; }
 
 /* Checklist section */
-.timea-checklist-section { display: flex; flex-direction: column; gap: 4px; }
-.timea-checklist-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--tx3); margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 6px; }
-.timea-checklist-title-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-.timea-check-item {
+.endre-checklist-section { display: flex; flex-direction: column; gap: 4px; }
+.endre-checklist-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--tx3); margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 6px; }
+.endre-checklist-title-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.endre-check-item {
   display: flex; align-items: flex-start; gap: 8px;
   background: var(--bg3); border: 1px solid var(--line);
   border-radius: 6px; padding: 7px 10px;
@@ -5665,72 +5665,104 @@ document.addEventListener('DOMContentLoaded', function() {
   transition: border-color .15s;
   cursor: default;
 }
-.timea-check-item.done { border-color: rgba(26,127,75,.3); background: rgba(26,127,75,.04); }
-.timea-check-item.urgent { border-color: rgba(192,57,43,.35); background: rgba(192,57,43,.04); }
-.timea-check-item.warn { border-color: rgba(194,122,0,.35); background: rgba(194,122,0,.04); }
-.timea-check-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
-.timea-check-text { flex: 1; }
-.timea-check-badge { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-left: 5px; display: inline-flex; }
+.endre-check-item.done { border-color: rgba(26,127,75,.3); background: rgba(26,127,75,.04); }
+.endre-check-item.urgent { border-color: rgba(192,57,43,.35); background: rgba(192,57,43,.04); }
+.endre-check-item.warn { border-color: rgba(194,122,0,.35); background: rgba(194,122,0,.04); }
+.endre-check-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.endre-check-text { flex: 1; }
+.endre-check-badge { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-left: 5px; display: inline-flex; }
 
 /* Footer buttons */
-.timea-analysis-footer {
+.endre-analysis-footer {
   border-top: 1px solid var(--line);
   padding: 10px 18px;
   display: flex; gap: 8px; align-items: center; flex-shrink: 0;
   background: var(--bg2);
 }
-.timea-analysis-ignore {
+.endre-analysis-ignore {
   flex: 1; background: var(--bg3); border: 1px solid var(--line);
   border-radius: 7px; padding: 9px; cursor: pointer;
   font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
   color: var(--tx3); letter-spacing: .5px; transition: all .15s; text-align: center;
 }
-.timea-analysis-ignore:hover { border-color: var(--red); color: var(--red); background: rgba(192,57,43,.05); }
-.timea-analysis-accept {
+.endre-analysis-ignore:hover { border-color: var(--red); color: var(--red); background: rgba(192,57,43,.05); }
+.endre-analysis-accept {
   flex: 2; background: var(--blue); border: none;
   border-radius: 7px; padding: 9px; cursor: pointer;
   font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
   color: #fff; letter-spacing: .5px; transition: all .15s; text-align: center;
   box-shadow: 0 2px 8px rgba(26,107,191,.3);
 }
-.timea-analysis-accept:hover { background: var(--blued); }
-.timea-analysis-spinner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 40px 0; flex-direction: column; }
+.endre-analysis-accept:hover { background: var(--blued); }
+.endre-analysis-spinner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 40px 0; flex-direction: column; }
 
 /* Analyse button in quick bar */
-.timea-qbtn.analyse { border-color: rgba(91,74,207,.4); color: var(--lav); background: rgba(91,74,207,.06); }
-.timea-qbtn.analyse:hover { background: rgba(91,74,207,.14); }
+.endre-qbtn.analyse { border-color: rgba(91,74,207,.4); color: var(--lav); background: rgba(91,74,207,.06); }
+.endre-qbtn.analyse:hover { background: rgba(91,74,207,.14); }
 </style>
 
-<!-- TIMEA ANALYSIS POPUP MODAL -->
-<div class="timea-analysis-overlay" id="timea-analysis-overlay" onclick="if(event.target===this)tTimea_closeAnalysis()">
-  <div class="timea-analysis-modal">
-    <div class="timea-analysis-hdr">
-      <div class="timea-analysis-hdr-icon">🧭</div>
-      <div class="timea-analysis-hdr-text">
-        <div class="timea-analysis-hdr-title">TIMEA — Clinical Situation Analysis</div>
-        <div class="timea-analysis-hdr-sub" id="timea-analysis-pt-label">Loading patient…</div>
+<!-- ENDRE ANALYSIS POPUP MODAL -->
+<div class="endre-analysis-overlay" id="endre-analysis-overlay" onclick="if(event.target===this)tEndre_closeAnalysis()">
+  <div class="endre-analysis-modal">
+    <div class="endre-analysis-hdr">
+      <div class="endre-analysis-hdr-icon">🧭</div>
+      <div class="endre-analysis-hdr-text">
+        <div class="endre-analysis-hdr-title">ENDRE — Clinical Situation Analysis</div>
+        <div class="endre-analysis-hdr-sub" id="endre-analysis-pt-label">Loading patient…</div>
       </div>
-      <div class="timea-analysis-close" onclick="tTimea_closeAnalysis()">✕</div>
+      <div class="endre-analysis-close" onclick="tEndre_closeAnalysis()">✕</div>
     </div>
-    <div class="timea-analysis-body" id="timea-analysis-body">
-      <div class="timea-analysis-spinner">
-        <div class="timea-progress-spinner" style="border-top-color:var(--blue)"></div>
+    <div class="endre-analysis-body" id="endre-analysis-body">
+      <div class="endre-analysis-spinner">
+        <div class="endre-progress-spinner" style="border-top-color:var(--blue)"></div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">Generating analysis…</div>
       </div>
     </div>
-    <div class="timea-analysis-footer">
-      <button class="timea-analysis-ignore" onclick="tTimea_closeAnalysis()">✕ Ignore &amp; Return</button>
-      <button class="timea-analysis-accept" onclick="tTimea_closeAnalysis()">✓ Acknowledged — Continue</button>
+    <div class="endre-analysis-footer">
+      <button class="endre-analysis-ignore" onclick="tEndre_closeAnalysis()">✕ Ignore &amp; Return</button>
+      <button class="endre-analysis-accept" onclick="tEndre_closeAnalysis()">✓ Acknowledged — Continue</button>
     </div>
   </div>
 </div>
 
 <style>
-/* ── TIMEA extended styles ── */
+/* ── ENDRE extended styles ── */
 </style>
 
 <style>
-.timea-write-all-btn {
+/* ── INSTRUCTOR MODE ── */
+.endre-mode-btn { display:flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--line);border-radius:5px;padding:3px 8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--tx3);letter-spacing:.5px;transition:all .15s; }
+.endre-mode-btn:hover { border-color:var(--blue);color:var(--blue); }
+.endre-mode-btn.instructor { background:rgba(91,74,207,.1);border-color:var(--lav);color:var(--lav); }
+.endre-instructor-bar { background:linear-gradient(135deg,rgba(91,74,207,.1),rgba(26,107,191,.06));border-bottom:1px solid var(--line);padding:7px 10px;display:none;flex-direction:column;gap:5px;flex-shrink:0; }
+.endre-instructor-bar.show { display:flex; }
+.endre-step-row { display:flex;align-items:center;gap:7px; }
+.endre-step-label { font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--lav);flex-shrink:0; }
+.endre-step-pills { display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1; }
+.endre-step-pills::-webkit-scrollbar { display:none; }
+.endre-step-pill { font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0;cursor:pointer;border:1px solid var(--line);background:var(--bg3);color:var(--tx3);transition:all .15s; }
+.endre-step-pill.active { background:rgba(91,74,207,.1);border-color:var(--lav);color:var(--lav); }
+.endre-step-pill.done { background:rgba(26,127,75,.1);border-color:var(--green);color:var(--green); }
+.endre-next-step-btn { background:var(--lav);border:none;border-radius:4px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;padding:3px 8px;cursor:pointer;letter-spacing:.5px;white-space:nowrap;transition:all .15s;flex-shrink:0; }
+.endre-next-step-btn:hover { opacity:.85; }
+.endre-quiz-card { background:rgba(91,74,207,.06);border:1.5px solid rgba(91,74,207,.35);border-radius:8px;padding:10px 12px;margin-top:5px;display:flex;flex-direction:column;gap:7px; }
+.endre-quiz-title { font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--lav);text-transform:uppercase;letter-spacing:1px; }
+.endre-quiz-q { font-size:12px;color:var(--tx);line-height:1.5;font-weight:500; }
+.endre-quiz-opts { display:flex;flex-direction:column;gap:4px; }
+.endre-quiz-opt { background:var(--bg3);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:11px;color:var(--tx2);transition:all .15s;display:flex;align-items:center;gap:7px; }
+.endre-quiz-opt:hover { border-color:var(--lav);color:var(--lav);background:rgba(91,74,207,.06); }
+.endre-quiz-opt.correct { border-color:var(--green);background:rgba(26,127,75,.08);color:var(--green);pointer-events:none; }
+.endre-quiz-opt.wrong { border-color:var(--red);background:rgba(192,57,43,.06);color:var(--red);pointer-events:none; }
+.endre-quiz-opt.reveal { border-color:var(--green);background:rgba(26,127,75,.05);pointer-events:none;opacity:.7; }
+.endre-quiz-opt-letter { font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;flex-shrink:0; }
+.endre-quiz-feedback { font-size:11px;line-height:1.6;color:var(--tx2);padding-top:4px;border-top:1px solid var(--line);display:none; }
+.endre-quiz-feedback.show { display:block; }
+.endre-teach-card { background:rgba(26,107,191,.05);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:7px 10px;margin-top:4px;font-size:11px;color:var(--tx2);line-height:1.6; }
+.endre-teach-card strong { color:var(--blue); }
+.endre-instructor-badge { display:none;background:rgba(91,74,207,.1);border:1px solid rgba(91,74,207,.35);border-radius:4px;padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;color:var(--lav); }
+.endre-instructor-badge.show { display:inline-block; }
+
+.endre-write-all-btn {
   width: 100%;
   background: linear-gradient(135deg, rgba(26,127,75,.12), rgba(26,107,191,.08));
   border: 1.5px solid var(--green);
@@ -5743,20 +5775,20 @@ document.addEventListener('DOMContentLoaded', function() {
   transition: all .2s;
   flex-shrink: 0;
 }
-.timea-write-all-btn:hover {
+.endre-write-all-btn:hover {
   background: linear-gradient(135deg, rgba(26,127,75,.2), rgba(26,107,191,.12));
   box-shadow: 0 2px 12px rgba(26,127,75,.25);
   transform: translateY(-1px);
 }
-.timea-write-all-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-.timea-write-all-icon { font-size: 14px; flex-shrink: 0; }
-.timea-write-all-text { flex: 1; text-align: left; }
-.timea-write-all-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 10px; color: var(--green); letter-spacing: .5px; }
-.timea-write-all-sub { font-size: 9px; color: var(--tx3); margin-top: 1px; }
-.timea-write-all-arrow { font-size: 10px; color: var(--green); flex-shrink: 0; }
+.endre-write-all-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.endre-write-all-icon { font-size: 14px; flex-shrink: 0; }
+.endre-write-all-text { flex: 1; text-align: left; }
+.endre-write-all-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 10px; color: var(--green); letter-spacing: .5px; }
+.endre-write-all-sub { font-size: 9px; color: var(--tx3); margin-top: 1px; }
+.endre-write-all-arrow { font-size: 10px; color: var(--green); flex-shrink: 0; }
 
 /* ── PROGRESS OVERLAY ── */
-.timea-progress-overlay {
+.endre-progress-overlay {
   position: absolute; inset: 0;
   background: rgba(0,0,0,.04);
   backdrop-filter: blur(6px);
@@ -5769,10 +5801,10 @@ document.addEventListener('DOMContentLoaded', function() {
   gap: 14px;
   border-radius: 14px;
 }
-body.dark .timea-progress-overlay { background: rgba(0,0,0,.5); }
-body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
-.timea-progress-overlay.show { display: flex; }
-.timea-progress-spinner {
+body.dark .endre-progress-overlay { background: rgba(0,0,0,.5); }
+body:not(.dark) .endre-progress-overlay { background: rgba(255,255,255,.85); }
+.endre-progress-overlay.show { display: flex; }
+.endre-progress-spinner {
   width: 36px; height: 36px;
   border: 3px solid var(--line);
   border-top-color: var(--green);
@@ -5780,11 +5812,11 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   animation: tSpin .7s linear infinite;
 }
 @keyframes tSpin { to { transform: rotate(360deg); } }
-.timea-progress-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--tx2); letter-spacing: .5px; text-align: center; }
-.timea-progress-sub { font-size: 10px; color: var(--tx3); text-align: center; max-width: 260px; line-height: 1.5; }
+.endre-progress-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--tx2); letter-spacing: .5px; text-align: center; }
+.endre-progress-sub { font-size: 10px; color: var(--tx3); text-align: center; max-width: 260px; line-height: 1.5; }
 
 /* ── FILL CONFIRM CARD ── */
-.timea-fill-card {
+.endre-fill-card {
   background: rgba(26,127,75,.06);
   border: 1.5px solid rgba(26,127,75,.35);
   border-radius: 8px;
@@ -5794,40 +5826,40 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   flex-direction: column;
   gap: 6px;
 }
-.timea-fill-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; }
-.timea-fill-fields { font-size: 10px; color: var(--tx2); line-height: 1.7; }
-.timea-fill-btns { display: flex; gap: 5px; }
-.timea-fill-apply {
+.endre-fill-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; }
+.endre-fill-fields { font-size: 10px; color: var(--tx2); line-height: 1.7; }
+.endre-fill-btns { display: flex; gap: 5px; }
+.endre-fill-apply {
   background: var(--green); border: none; border-radius: 5px;
   color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 9px;
   font-weight: 700; padding: 5px 12px; cursor: pointer; letter-spacing: .5px;
   transition: all .15s;
 }
-.timea-fill-apply:hover { opacity: .85; }
-.timea-fill-dismiss {
+.endre-fill-apply:hover { opacity: .85; }
+.endre-fill-dismiss {
   background: var(--bg3); border: 1px solid var(--line); border-radius: 5px;
   color: var(--tx3); font-family: 'JetBrains Mono', monospace; font-size: 9px;
   padding: 5px 10px; cursor: pointer; transition: all .15s;
 }
-.timea-fill-dismiss:hover { border-color: var(--red); color: var(--red); }
+.endre-fill-dismiss:hover { border-color: var(--red); color: var(--red); }
 
 /* ── TYPING INDICATOR ── */
-.timea-typing {
+.endre-typing {
   display: flex; align-items: center; gap: 4px;
   padding: 8px 10px; background: var(--bg2);
   border: 1px solid var(--line); border-radius: 8px;
   width: fit-content;
 }
-.timea-tdot {
+.endre-tdot {
   width: 5px; height: 5px; border-radius: 50%;
   background: var(--tx3); animation: tdot 1.2s infinite;
 }
-.timea-tdot:nth-child(2) { animation-delay: .18s; }
-.timea-tdot:nth-child(3) { animation-delay: .36s; }
+.endre-tdot:nth-child(2) { animation-delay: .18s; }
+.endre-tdot:nth-child(3) { animation-delay: .36s; }
 @keyframes tdot { 0%,80%,100%{transform:scale(.6);opacity:.4} 40%{transform:scale(1);opacity:1} }
 
 /* ── INPUT ── */
-.timea-input-wrap {
+.endre-input-wrap {
   border-top: 1px solid var(--line);
   padding: 8px 10px;
   display: flex;
@@ -5836,7 +5868,7 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   flex-shrink: 0;
   background: var(--bg2);
 }
-.timea-input-inner {
+.endre-input-inner {
   flex: 1;
   background: var(--bg3);
   border: 1.5px solid var(--line);
@@ -5846,14 +5878,14 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   align-items: flex-end;
   transition: border-color .15s;
 }
-.timea-input-inner:focus-within { border-color: var(--blue); }
-#timea-input {
+.endre-input-inner:focus-within { border-color: var(--blue); }
+#endre-input {
   flex: 1; background: transparent; border: none; outline: none;
   font-family: var(--sans); font-size: 12px; color: var(--tx);
   resize: none; max-height: 80px; min-height: 18px; line-height: 1.45;
 }
-#timea-input::placeholder { color: var(--tx3); }
-.timea-send {
+#endre-input::placeholder { color: var(--tx3); }
+.endre-send {
   width: 32px; height: 32px;
   background: var(--blue); border: none; border-radius: 7px;
   color: #fff; cursor: pointer; font-size: 14px;
@@ -5861,18 +5893,18 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   flex-shrink: 0; transition: all .15s;
   box-shadow: 0 2px 6px rgba(26,107,191,.3);
 }
-.timea-send:hover { background: var(--blued); transform: translateY(-1px); }
-.timea-send:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+.endre-send:hover { background: var(--blued); transform: translateY(-1px); }
+.endre-send:disabled { opacity: .35; cursor: not-allowed; transform: none; }
 
 /* ── API KEY MODAL ── */
-.timea-modal-overlay {
+.endre-modal-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.5);
   z-index: 9500;
   display: flex; align-items: center; justify-content: center;
   backdrop-filter: blur(4px);
 }
-.timea-modal {
+.endre-modal {
   background: var(--bg2);
   border: 1.5px solid var(--blue);
   border-radius: 12px; padding: 22px;
@@ -5881,96 +5913,117 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   box-shadow: 0 8px 40px rgba(0,0,0,.35);
   animation: tmsgFade .3s ease both;
 }
-.timea-modal-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--blue); letter-spacing: 1px; }
-.timea-modal-sub { font-size: 11px; color: var(--tx3); line-height: 1.65; }
-.timea-modal-field label { display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--tx3); margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; }
-.timea-modal-field input {
+.endre-modal-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--blue); letter-spacing: 1px; }
+.endre-modal-sub { font-size: 11px; color: var(--tx3); line-height: 1.65; }
+.endre-modal-field label { display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--tx3); margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; }
+.endre-modal-field input {
   width: 100%; background: var(--bg3); border: 1.5px solid var(--line);
   border-radius: 7px; padding: 8px 11px;
   font-family: 'JetBrains Mono', monospace; font-size: 12px;
   color: var(--tx); outline: none; transition: border-color .2s;
 }
-.timea-modal-field input:focus { border-color: var(--blue); }
-.timea-modal-btn {
+.endre-modal-field input:focus { border-color: var(--blue); }
+.endre-modal-btn {
   background: var(--blue); border: none; border-radius: 7px;
   color: #fff; font-weight: 700; font-size: 12px; padding: 10px;
   cursor: pointer; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;
   transition: all .15s;
 }
-.timea-modal-btn:hover { background: var(--blued); }
-.timea-modal-note {
+.endre-modal-btn:hover { background: var(--blued); }
+.endre-modal-note {
   font-size: 9px; color: var(--tx3); line-height: 1.6;
   background: var(--bg3); border: 1px solid var(--line);
   border-radius: 5px; padding: 7px 9px; font-family: 'JetBrains Mono', monospace;
 }
 </style>
 
-<!-- TIMEA FAB -->
-<button class="timea-fab" id="timea-fab" onclick="tTimeaToggle()">
-  <div class="timea-fab-dot off" id="timea-fab-dot"></div>
-  TIMEA AI
+<!-- ENDRE FAB -->
+<button class="endre-fab" id="endre-fab" onclick="tEndreToggle()">
+  <div class="endre-fab-dot off" id="endre-fab-dot"></div>
+  ASK ENDRE
 </button>
 
-<!-- TIMEA PANEL -->
-<div class="timea-panel" id="timea-panel">
+<!-- ENDRE PANEL -->
+<div class="endre-panel" id="endre-panel">
   <!-- Header -->
-  <div class="timea-hdr">
-    <div class="timea-avatar">AI</div>
-    <div class="timea-hdr-text">
-      <div class="timea-name">TIMEA</div>
-      <div class="timea-sub">Trauma-Integrated Medical Education AI</div>
+  <div class="endre-hdr">
+    <div class="endre-avatar">AI</div>
+    <div class="endre-hdr-text">
+      <div class="endre-name">ENDRE</div>
+      <div class="endre-sub">Emergency Neural Decision and Reasoning Engine</div>
     </div>
-    <div class="timea-hdr-btns">
-      <div class="timea-hdr-btn" onclick="tTimea_showKey()" title="API Key">🔑</div>
-      <div class="timea-hdr-btn danger" onclick="tTimea_clear()" title="Clear chat">⟳</div>
-      <div class="timea-hdr-btn" onclick="tTimeaToggle()" title="Close">✕</div>
+    <div class="endre-hdr-btns">
+      <button class="endre-mode-btn" id="endre-mode-btn" onclick="tEndre_toggleMode()" title="Switch between Assistant and Instructor mode">
+        <span id="endre-mode-icon">🎓</span>
+        <span id="endre-mode-label">Instructor</span>
+      </button>
+      <div class="endre-hdr-btn" onclick="tEndre_showKey()" title="API Key">🔑</div>
+      <div class="endre-hdr-btn danger" onclick="tEndre_clear()" title="Clear chat">⟳</div>
+      <div class="endre-hdr-btn" onclick="tEndreToggle()" title="Close">✕</div>
     </div>
   </div>
 
   <!-- Context strip -->
-  <div class="timea-ctx">
-    <span class="timea-ctx-lbl">Context:</span>
-    <span class="timea-ctx-badge nodata" id="timea-pt-badge">No patient loaded</span>
-    <button class="timea-read-btn" onclick="tTimea_readPatient()">↻ Read Patient Data</button>
+  <div class="endre-ctx">
+    <span class="endre-ctx-lbl">Context:</span>
+    <span class="endre-ctx-badge nodata" id="endre-pt-badge">No patient loaded</span>
+    <button class="endre-read-btn" onclick="tEndre_readPatient()">↻ Read Patient Data</button>
+  </div>
+
+  <!-- Instructor step bar (hidden in assistant mode) -->
+  <div class="endre-instructor-bar" id="endre-instructor-bar">
+    <div class="endre-step-row">
+      <span class="endre-step-label">Step</span>
+      <div class="endre-step-pills" id="endre-step-pills">
+        <span class="endre-step-pill active" data-step="0" onclick="tEndre_jumpStep(0)">Patient</span>
+        <span class="endre-step-pill" data-step="1" onclick="tEndre_jumpStep(1)">A · Airway</span>
+        <span class="endre-step-pill" data-step="2" onclick="tEndre_jumpStep(2)">B · Breathing</span>
+        <span class="endre-step-pill" data-step="3" onclick="tEndre_jumpStep(3)">C · Circulation</span>
+        <span class="endre-step-pill" data-step="4" onclick="tEndre_jumpStep(4)">D · Disability</span>
+        <span class="endre-step-pill" data-step="5" onclick="tEndre_jumpStep(5)">E · Exposure</span>
+        <span class="endre-step-pill" data-step="6" onclick="tEndre_jumpStep(6)">Analysis</span>
+      </div>
+      <button class="endre-next-step-btn" onclick="tEndre_nextStep()">Next ▶</button>
+    </div>
   </div>
 
   <!-- Write Everything from Chat button -->
   <div style="padding:6px 10px;flex-shrink:0;border-bottom:1px solid var(--line)">
-    <button class="timea-write-all-btn" id="timea-write-all-btn" onclick="tTimea_writeAll()">
-      <span class="timea-write-all-icon">📋</span>
-      <span class="timea-write-all-text">
-        <div class="timea-write-all-title">Write Everything from Chat → Form</div>
-        <div class="timea-write-all-sub">Extract all clinical data mentioned in this conversation and fill the ABCDE survey instantly</div>
+    <button class="endre-write-all-btn" id="endre-write-all-btn" onclick="tEndre_writeAll()">
+      <span class="endre-write-all-icon">📋</span>
+      <span class="endre-write-all-text">
+        <div class="endre-write-all-title">Write Everything from Chat → Form</div>
+        <div class="endre-write-all-sub">Extract all clinical data mentioned in this conversation and fill the ABCDE survey instantly</div>
       </span>
-      <span class="timea-write-all-arrow">▶</span>
+      <span class="endre-write-all-arrow">▶</span>
     </button>
   </div>
 
   <!-- Quick actions -->
-  <div class="timea-quick">
-    <button class="timea-qbtn fill" onclick="tTimea_quickAsk('fillabcde')">✏ Fill ABCDE for me</button>
-    <button class="timea-qbtn analyse" onclick="tTimea_analyse()">🧭 Analyse Now</button>
-    <button class="timea-qbtn" onclick="tTimea_quickAsk('treatment')">💊 Treatment Plan</button>
-    <button class="timea-qbtn" onclick="tTimea_quickAsk('risk')">🔴 Assess Risk</button>
-    <button class="timea-qbtn" onclick="tTimea_quickAsk('protocols')">📋 Compare Protocols</button>
-    <button class="timea-qbtn" onclick="tTimea_quickAsk('scores')">📊 Explain Scores</button>
-    <button class="timea-qbtn" onclick="tTimea_quickAsk('mtp')">🩸 MTP Needed?</button>
+  <div class="endre-quick">
+    <button class="endre-qbtn fill" onclick="tEndre_quickAsk('fillabcde')">✏ Fill ABCDE for me</button>
+    <button class="endre-qbtn analyse" onclick="tEndre_analyse()">🧭 Analyse Now</button>
+    <button class="endre-qbtn" onclick="tEndre_quickAsk('treatment')">💊 Treatment Plan</button>
+    <button class="endre-qbtn" onclick="tEndre_quickAsk('risk')">🔴 Assess Risk</button>
+    <button class="endre-qbtn" onclick="tEndre_quickAsk('protocols')">📋 Compare Protocols</button>
+    <button class="endre-qbtn" onclick="tEndre_quickAsk('scores')">📊 Explain Scores</button>
+    <button class="endre-qbtn" onclick="tEndre_quickAsk('mtp')">🩸 MTP Needed?</button>
   </div>
 
   <!-- Messages -->
-  <div class="timea-msgs" id="timea-msgs" style="position:relative">
+  <div class="endre-msgs" id="endre-msgs" style="position:relative">
   <!-- Progress overlay -->
-  <div class="timea-progress-overlay" id="timea-progress">
-    <div class="timea-progress-spinner"></div>
-    <div class="timea-progress-label" id="timea-progress-label">Analysing conversation…</div>
-    <div class="timea-progress-sub" id="timea-progress-sub">TIMEA is reading your chat and extracting all clinical values</div>
+  <div class="endre-progress-overlay" id="endre-progress">
+    <div class="endre-progress-spinner"></div>
+    <div class="endre-progress-label" id="endre-progress-label">Analysing conversation…</div>
+    <div class="endre-progress-sub" id="endre-progress-sub">ENDRE is reading your chat and extracting all clinical values</div>
   </div>
     <div class="tmsg ai">
       <div class="tmsg-av">AI</div>
       <div class="tmsg-body">
-        <div class="tmsg-meta">TIMEA</div>
+        <div class="tmsg-meta">ENDRE</div>
         <div class="tmsg-bubble">
-          <strong>Hi! I'm TIMEA</strong> — your trauma education AI inside COMPASS EDU.<br><br>
+          <strong>Hi! I'm ENDRE</strong> — your trauma education AI inside COMPASS EDU.<br><br>
           💬 <strong>Chat naturally</strong> — describe the patient scenario, mention vitals, injuries, labs and treatments in plain language.<br><br>
           📋 <strong>Write Everything → Form</strong> — click the green button above at any time to extract <em>everything</em> from our conversation and fill the entire ABCDE survey instantly.<br><br>
           Or use the quick-action buttons to ask for a treatment plan, risk assessment, or protocol comparison.<br><br>
@@ -5981,32 +6034,32 @@ body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
   </div>
 
   <!-- Input -->
-  <div class="timea-input-wrap">
-    <div class="timea-input-inner">
-      <textarea id="timea-input" rows="1" placeholder="Ask TIMEA…" maxlength="2000"
-        onkeydown="tTimea_key(event)" oninput="tTimea_resize(this)"></textarea>
+  <div class="endre-input-wrap">
+    <div class="endre-input-inner">
+      <textarea id="endre-input" rows="1" placeholder="Ask ENDRE…" maxlength="2000"
+        onkeydown="tEndre_key(event)" oninput="tEndre_resize(this)"></textarea>
     </div>
-    <button class="timea-send" id="timea-send" onclick="tTimea_send()" disabled title="Enter API key first">↑</button>
+    <button class="endre-send" id="endre-send" onclick="tEndre_send()" disabled title="Enter API key first">↑</button>
   </div>
 </div>
 
-<!-- TIMEA API KEY MODAL -->
-<div class="timea-modal-overlay" id="timea-key-modal" style="display:none" onclick="if(event.target===this)tTimea_closeKey()">
-  <div class="timea-modal">
-    <div class="timea-modal-title">🔑 Anthropic API Key for TIMEA</div>
-    <div class="timea-modal-sub">TIMEA uses the Anthropic Claude API. Your key is stored only in this browser session.</div>
-    <div class="timea-modal-field">
+<!-- ENDRE API KEY MODAL -->
+<div class="endre-modal-overlay" id="endre-key-modal" style="display:none" onclick="if(event.target===this)tEndre_closeKey()">
+  <div class="endre-modal">
+    <div class="endre-modal-title">🔑 Anthropic API Key for ENDRE</div>
+    <div class="endre-modal-sub">ENDRE uses the Anthropic Claude API. Your key is stored only in this browser session.</div>
+    <div class="endre-modal-field">
       <label>API Key</label>
-      <input type="password" id="timea-key-input" placeholder="sk-ant-api03-..." autocomplete="off" onkeydown="if(event.key==='Enter')tTimea_saveKey()">
+      <input type="password" id="endre-key-input" placeholder="sk-ant-api03-..." autocomplete="off" onkeydown="if(event.key==='Enter')tEndre_saveKey()">
     </div>
-    <div class="timea-modal-note">🔒 Stored in sessionStorage only. Cleared on tab close. Sent directly to api.anthropic.com.</div>
-    <button class="timea-modal-btn" onclick="tTimea_saveKey()">✓ Connect TIMEA</button>
+    <div class="endre-modal-note">🔒 Stored in sessionStorage only. Cleared on tab close. Sent directly to api.anthropic.com.</div>
+    <button class="endre-modal-btn" onclick="tEndre_saveKey()">✓ Connect ENDRE</button>
   </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  TIMEA — embedded in COMPASS EDU
+//  ENDRE — embedded in COMPASS EDU
 // ═══════════════════════════════════════════════════════
 (function() {
 'use strict';
@@ -6043,7 +6096,7 @@ const FIELD_MAP = {
   'mod-pregnant':'Pregnant','mod-burns':'Burns+Trauma'
 };
 
-// Fields TIMEA can fill via AI — includes patient identity fields
+// Fields ENDRE can fill via AI — includes patient identity fields
 const FILLABLE_FIELDS = [
   'pt-name','dob','sex','mech-type','mech-energy','mech-detail',
   'int-g','airway-status',
@@ -6056,7 +6109,7 @@ const FILLABLE_FIELDS = [
   'mod-elderly','mod-anticoag','mod-pregnant','mod-burns'
 ];
 
-const TIMEA_SYSTEM = `You are TIMEA (Trauma-Integrated Medical Education AI), embedded inside COMPASS EDU, a clinical trauma education platform. You are an expert in ATLS 11th Edition, European White Book on Trauma, JATEC, and trauma scoring (ISS, RTS, TRISS, GCS, AIS).
+const ENDRE_SYSTEM = `You are ENDRE (Emergency Neural Decision and Reasoning Engine), embedded inside COMPASS EDU, a clinical trauma education platform. You are an expert in ATLS 11th Edition, European White Book on Trauma, JATEC, and trauma scoring (ISS, RTS, TRISS, GCS, AIS).
 
 CONTEXT: When patient data is provided in the message, use it to give specific, data-driven recommendations.
 
@@ -6112,59 +6165,59 @@ Always end with: ⚠ Educational reference only — not for clinical decisions.`
 
 // ── INIT ──
 window.addEventListener('DOMContentLoaded', function() {
-  const saved = sessionStorage.getItem('timea_key_compass');
+  const saved = sessionStorage.getItem('endre_key_compass');
   if (saved) { _tKey = saved; _tOnKey(); }
 });
 
 // ── TOGGLE PANEL ──
-window.tTimeaToggle = function() {
+window.tEndreToggle = function() {
   _tOpen = !_tOpen;
-  document.getElementById('timea-panel').classList.toggle('open', _tOpen);
-  if (_tOpen && !_tKey) setTimeout(tTimea_showKey, 300);
+  document.getElementById('endre-panel').classList.toggle('open', _tOpen);
+  if (_tOpen && !_tKey) setTimeout(tEndre_showKey, 300);
 };
 
 // ── API KEY ──
-window.tTimea_showKey = function() {
-  document.getElementById('timea-key-modal').style.display = 'flex';
-  setTimeout(() => document.getElementById('timea-key-input').focus(), 100);
+window.tEndre_showKey = function() {
+  document.getElementById('endre-key-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('endre-key-input').focus(), 100);
 };
-window.tTimea_closeKey = function() {
-  document.getElementById('timea-key-modal').style.display = 'none';
+window.tEndre_closeKey = function() {
+  document.getElementById('endre-key-modal').style.display = 'none';
 };
-window.tTimea_saveKey = function() {
-  const v = document.getElementById('timea-key-input').value.trim();
+window.tEndre_saveKey = function() {
+  const v = document.getElementById('endre-key-input').value.trim();
   if (!v || !v.startsWith('sk-')) {
-    document.getElementById('timea-key-input').style.borderColor = 'var(--red)';
+    document.getElementById('endre-key-input').style.borderColor = 'var(--red)';
     return;
   }
   _tKey = v;
-  sessionStorage.setItem('timea_key_compass', v);
+  sessionStorage.setItem('endre_key_compass', v);
   _tOnKey();
-  tTimea_closeKey();
+  tEndre_closeKey();
 };
 function _tOnKey() {
-  document.getElementById('timea-send').disabled = false;
-  document.getElementById('timea-fab-dot').classList.remove('off');
+  document.getElementById('endre-send').disabled = false;
+  document.getElementById('endre-fab-dot').classList.remove('off');
 }
 
 // ── CLEAR CHAT ──
-window.tTimea_clear = function() {
+window.tEndre_clear = function() {
   _tHistory = [];
   _tPatientCtx = null;
-  document.getElementById('timea-msgs').innerHTML = `
+  document.getElementById('endre-msgs').innerHTML = `
     <div class="tmsg ai">
       <div class="tmsg-av">AI</div>
       <div class="tmsg-body">
-        <div class="tmsg-meta">TIMEA</div>
+        <div class="tmsg-meta">ENDRE</div>
         <div class="tmsg-bubble">Chat cleared. Click <strong>↻ Read Patient Data</strong> and ask me anything.</div>
       </div>
     </div>`;
-  document.getElementById('timea-pt-badge').className = 'timea-ctx-badge nodata';
-  document.getElementById('timea-pt-badge').textContent = 'No patient loaded';
+  document.getElementById('endre-pt-badge').className = 'endre-ctx-badge nodata';
+  document.getElementById('endre-pt-badge').textContent = 'No patient loaded';
 };
 
 // ── READ PATIENT DATA FROM FORM ──
-window.tTimea_readPatient = function() {
+window.tEndre_readPatient = function() {
   const fv = id => { const el = document.getElementById(id); if (!el) return null; return el.type === 'checkbox' ? (el.checked ? 'yes' : 'no') : (el.value || null); };
 
   const data = {};
@@ -6179,8 +6232,8 @@ window.tTimea_readPatient = function() {
   const name = data['pt-name'] || 'Unknown';
   const age = data['age'] || '?';
   const sex = data['sex'] || '?';
-  const badge = document.getElementById('timea-pt-badge');
-  badge.className = 'timea-ctx-badge patient';
+  const badge = document.getElementById('endre-pt-badge');
+  badge.className = 'endre-ctx-badge patient';
   badge.textContent = `${name}, ${age}y, ${sex}`;
 
   // Build summary string
@@ -6211,11 +6264,11 @@ window.tTimea_readPatient = function() {
   _tPatientCtx = lines.join('\n');
 
   // Show confirmation message in chat
-  tTimea_appendMsg('ai', `✅ **Patient data loaded!**\n\n${lines.join('\n')}\n\nI now have context on this patient. Ask me anything — treatment plan, protocol comparison, or say "fill the ABCDE form" to propose values.`);
+  tEndre_appendMsg('ai', `✅ **Patient data loaded!**\n\n${lines.join('\n')}\n\nI now have context on this patient. Ask me anything — treatment plan, protocol comparison, or say "fill the ABCDE form" to propose values.`);
 };
 
 // ── QUICK ASK ──
-window.tTimea_quickAsk = function(type) {
+window.tEndre_quickAsk = function(type) {
   const ptCtx = _tPatientCtx ? `\n\n--- CURRENT PATIENT DATA ---\n${_tPatientCtx}\n---\n` : '';
   const prompts = {
     fillabcde: `Based on the patient data provided, please suggest values for the ABCDE form fields and fill them in. ${ptCtx} Provide a brief clinical rationale and use the FILL_FORM JSON block.`,
@@ -6234,42 +6287,42 @@ window.tTimea_quickAsk = function(type) {
     scores:'📊 Explain scores for this patient',
     mtp:'🩸 Should MTP be activated?'
   }[type] || text;
-  document.getElementById('timea-input').value = displayText;
-  tTimea_resize(document.getElementById('timea-input'));
-  tTimea_sendRaw(text, displayText);
+  document.getElementById('endre-input').value = displayText;
+  tEndre_resize(document.getElementById('endre-input'));
+  tEndre_sendRaw(text, displayText);
 };
 
 // ── KEYBOARD ──
-window.tTimea_key = function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); tTimea_send(); }
+window.tEndre_key = function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); tEndre_send(); }
 };
 
 // ── RESIZE TEXTAREA ──
-window.tTimea_resize = function(el) {
+window.tEndre_resize = function(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 80) + 'px';
 };
 
 // ── SEND ──
-window.tTimea_send = function() {
-  const el = document.getElementById('timea-input');
+window.tEndre_send = function() {
+  const el = document.getElementById('endre-input');
   const text = el.value.trim();
   if (!text) return;
   el.value = '';
-  tTimea_resize(el);
+  tEndre_resize(el);
 
   // Inject patient context if loaded
   let fullPrompt = text;
   if (_tPatientCtx) {
     fullPrompt = text + '\n\n--- CURRENT PATIENT DATA FROM COMPASS EDU ---\n' + _tPatientCtx + '\n---';
   }
-  tTimea_sendRaw(fullPrompt, text);
+  tEndre_sendRaw(fullPrompt, text);
 };
 
-function tTimea_sendRaw(fullPrompt, displayText) {
-  if (!_tKey) { tTimea_showKey(); return; }
-  tTimea_appendMsg('user', displayText || fullPrompt);
-  document.getElementById('timea-send').disabled = true;
+function tEndre_sendRaw(fullPrompt, displayText) {
+  if (!_tKey) { tEndre_showKey(); return; }
+  tEndre_appendMsg('user', displayText || fullPrompt);
+  document.getElementById('endre-send').disabled = true;
   _tShowTyping();
 
   _tHistory.push({ role: 'user', content: fullPrompt });
@@ -6286,7 +6339,7 @@ function tTimea_sendRaw(fullPrompt, displayText) {
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1200,
-      system: TIMEA_SYSTEM,
+      system: ENDRE_SYSTEM,
       messages: _tHistory
     })
   })
@@ -6304,15 +6357,15 @@ function tTimea_sendRaw(fullPrompt, displayText) {
     _tHideTyping();
     if (err.message && err.message.includes('401')) {
       _tKey = '';
-      sessionStorage.removeItem('timea_key_compass');
-      document.getElementById('timea-send').disabled = true;
-      document.getElementById('timea-fab-dot').classList.add('off');
+      sessionStorage.removeItem('endre_key_compass');
+      document.getElementById('endre-send').disabled = true;
+      document.getElementById('endre-fab-dot').classList.add('off');
     }
-    tTimea_appendMsg('ai', '⚠️ **Error:** ' + err.message + '\n\nCheck your API key or network connection.');
+    tEndre_appendMsg('ai', '⚠️ **Error:** ' + err.message + '\n\nCheck your API key or network connection.');
   })
   .finally(() => {
-    if (_tKey) document.getElementById('timea-send').disabled = false;
-    document.getElementById('timea-input').focus();
+    if (_tKey) document.getElementById('endre-send').disabled = false;
+    document.getElementById('endre-input').focus();
   });
 }
 
@@ -6322,21 +6375,21 @@ function _tHandleReply(reply) {
   const fillMatch = reply.match(/```FILL_FORM\s*([\s\S]*?)```/);
   const visibleReply = reply.replace(/```FILL_FORM[\s\S]*?```/, '').trim();
 
-  tTimea_appendMsg('ai', visibleReply);
+  tEndre_appendMsg('ai', visibleReply);
 
   if (fillMatch) {
     try {
       const fields = JSON.parse(fillMatch[1].trim());
       _tShowFillCard(fields);
     } catch(e) {
-      tTimea_appendMsg('ai', '⚠️ Could not parse form fill suggestion (invalid JSON).');
+      tEndre_appendMsg('ai', '⚠️ Could not parse form fill suggestion (invalid JSON).');
     }
   }
 }
 
 // ── SHOW FILL CONFIRMATION CARD ──
 function _tShowFillCard(fields) {
-  const container = document.getElementById('timea-msgs');
+  const container = document.getElementById('endre-msgs');
   const card = document.createElement('div');
   card.className = 'tmsg ai';
 
@@ -6348,13 +6401,13 @@ function _tShowFillCard(fields) {
   card.innerHTML = `
     <div class="tmsg-av">AI</div>
     <div class="tmsg-body">
-      <div class="tmsg-meta">TIMEA · Form Fill</div>
-      <div class="timea-fill-card">
-        <div class="timea-fill-title">📝 Suggested ABCDE Values (${Object.keys(fields).length} fields)</div>
-        <div class="timea-fill-fields">${fieldLines}</div>
-        <div class="timea-fill-btns">
-          <button class="timea-fill-apply" onclick="tTimea_applyFill(${JSON.stringify(JSON.stringify(fields))}, this)">✓ Apply to Form</button>
-          <button class="timea-fill-dismiss" onclick="this.closest('.timea-fill-card').style.opacity='.4'">Dismiss</button>
+      <div class="tmsg-meta">ENDRE · Form Fill</div>
+      <div class="endre-fill-card">
+        <div class="endre-fill-title">📝 Suggested ABCDE Values (${Object.keys(fields).length} fields)</div>
+        <div class="endre-fill-fields">${fieldLines}</div>
+        <div class="endre-fill-btns">
+          <button class="endre-fill-apply" onclick="tEndre_applyFill(${JSON.stringify(JSON.stringify(fields))}, this)">✓ Apply to Form</button>
+          <button class="endre-fill-dismiss" onclick="this.closest('.endre-fill-card').style.opacity='.4'">Dismiss</button>
         </div>
       </div>
     </div>`;
@@ -6363,15 +6416,15 @@ function _tShowFillCard(fields) {
 }
 
 // ── APPLY FIELDS TO COMPASS FORM ──
-window.tTimea_applyFill = function(jsonStr, btn) {
+window.tEndre_applyFill = function(jsonStr, btn) {
   let fields;
   try { fields = JSON.parse(jsonStr); } catch(e) { return; }
   const filled = _tWriteFields(fields);
   btn.textContent = `✓ Applied ${filled} fields!`;
   btn.style.background = 'var(--green)';
   btn.disabled = true;
-  setTimeout(tTimea_readPatient, 200);
-  tTimea_appendMsg('ai', `✅ Applied **${filled} field values** to the ABCDE form. Scores have been recalculated.`);
+  setTimeout(tEndre_readPatient, 200);
+  tEndre_appendMsg('ai', `✅ Applied **${filled} field values** to the ABCDE form. Scores have been recalculated.`);
 };
 
 // ── SHARED FIELD WRITER (used by applyFill and autoApplyAll) ──
@@ -6443,30 +6496,30 @@ function _tWriteFields(fields) {
 }
 
 // ── WRITE EVERYTHING FROM CHAT ──
-window.tTimea_writeAll = function() {
-  if (!_tKey) { tTimea_showKey(); return; }
+window.tEndre_writeAll = function() {
+  if (!_tKey) { tEndre_showKey(); return; }
 
   // Gather all text from current conversation
-  const allBubbles = Array.from(document.querySelectorAll('#timea-msgs .tmsg-bubble'))
+  const allBubbles = Array.from(document.querySelectorAll('#endre-msgs .tmsg-bubble'))
     .map(el => el.innerText || el.textContent)
     .filter(t => t && t.length > 5)
     .join('\n\n---\n\n');
 
   if (!allBubbles.trim()) {
-    tTimea_appendMsg('ai', '⚠️ No conversation found yet. Start chatting with me first — describe the patient scenario, mention vitals, injuries, etc. Then click **Write Everything** to extract and fill all values.');
+    tEndre_appendMsg('ai', '⚠️ No conversation found yet. Start chatting with me first — describe the patient scenario, mention vitals, injuries, etc. Then click **Write Everything** to extract and fill all values.');
     return;
   }
 
   // Show progress overlay
-  const overlay = document.getElementById('timea-progress');
-  const lbl = document.getElementById('timea-progress-label');
-  const sub = document.getElementById('timea-progress-sub');
+  const overlay = document.getElementById('endre-progress');
+  const lbl = document.getElementById('endre-progress-label');
+  const sub = document.getElementById('endre-progress-sub');
   overlay.classList.add('show');
   lbl.textContent = 'Reading conversation…';
-  sub.textContent = 'TIMEA is scanning your chat for all clinical values';
+  sub.textContent = 'ENDRE is scanning your chat for all clinical values';
 
   // Disable button
-  const btn = document.getElementById('timea-write-all-btn');
+  const btn = document.getElementById('endre-write-all-btn');
   btn.disabled = true;
 
   // Build the extraction prompt — do NOT use _tHistory to avoid polluting it
@@ -6596,20 +6649,20 @@ ${allBubbles}
     const fillMatch = reply.match(/```FILL_FORM\s*([\s\S]*?)```/);
 
     if (!fillMatch) {
-      tTimea_appendMsg('ai', '⚠️ Could not extract any clinical values from the conversation. Make sure you\'ve discussed specific patient data (e.g. "HR is 120", "SBP 80 mmHg", "GCS 12") before using this feature.');
+      tEndre_appendMsg('ai', '⚠️ Could not extract any clinical values from the conversation. Make sure you\'ve discussed specific patient data (e.g. "HR is 120", "SBP 80 mmHg", "GCS 12") before using this feature.');
       return;
     }
 
     let fields;
     try { fields = JSON.parse(fillMatch[1].trim()); }
     catch(e) {
-      tTimea_appendMsg('ai', '⚠️ Extraction produced invalid data. Try again or fill manually.');
+      tEndre_appendMsg('ai', '⚠️ Extraction produced invalid data. Try again or fill manually.');
       return;
     }
 
     const count = Object.keys(fields).length;
     if (count === 0) {
-      tTimea_appendMsg('ai', '⚠️ No clinical values were found in the conversation. Describe the patient scenario with specific numbers (vitals, labs, GCS, AIS scores) and try again.');
+      tEndre_appendMsg('ai', '⚠️ No clinical values were found in the conversation. Describe the patient scenario with specific numbers (vitals, labs, GCS, AIS scores) and try again.');
       return;
     }
 
@@ -6620,7 +6673,7 @@ ${allBubbles}
     clearInterval(stepTimer);
     overlay.classList.remove('show');
     btn.disabled = false;
-    tTimea_appendMsg('ai', '⚠️ **Error during extraction:** ' + err.message);
+    tEndre_appendMsg('ai', '⚠️ **Error during extraction:** ' + err.message);
   });
 };
 
@@ -6647,7 +6700,7 @@ function _tAutoApplyAll(fields) {
     summaryLines.push(`**${section}:** ` + rows.map(([id,val]) => `${FIELD_MAP[id]||id} = \`${val}\``).join(', '));
   });
   summaryLines.push('\n_Scores recalculated. Context auto-updated._');
-  tTimea_appendMsg('ai', summaryLines.join('\n'));
+  tEndre_appendMsg('ai', summaryLines.join('\n'));
 
   // Silently refresh context
   setTimeout(_tRefreshCtxSilent, 400);
@@ -6669,14 +6722,14 @@ function _tRefreshCtxSilent() {
   if (msAtls&&msAtls!=='—') lines.push(`Ps(ATLS): ${msAtls}`);
   if (msIss&&msIss!=='—') lines.push(`ISS: ${msIss}, RTS: ${document.getElementById('m-rts')?.textContent}`);
   _tPatientCtx = lines.join('\n');
-  const badge = document.getElementById('timea-pt-badge');
-  badge.className = 'timea-ctx-badge patient';
+  const badge = document.getElementById('endre-pt-badge');
+  badge.className = 'endre-ctx-badge patient';
   badge.textContent = `${name}, ${age}y, ${sex}`;
 }
 
 
-function tTimea_appendMsg(role, text) {
-  const container = document.getElementById('timea-msgs');
+function tEndre_appendMsg(role, text) {
+  const container = document.getElementById('endre-msgs');
   const now = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   const el = document.createElement('div');
   el.className = 'tmsg ' + role;
@@ -6684,32 +6737,32 @@ function tTimea_appendMsg(role, text) {
   el.innerHTML = `
     <div class="tmsg-av">${role === 'user' ? 'YOU' : 'AI'}</div>
     <div class="tmsg-body">
-      <div class="tmsg-meta">${role === 'user' ? 'You' : 'TIMEA'} · ${now}</div>
+      <div class="tmsg-meta">${role === 'user' ? 'You' : 'ENDRE'} · ${now}</div>
       <div class="tmsg-bubble">${rendered}</div>
     </div>`;
   container.appendChild(el);
   container.scrollTop = container.scrollHeight;
 }
-window.tTimea_appendMsg = tTimea_appendMsg;
+window.tEndre_appendMsg = tEndre_appendMsg;
 
 // ── TYPING INDICATOR ──
 function _tShowTyping() {
-  const c = document.getElementById('timea-msgs');
+  const c = document.getElementById('endre-msgs');
   const el = document.createElement('div');
-  el.className = 'tmsg ai'; el.id = 'timea-typing';
+  el.className = 'tmsg ai'; el.id = 'endre-typing';
   el.innerHTML = `<div class="tmsg-av">AI</div>
     <div class="tmsg-body">
-      <div class="timea-typing">
-        <div class="timea-tdot"></div>
-        <div class="timea-tdot"></div>
-        <div class="timea-tdot"></div>
+      <div class="endre-typing">
+        <div class="endre-tdot"></div>
+        <div class="endre-tdot"></div>
+        <div class="endre-tdot"></div>
       </div>
     </div>`;
   c.appendChild(el);
   c.scrollTop = c.scrollHeight;
 }
 function _tHideTyping() {
-  const el = document.getElementById('timea-typing');
+  const el = document.getElementById('endre-typing');
   if (el) el.remove();
 }
 
@@ -6730,16 +6783,16 @@ function _tEscape(t) {
 }
 
 // ── ANALYSIS POPUP ──
-window.tTimea_analyse = function() {
-  if (!_tKey) { tTimea_showKey(); return; }
+window.tEndre_analyse = function() {
+  if (!_tKey) { tEndre_showKey(); return; }
 
-  const overlay = document.getElementById('timea-analysis-overlay');
-  const body = document.getElementById('timea-analysis-body');
-  const ptLabel = document.getElementById('timea-analysis-pt-label');
+  const overlay = document.getElementById('endre-analysis-overlay');
+  const body = document.getElementById('endre-analysis-body');
+  const ptLabel = document.getElementById('endre-analysis-pt-label');
 
   // Show modal with spinner
   overlay.classList.add('show');
-  body.innerHTML = `<div class="timea-analysis-spinner"><div class="timea-progress-spinner" style="border-top-color:var(--blue)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">Generating analysis…</div></div>`;
+  body.innerHTML = `<div class="endre-analysis-spinner"><div class="endre-progress-spinner" style="border-top-color:var(--blue)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">Generating analysis…</div></div>`;
 
   // Read live patient data
   const fv = id => { const el=document.getElementById(id); if(!el) return null; return el.type==='checkbox'?(el.checked?'yes':'no'):(el.value||null); };
@@ -6833,12 +6886,12 @@ Each section should have 3-6 items. Be specific to this patient's data.`;
   });
 };
 
-window.tTimea_closeAnalysis = function() {
-  document.getElementById('timea-analysis-overlay').classList.remove('show');
+window.tEndre_closeAnalysis = function() {
+  document.getElementById('endre-analysis-overlay').classList.remove('show');
 };
 
 function _tRenderAnalysis(a) {
-  const body = document.getElementById('timea-analysis-body');
+  const body = document.getElementById('endre-analysis-body');
   const riskClass = {critical:'critical',high:'high',moderate:'moderate',low:'low'}[a.risk]||'moderate';
   const riskIcon = {critical:'🔴',high:'🟠',moderate:'🟡',low:'🟢'}[a.risk]||'⚕';
   const riskColor = {critical:'var(--red)',high:'#c85000',moderate:'var(--amber)',low:'var(--green)'}[a.risk]||'var(--amber)';
@@ -6849,28 +6902,28 @@ function _tRenderAnalysis(a) {
   const colorDot = {red:'var(--red)',amber:'var(--amber)',green:'var(--green)',blue:'var(--blue)'};
 
   let html = `
-    <div class="timea-risk-banner ${riskClass}">
-      <div class="timea-risk-icon">${riskIcon}</div>
-      <div class="timea-risk-text">
-        <div class="timea-risk-level" style="color:${riskColor}">${(a.risk||'').toUpperCase()} RISK</div>
-        <div class="timea-risk-summary">${_tEscape(a.risk_summary||'')}</div>
+    <div class="endre-risk-banner ${riskClass}">
+      <div class="endre-risk-icon">${riskIcon}</div>
+      <div class="endre-risk-text">
+        <div class="endre-risk-level" style="color:${riskColor}">${(a.risk||'').toUpperCase()} RISK</div>
+        <div class="endre-risk-summary">${_tEscape(a.risk_summary||'')}</div>
       </div>
     </div>`;
 
   (a.sections||[]).forEach(sec => {
     const dot = colorDot[sec.color]||'var(--blue)';
-    html += `<div class="timea-checklist-section">
-      <div class="timea-checklist-title">
-        <div class="timea-checklist-title-dot" style="background:${dot}"></div>
+    html += `<div class="endre-checklist-section">
+      <div class="endre-checklist-title">
+        <div class="endre-checklist-title-dot" style="background:${dot}"></div>
         ${_tEscape(sec.title||'')}
       </div>`;
     (sec.items||[]).forEach(item => {
       const icon = statusIcon[item.status]||'ℹ️';
       const cls = statusClass[item.status]||'';
-      const badge = item.badge ? `<span class="timea-check-badge ${item.badge==='ATLS'?'atls':item.badge==='EURO WB'?'euro':item.badge==='JATEC'?'jatec':''}" style="${item.badge==='ATLS'?'background:rgba(26,107,191,.1);border:1px solid rgba(26,107,191,.25);color:var(--blue)':item.badge==='EURO WB'?'background:rgba(91,74,207,.1);border:1px solid rgba(91,74,207,.25);color:var(--lav)':item.badge==='JATEC'?'background:rgba(26,127,75,.1);border:1px solid rgba(26,127,75,.25);color:var(--green)':''}">${_tEscape(item.badge)}</span>` : '';
-      html += `<div class="timea-check-item ${cls}">
-        <span class="timea-check-icon">${icon}</span>
-        <span class="timea-check-text">${_tEscape(item.text||'')}${badge}</span>
+      const badge = item.badge ? `<span class="endre-check-badge ${item.badge==='ATLS'?'atls':item.badge==='EURO WB'?'euro':item.badge==='JATEC'?'jatec':''}" style="${item.badge==='ATLS'?'background:rgba(26,107,191,.1);border:1px solid rgba(26,107,191,.25);color:var(--blue)':item.badge==='EURO WB'?'background:rgba(91,74,207,.1);border:1px solid rgba(91,74,207,.25);color:var(--lav)':item.badge==='JATEC'?'background:rgba(26,127,75,.1);border:1px solid rgba(26,127,75,.25);color:var(--green)':''}">${_tEscape(item.badge)}</span>` : '';
+      html += `<div class="endre-check-item ${cls}">
+        <span class="endre-check-icon">${icon}</span>
+        <span class="endre-check-text">${_tEscape(item.text||'')}${badge}</span>
       </div>`;
     });
     html += `</div>`;
@@ -6883,15 +6936,349 @@ function _tRenderAnalysis(a) {
   body.innerHTML = html;
 }
 
-})(); // end TIMEA IIFE
-
 // ═══════════════════════════════════════════════════════
-//  TIMEA VOICE — Wake word "Hi Timi" + dictation
+//  ENDRE INSTRUCTOR MODE
+// ═══════════════════════════════════════════════════════
+
+let _instrMode = false;
+let _instrStep = 0;
+let _instrDoneSteps = new Set();
+let _quizPending = false;
+let _quizCount = 0; // track quizzes shown this session
+
+const INSTRUCTOR_STEPS = [
+  {
+    id: 0, name: 'Patient',
+    section: 'pt-id-card',
+    abcde: null,
+    intro: `🎓 **Step 1 — Patient Identification**\n\nBefore touching the ABCDE assessment, always establish who this patient is and how they got here.\n\n**Why this matters:** The mechanism of injury (MOI) predicts the injury pattern before you examine anything. A 70-year-old on anticoagulants who fell 1 metre has a higher mortality risk than a 25-year-old in the same fall. Age, sex, and modifiers change every threshold in the ATLS, Euro WB and JATEC protocols.\n\n**Your task now:** Fill in the patient name, date of birth, sex, and mechanism of injury. Then click **Next ▶** to proceed to Airway.`,
+    teaching: `**Key teaching points — Patient & MOI**\n\n[ATLS] High-energy mechanisms warrant full trauma team activation regardless of initial vital signs.\n\n[EURO WB] The European approach emphasises early CT triage (≤30 min) for high-energy blunt trauma — mechanism drives that decision.\n\n[JATEC] Japan's most common mechanism is low-energy falls in the elderly — geriatric modifiers are explicitly built into JATEC thresholds.\n\n**Outcome influencers:** Age ≥65 lowers all activation thresholds. Anticoagulation converts a low-energy fall into a high-risk event. Penetrating vs blunt changes your TRISS coefficients and survival prediction.`,
+    quizChance: 0.5,
+  },
+  {
+    id: 1, name: 'A · Airway',
+    section: 'abcde-a-sec',
+    abcde: 'a',
+    intro: `🎓 **Step 2 — A: Airway**\n\nThe airway is always assessed first. A patient with no airway has seconds to live — everything else is secondary.\n\n**What to assess:** Is the airway patent, threatened, or compromised? Has it been secured with intubation?\n\n**Your task:** Fill in the Airway Status and Intubated fields, then click **Next ▶**.`,
+    teaching: `**Key teaching points — Airway**\n\n[ATLS] GCS ≤8 = presumed inability to protect airway → intubate. RSI is the gold standard method.\n\n[JATEC] Sets a lower threshold: GCS ≤12 combined with haemodynamic instability warrants intubation consideration.\n\n[EURO WB] Emphasises pre-hospital airway management and continuity — a secured airway on arrival should not be re-attempted without cause.\n\n**Outcome influencers:** Every minute of hypoxia causes secondary brain injury in TBI patients. A missed threatened airway is the most preventable cause of trauma death.`,
+    quizChance: 0.6,
+  },
+  {
+    id: 2, name: 'B · Breathing',
+    section: 'abcde-b-sec',
+    abcde: 'b',
+    intro: `🎓 **Step 3 — B: Breathing & Ventilation**\n\nOnce the airway is secured, assess ventilation. A patient can have a patent airway and still not be breathing adequately.\n\n**What to assess:** Respiratory rate, oxygen saturations, blood gas values (pCO₂, pO₂, pH), and whether a chest drain has been placed.\n\n**Your task:** Fill in the breathing section values, then click **Next ▶**.`,
+    teaching: `**Key teaching points — Breathing**\n\n[ATLS] Tension pneumothorax = immediate needle decompression (2nd ICS MCL). Do not wait for X-ray.\n\n[EURO WB] CT chest within 30 minutes for haemodynamically stable patients — identifies occult pneumothorax and haemothorax missed on CXR.\n\n**Normal ranges to remember:**\n- RR: 12–20 /min\n- SpO₂: ≥95%\n- pCO₂: 4.7–6.0 kPa\n- pH: 7.35–7.45\n\n**Outcome influencers:** Hypoxia (SpO₂ <94%) directly worsens TBI outcomes and increases mortality in haemorrhagic shock. pCO₂ >6 kPa in a head-injured patient indicates hypoventilation and rising ICP.`,
+    quizChance: 0.5,
+  },
+  {
+    id: 3, name: 'C · Circulation',
+    section: 'abcde-c-sec',
+    abcde: 'c',
+    intro: `🎓 **Step 4 — C: Circulation & Haemorrhage Control**\n\nHaemorrhage is the leading cause of preventable trauma death. The C step is often the most time-critical.\n\n**What to assess:** SBP, DBP, HR, haemoglobin, coagulation (INR, fibrinogen), metabolic markers (lactate, base excess, ionised calcium), FAST exam, and treatments already given.\n\n**Your task:** Fill in all Circulation fields, then click **Next ▶**.`,
+    teaching: `**Key teaching points — Circulation**\n\n[ATLS] SBP <90 mmHg = haemorrhagic shock. Shock Index (HR/SBP) >1.0 = significant blood loss.\n\n[EURO WB] Lactate >2 mmol/L OR Base Excess < -3 is an independent trigger for TXA, not just hypotension.\n\n[JATEC] Fibrinogen is prioritised over FFP as first-line coagulopathy treatment — different from ATLS.\n\n**The lethal triad to recognise:** Hypothermia + Acidosis + Coagulopathy. Each worsens the other. Fibrinogen <1.5 g/L + INR >1.5 + iCa <1.1 together = critical coagulopathy requiring immediate correction.\n\n**TXA window:** CRASH-2 evidence — give within 3 hours of injury. After 3 hours it may increase mortality. Time matters.`,
+    quizChance: 0.7,
+  },
+  {
+    id: 4, name: 'D · Disability',
+    section: 'abcde-d-sec',
+    abcde: 'd',
+    intro: `🎓 **Step 5 — D: Disability (Neurological)**\n\nA rapid neurological assessment to identify life-threatening brain injury that requires immediate intervention.\n\n**What to assess:** GCS total score (3–15) and pupil reactivity.\n\n**Your task:** Fill in GCS and Pupils, then click **Next ▶**.`,
+    teaching: `**Key teaching points — Disability**\n\n[ATLS] GCS ≤8 = severe TBI. Indication for intubation if not already done. CT head is mandatory.\n\nPupil findings:\n- Equal & reactive = normal\n- Unequal = possible herniation or CN III compression\n- Fixed & dilated = late sign of transtentorial herniation — neurosurgery NOW\n\n[EURO WB] Avoid secondary brain injury: keep SBP ≥90 mmHg (or ≥100 mmHg in JATEC), SpO₂ ≥95%, pCO₂ 4.5–5.0 kPa.\n\n**Outcome influencers:** Every episode of hypotension (SBP <90) in a TBI patient doubles mortality. The brain needs perfusion pressure — haemorrhage control and TBI management must happen simultaneously, not sequentially.`,
+    quizChance: 0.5,
+  },
+  {
+    id: 5, name: 'E · Exposure',
+    section: 'abcde-e-sec',
+    abcde: 'e',
+    intro: `🎓 **Step 6 — E: Exposure & Environment**\n\nExpose the patient completely to identify all injuries. Prevent hypothermia — the environment step reminds you to then cover the patient.\n\n**What to assess:** Temperature status, pelvic binder application, and all AIS (Abbreviated Injury Scale) scores by body region.\n\n**Your task:** Complete all AIS scores (0–6 per region) and temperature/pelvic fields, then click **Next ▶**.`,
+    teaching: `**Key teaching points — Exposure & AIS**\n\nAIS scoring drives your ISS and TRISS survival prediction:\n- AIS 1 = Minor\n- AIS 2 = Moderate\n- AIS 3 = Serious\n- AIS 4 = Severe\n- AIS 5 = Critical\n- AIS 6 = Unsurvivable\n\n**ISS = sum of squares of 3 highest AIS scores from different body regions.** ISS >15 = major trauma.\n\n[ATLS/EURO WB] Pelvic fracture with haemodynamic instability = immediate pelvic binder + consider REBOA or angio-embolisation.\n\n**Hypothermia and the lethal triad:** Core temp <35°C worsens coagulopathy. Every degree below 35°C increases bleeding. Cover the patient, warm IV fluids, warm the resus room.`,
+    quizChance: 0.6,
+  },
+  {
+    id: 6, name: 'Analysis',
+    section: null,
+    abcde: null,
+    intro: `🎓 **Step 7 — Run Analysis**\n\nAll data is entered. Now let's see what the three protocols recommend for this patient and what the survival prediction looks like.\n\nClick **▶ Run Analysis** in the main panel to generate the full ATLS · Euro WB · JATEC comparison.\n\nAfter the analysis loads, come back here and I'll walk you through how to interpret the Ps scores, protocol conflicts, and what to prioritise.`,
+    teaching: `**Interpreting the analysis output**\n\n**Ps (Survival Probability)** is calculated via TRISS methodology. Ps 0.9 = 90% predicted survival. Ps <0.5 = more likely to die than survive with current data.\n\n**Protocol conflicts** appear when ATLS, Euro WB, and JATEC disagree. These are teaching opportunities — the disagreements reflect genuine differences in evidence interpretation between North American, European, and Japanese trauma systems.\n\n**Risk level** (critical/high/moderate/low) is derived from a composite of haemodynamic status, GCS, and ISS. Use it as a triage guide, not a definitive classification.\n\n**What to do with the results:** Use them to ask — what would I do differently if I followed each protocol? That question is the core of trauma protocol education.`,
+    quizChance: 0.4,
+  }
+];
+
+// Quiz bank — indexed by step, multiple questions per step
+const QUIZ_BANK = {
+  0: [
+    { q: 'A 68-year-old anticoagulated patient falls from standing height. What should this be treated as, per ATLS/Euro WB?', opts: ['Low-energy mechanism — standard assessment', 'High-energy equivalent — full trauma activation', 'Medium energy — abbreviated survey only', 'No protocol modification needed'], correct: 1, feedback: 'Correct. Per ATLS and Euro WB, anticoagulation converts a ground-level fall into a high-energy equivalent. The anticoagulated elderly patient has a 3–5x higher mortality than a young patient with the same mechanism.' },
+    { q: 'Which trauma type uses different TRISS regression coefficients affecting Ps calculation?', opts: ['Age >65 vs younger', 'Male vs female', 'Blunt vs penetrating', 'High vs low energy'], correct: 2, feedback: 'Correct. TRISS uses separate b-coefficients for blunt and penetrating trauma. Penetrating trauma generally produces a lower Ps for the same ISS, reflecting different injury patterns and physiological response.' },
+  ],
+  1: [
+    { q: 'GCS is 7, BP is 110/70, SpO₂ 97%. Which protocol recommends intubation?', opts: ['ATLS only', 'JATEC only', 'Both ATLS and JATEC', 'Neither — GCS threshold not met'], correct: 2, feedback: 'Correct. ATLS recommends intubation at GCS ≤8. JATEC uses GCS ≤12 combined with haemodynamic instability — at GCS 7, both protocols independently indicate airway intervention.' },
+    { q: 'A patient has a patent airway but RR of 28 and SpO₂ of 91%. What is the priority?', opts: ['Proceed to Circulation assessment', 'Supplemental oxygen and assess for tension pneumothorax', 'Intubate immediately', 'Chest X-ray before any intervention'], correct: 1, feedback: 'Correct. SpO₂ <94% requires immediate oxygen therapy. The elevated RR and low saturation together suggest a breathing problem (B), not just an airway problem (A). Tension pneumothorax must be excluded clinically — don\'t wait for imaging.' },
+  ],
+  2: [
+    { q: 'A trauma patient has SpO₂ 88%, absent breath sounds on the right, and tracheal deviation to the left. What is the immediate action?', opts: ['Emergency chest X-ray', 'Needle decompression — 2nd ICS MCL right side', 'Chest drain insertion', 'CT chest immediately'], correct: 1, feedback: 'Correct. This is a clinical diagnosis of tension pneumothorax. Per ATLS, immediate needle decompression (14G cannula, 2nd intercostal space, midclavicular line) is the treatment — do NOT wait for imaging. Delay is lethal.' },
+    { q: 'pCO₂ is 7.2 kPa in an intubated patient with GCS 6. What does this indicate?', opts: ['Normal — intubated patients have higher pCO₂', 'Hyperventilation — needs lower tidal volume', 'Hypoventilation — increases ICP, needs adjustment', 'Metabolic alkalosis — unrelated to ventilation'], correct: 2, feedback: 'Correct. pCO₂ >6.0 kPa in a head-injured patient indicates hypoventilation. Elevated pCO₂ causes cerebral vasodilation and raises ICP. Target: 4.5–5.0 kPa. Adjust ventilator settings immediately.' },
+  ],
+  3: [
+    { q: 'SBP 78 mmHg, HR 138 bpm. What is the Shock Index, and what does it indicate?', opts: ['0.56 — normal, no action', '1.77 — massive haemorrhage, consider MTP', '0.78 — mild hypovolaemia', '2.14 — neurogenic shock'], correct: 1, feedback: 'Correct. Shock Index = HR / SBP = 138 / 78 = 1.77. SI >1.0 indicates significant haemorrhage. SI >1.4 is strongly associated with massive transfusion requirement. Activate your MTP now and identify the haemorrhage source.' },
+    { q: 'CRASH-2 trial: what is the critical time window for TXA administration?', opts: ['Within 1 hour of injury', 'Within 3 hours — after 3h it may increase mortality', 'Within 6 hours — same as fibrinogen', 'Any time if still bleeding'], correct: 1, feedback: 'Correct. The CRASH-2 trial showed TXA reduces mortality when given within 3 hours of injury. After 3 hours, TXA may actually increase mortality (possibly by inhibiting late fibrinolysis that aids healing). Time of injury documentation is therefore critical.' },
+    { q: 'Which protocol prioritises fibrinogen over FFP as first-line coagulopathy treatment?', opts: ['ATLS 11th Edition', 'European White Book', 'JATEC (Japan)', 'All three protocols agree'], correct: 2, feedback: 'Correct. JATEC recommends fibrinogen concentrate as the first-line treatment when INR >1.5, before FFP. ATLS defaults to FFP in a 1:1:1 ratio with pRBC and platelets. This is one of the key protocol divergence points between Eastern and Western approaches.' },
+  ],
+  4: [
+    { q: 'GCS = 14, pupils equal and reactive, BP 95/60. What is the most dangerous risk here?', opts: ['The GCS is too low — intubate now', 'Hypotension in a potentially head-injured patient worsens TBI outcomes', 'Pupils indicate no intracranial pathology', 'GCS 14 does not require CT head'], correct: 1, feedback: 'Correct. Every episode of SBP <90 mmHg in a TBI patient approximately doubles mortality. The hypotension must be corrected simultaneously with neurological assessment, not after. All three protocols agree: permissive hypotension is contraindicated in suspected TBI.' },
+    { q: 'Fixed and dilated bilateral pupils in a trauma patient. What is the immediate action?', opts: ['Repeat GCS assessment in 5 minutes', 'Immediate neurosurgical consultation + CT head', 'Give mannitol and observe', 'Document finding and continue ABCDE'], correct: 1, feedback: 'Correct. Bilateral fixed dilated pupils indicate transtentorial herniation — a neurosurgical emergency. This warrants immediate CT head and neurosurgical consultation. Mannitol or hypertonic saline as a bridge is reasonable but does not replace surgery if there is a correctable lesion.' },
+  ],
+  5: [
+    { q: 'AIS scores: Head 4, Thorax 3, Abdomen 3. What is the ISS?', opts: ['10', '25', '34', '43'], correct: 2, feedback: 'Correct. ISS = sum of squares of the 3 highest AIS scores from different body regions. 4²+3²+3² = 16+9+9 = 34. ISS >15 = major trauma. ISS >25 = severe — mortality increases significantly above this threshold.' },
+    { q: 'Core temperature is 34.2°C. Which element of the lethal triad does this directly worsen?', opts: ['Acidosis only', 'Coagulopathy only', 'Both coagulopathy and acidosis', 'Neither — hypothermia is managed separately'], correct: 2, feedback: 'Correct. Hypothermia directly impairs clotting factor function (worsening coagulopathy) and slows cellular metabolism causing lactic acidosis. All three elements of the lethal triad interact — treating one improves the others. Warm the patient, warm the fluids, warm the room.' },
+  ],
+  6: [
+    { q: 'Ps (ATLS) = 0.42, Ps (Euro WB) = 0.38. What does this mean clinically?', opts: ['Both predict >50% survival probability', 'Both predict this patient is more likely to die than survive — critical intervention needed', 'The models disagree significantly — ignore both', 'Ps only applies to penetrating trauma'], correct: 1, feedback: 'Correct. Ps <0.5 means the model predicts this patient is statistically more likely to die than survive given their current physiological and anatomical parameters. This should escalate urgency — immediate damage control surgery, ICU escalation, and senior involvement.' },
+    { q: 'ATLS and Euro WB recommend different first-line coagulopathy treatments. Why does this matter in practice?', opts: ['It doesn\'t — outcomes are the same', 'It affects which blood products you order and how fast — FFP takes longer to prepare than fibrinogen concentrate', 'Only relevant in penetrating trauma', 'Euro WB is always superior — follow it'], correct: 1, feedback: 'Correct. ATLS\'s 1:1:1 FFP:PLT:pRBC approach requires type-and-screen and FFP thawing (15–30 min). Fibrinogen concentrate (JATEC/Euro WB approach) can be given in 2–5 minutes. In a rapidly deteriorating patient, that time difference can determine whether coagulopathy is corrected before haemorrhage kills the patient.' },
+  ]
+};
+
+// ── INSTRUCTOR MODE TOGGLE ──
+window.tEndre_toggleMode = function() {
+  _instrMode = !_instrMode;
+  _instrStep = 0;
+  _instrDoneSteps.clear();
+
+  const btn = document.getElementById('endre-mode-btn');
+  const bar = document.getElementById('endre-instructor-bar');
+  const badge = document.getElementById('endre-instructor-badge');
+  const lbl = document.getElementById('endre-mode-label');
+  const icon = document.getElementById('endre-mode-icon');
+  const sub = document.getElementById('endre-sub');
+
+  if (_instrMode) {
+    btn.classList.add('instructor');
+    bar.classList.add('show');
+    if (badge) badge.classList.add('show');
+    lbl.textContent = 'Assistant';
+    icon.textContent = '💬';
+    if (sub) sub.textContent = 'Instructor Mode — Emergency Neural Decision and Reasoning Engine';
+    _instrUpdatePills();
+    _instrGreet();
+  } else {
+    btn.classList.remove('instructor');
+    bar.classList.remove('show');
+    if (badge) badge.classList.remove('show');
+    lbl.textContent = 'Instructor';
+    icon.textContent = '🎓';
+    if (sub) sub.textContent = 'Emergency Neural Decision and Reasoning Engine';
+    tEndre_appendMsg('ai', '👋 Switched back to **Assistant mode**. Ask me anything about the patient or protocols.');
+  }
+};
+
+// ── STEP PILL UPDATER ──
+function _instrUpdatePills() {
+  document.querySelectorAll('.endre-step-pill').forEach((pill, i) => {
+    pill.classList.remove('active','done');
+    if (i === _instrStep) pill.classList.add('active');
+    else if (_instrDoneSteps.has(i)) pill.classList.add('done');
+  });
+}
+
+// ── JUMP TO STEP ──
+window.tEndre_jumpStep = function(i) {
+  if (!_instrMode) return;
+  _instrStep = i;
+  _instrUpdatePills();
+  _instrTeachStep(i, false);
+};
+
+// ── NEXT STEP ──
+window.tEndre_nextStep = function() {
+  if (!_instrMode) return;
+  _instrDoneSteps.add(_instrStep);
+  _instrStep = Math.min(_instrStep + 1, INSTRUCTOR_STEPS.length - 1);
+  _instrUpdatePills();
+
+  const step = INSTRUCTOR_STEPS[_instrStep];
+
+  // Scroll to and open the relevant ABCDE section
+  if (step.abcde) {
+    const body = document.getElementById('abcde-'+step.abcde+'-body');
+    const arrow = document.getElementById('abcde-'+step.abcde+'-arrow');
+    if (body && body.classList.contains('collapsed')) {
+      body.classList.remove('collapsed');
+      if (arrow) arrow.classList.remove('collapsed');
+    }
+  }
+  if (step.section) {
+    const el = document.getElementById(step.section);
+    const lp = document.getElementById('lp');
+    if (el && lp) {
+      setTimeout(() => { lp.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' }); }, 200);
+    }
+  }
+
+  _instrTeachStep(_instrStep, true);
+};
+
+// ── GREET IN INSTRUCTOR MODE ──
+function _instrGreet() {
+  tEndre_appendMsg('ai', `🎓 **Instructor Mode activated.**\n\nI'll guide you through the ABCDE trauma assessment step by step, explain what each value means, what influences patient outcomes, and occasionally quiz you on key protocol knowledge.\n\nUse the **step pills above** to navigate, or click **Next ▶** to advance. Your progress is tracked.\n\nLet's start with **Step 1 — Patient Identification**. Click **Next ▶** to begin.`);
+}
+
+// ── TEACH A STEP ──
+function _instrTeachStep(stepIdx, withQuiz) {
+  const step = INSTRUCTOR_STEPS[stepIdx];
+  if (!step) return;
+
+  // Post the intro message
+  tEndre_appendMsg('ai', step.intro);
+
+  // Post teaching card
+  setTimeout(() => {
+    _instrShowTeachCard(step.teaching);
+
+    // Decide whether to show a quiz
+    if (withQuiz && !_quizPending && Math.random() < step.quizChance && QUIZ_BANK[stepIdx]) {
+      setTimeout(() => { _instrShowQuiz(stepIdx); }, 800);
+    }
+  }, 400);
+}
+
+// ── SHOW TEACHING CARD ──
+function _instrShowTeachCard(text) {
+  const container = document.getElementById('endre-msgs');
+  const el = document.createElement('div');
+  el.className = 'tmsg ai';
+  el.innerHTML = `
+    <div class="tmsg-av">AI</div>
+    <div class="tmsg-body">
+      <div class="tmsg-meta">ENDRE · Teaching point</div>
+      <div class="endre-teach-card">${_tRenderInstr(text)}</div>
+    </div>`;
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+}
+
+// ── SHOW QUIZ ──
+function _instrShowQuiz(stepIdx) {
+  const bank = QUIZ_BANK[stepIdx];
+  if (!bank || !bank.length) return;
+
+  _quizPending = true;
+  _quizCount++;
+
+  const q = bank[Math.floor(Math.random() * bank.length)];
+  const letters = ['A','B','C','D'];
+  const qId = 'quiz_' + Date.now();
+
+  const container = document.getElementById('endre-msgs');
+  const el = document.createElement('div');
+  el.className = 'tmsg ai';
+
+  const optsHtml = q.opts.map((opt, i) =>
+    `<div class="endre-quiz-opt" id="${qId}_opt${i}" onclick="tEndre_answerQuiz('${qId}',${i},${q.correct},${q.opts.length})">
+      <span class="endre-quiz-opt-letter">${letters[i]}</span>
+      <span>${_tEscapeInstr(opt)}</span>
+    </div>`
+  ).join('');
+
+  el.innerHTML = `
+    <div class="tmsg-av">AI</div>
+    <div class="tmsg-body">
+      <div class="tmsg-meta">ENDRE · Quick check</div>
+      <div class="endre-quiz-card">
+        <div class="endre-quiz-title">❓ Protocol Knowledge Check</div>
+        <div class="endre-quiz-q">${_tEscapeInstr(q.question || q.q)}</div>
+        <div class="endre-quiz-opts" id="${qId}_opts">${optsHtml}</div>
+        <div class="endre-quiz-feedback" id="${qId}_feedback"></div>
+      </div>
+    </div>`;
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+}
+
+// ── ANSWER QUIZ ──
+window.tEndre_answerQuiz = function(qId, chosen, correct, total) {
+  _quizPending = false;
+
+  for (let i = 0; i < total; i++) {
+    const opt = document.getElementById(qId+'_opt'+i);
+    if (!opt) continue;
+    if (i === correct) opt.classList.add(chosen === correct ? 'correct' : 'reveal');
+    else if (i === chosen && chosen !== correct) opt.classList.add('wrong');
+    else opt.style.opacity = '.45';
+    opt.style.pointerEvents = 'none';
+  }
+
+  // Find the feedback text from the quiz bank
+  let feedbackText = chosen === correct
+    ? '✅ Correct!'
+    : '❌ Not quite.';
+
+  // Search all quiz banks for matching question
+  Object.values(QUIZ_BANK).forEach(bank => {
+    bank.forEach(q => {
+      if (q.opts && q.opts.length === total) {
+        const fb = document.getElementById(qId+'_feedback');
+        if (fb && !fb.textContent) {
+          fb.innerHTML = feedbackText + ' ' + _tRenderInstr(q.feedback || '');
+          fb.classList.add('show');
+        }
+      }
+    });
+  });
+
+  // Fallback
+  const fb = document.getElementById(qId+'_feedback');
+  if (fb && !fb.classList.contains('show')) {
+    fb.innerHTML = feedbackText;
+    fb.classList.add('show');
+  }
+
+  const msgs = document.getElementById('endre-msgs');
+  if (msgs) msgs.scrollTop = msgs.scrollHeight;
+};
+
+// ── OVERRIDE SEND TO ADD INSTRUCTOR CONTEXT ──
+const _origEndreHistory_push = Array.prototype.push;
+(function() {
+  const origSend = window.tEndre_send;
+  window.tEndre_send = function() {
+    if (_instrMode) {
+      const step = INSTRUCTOR_STEPS[_instrStep];
+      const input = document.getElementById('endre-input');
+      if (input && input.value.trim()) {
+        // Prepend instructor context invisibly to the actual API message
+        const userText = input.value.trim();
+        const instrCtx = `[INSTRUCTOR MODE — current step: ${step.name} (step ${_instrStep+1}/${INSTRUCTOR_STEPS.length}). The student is learning about: ${step.name}. Respond as a clinical instructor — be educational, reference protocols, and offer to continue teaching after answering.]`;
+        // Store original, temporarily modify
+        const orig = input.value;
+        input.setAttribute('data-instr-orig', orig);
+      }
+    }
+    origSend.apply(this, arguments);
+  };
+})();
+
+// ── RENDER HELPERS FOR INSTRUCTOR ──
+function _tRenderInstr(t) {
+  return t
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code style="font-family:monospace;font-size:10px;background:var(--bg3);padding:1px 4px;border-radius:3px">$1</code>')
+    .replace(/\[ATLS\]/g,'<span style="background:rgba(26,107,191,.1);border:1px solid rgba(26,107,191,.25);color:var(--blue);font-family:monospace;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px">ATLS</span>')
+    .replace(/\[EURO WB\]/g,'<span style="background:rgba(91,74,207,.1);border:1px solid rgba(91,74,207,.25);color:var(--lav);font-family:monospace;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px">EURO WB</span>')
+    .replace(/\[JATEC\]/g,'<span style="background:rgba(26,127,75,.1);border:1px solid rgba(26,127,75,.25);color:var(--green);font-family:monospace;font-size:8px;font-weight:700;padding:1px 5px;border-radius:3px">JATEC</span>')
+    .replace(/\n\n+/g,'<br><br>').replace(/\n/g,'<br>');
+}
+function _tEscapeInstr(t) {
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+})(); // end ENDRE IIFE
 // ═══════════════════════════════════════════════════════
 (function() {
 'use strict';
 
-const WAKE_WORDS = ['hi timi','hey timi','hi timea','hey timea','hi timy','hey timy'];
+const WAKE_WORDS = ['hi endre','hey endre','hi endre','hey endre','hi endre','hey endre'];
 const STOP_WORDS = ['send it','send message','stop listening','cancel','nevermind'];
 
 let _wakeRecog = null;   // always-on background listener
@@ -6905,7 +7292,7 @@ const SILENCE_TIMEOUT = 4000; // auto-send after 4s silence
 const style = document.createElement('style');
 style.textContent = `
 /* ── VOICE MIC BUTTON ── */
-.timea-mic-btn {
+.endre-mic-btn {
   position: fixed;
   bottom: 70px;
   right: 14px;
@@ -6922,25 +7309,25 @@ style.textContent = `
   box-shadow: 0 2px 10px var(--shadow2);
   transition: all .2s;
 }
-.timea-mic-btn.listening {
+.endre-mic-btn.listening {
   background: rgba(192,57,43,.12);
   border-color: var(--red);
   color: var(--red);
   animation: micPulse 1.2s ease-in-out infinite;
 }
-.timea-mic-btn.wake-on {
+.endre-mic-btn.wake-on {
   background: rgba(26,127,75,.1);
   border-color: var(--green);
   color: var(--green);
 }
-.timea-mic-btn:hover { transform: scale(1.08); box-shadow: 0 4px 16px var(--shadow2); }
+.endre-mic-btn:hover { transform: scale(1.08); box-shadow: 0 4px 16px var(--shadow2); }
 @keyframes micPulse {
   0%,100% { box-shadow: 0 0 0 0 rgba(192,57,43,.4); }
   50%      { box-shadow: 0 0 0 8px rgba(192,57,43,0); }
 }
 
 /* ── VOICE STATUS TOAST ── */
-.timea-voice-toast {
+.endre-voice-toast {
   position: fixed;
   bottom: 122px;
   right: 14px;
@@ -6959,27 +7346,27 @@ style.textContent = `
   animation: tmsgFade .2s ease both;
   line-height: 1.5;
 }
-.timea-voice-toast.show { display: block; }
-.timea-voice-toast.active {
+.endre-voice-toast.show { display: block; }
+.endre-voice-toast.active {
   border-color: var(--red);
   background: rgba(192,57,43,.06);
   color: var(--red);
 }
-.timea-voice-toast.wake {
+.endre-voice-toast.wake {
   border-color: var(--green);
   background: rgba(26,127,75,.06);
   color: var(--green);
 }
 
 /* ── VOICE INTERIM TEXT ── */
-#timea-voice-interim {
+#endre-voice-interim {
   color: var(--tx3);
   font-style: italic;
   font-size: 11px;
 }
 
 /* ── DICTATION INDICATOR in input ── */
-.timea-input-inner.dictating {
+.endre-input-inner.dictating {
   border-color: var(--red) !important;
   animation: dictBorder 1s infinite;
 }
@@ -6994,31 +7381,31 @@ document.head.appendChild(style);
 function buildVoiceUI() {
   // Mic FAB
   const mic = document.createElement('button');
-  mic.id = 'timea-mic-btn';
-  mic.className = 'timea-mic-btn';
-  mic.title = 'Click to toggle wake-word listener. Say "Hi Timi" to activate.';
+  mic.id = 'endre-mic-btn';
+  mic.className = 'endre-mic-btn';
+  mic.title = 'Click to toggle wake-word listener. Say "Hi Endre" to activate.';
   mic.innerHTML = '🎤';
   mic.onclick = toggleWake;
   document.body.appendChild(mic);
 
   // Status toast
   const toast = document.createElement('div');
-  toast.id = 'timea-voice-toast';
-  toast.className = 'timea-voice-toast';
+  toast.id = 'endre-voice-toast';
+  toast.className = 'endre-voice-toast';
   document.body.appendChild(toast);
 }
 
 // ── SHOW / HIDE TOAST ──
 function voiceToast(msg, type='', duration=0) {
-  const t = document.getElementById('timea-voice-toast');
+  const t = document.getElementById('endre-voice-toast');
   if (!t) return;
   t.textContent = msg;
-  t.className = 'timea-voice-toast show' + (type ? ' ' + type : '');
-  if (duration) setTimeout(() => { t.className = 'timea-voice-toast'; }, duration);
+  t.className = 'endre-voice-toast show' + (type ? ' ' + type : '');
+  if (duration) setTimeout(() => { t.className = 'endre-voice-toast'; }, duration);
 }
 function voiceToastHide() {
-  const t = document.getElementById('timea-voice-toast');
-  if (t) t.className = 'timea-voice-toast';
+  const t = document.getElementById('endre-voice-toast');
+  if (t) t.className = 'endre-voice-toast';
 }
 
 // ── CHECK BROWSER SUPPORT ──
@@ -7027,7 +7414,7 @@ if (!SpeechRecognition) {
   // Still build the mic button but disabled
   window.addEventListener('DOMContentLoaded', () => {
     buildVoiceUI();
-    const mic = document.getElementById('timea-mic-btn');
+    const mic = document.getElementById('endre-mic-btn');
     if (mic) {
       mic.style.opacity = '.4';
       mic.title = 'Voice recognition not supported in this browser. Use Chrome.';
@@ -7085,11 +7472,11 @@ function stopWakeListener() {
 // ── TOGGLE WAKE MODE ──
 function toggleWake() {
   _wakeEnabled = !_wakeEnabled;
-  const btn = document.getElementById('timea-mic-btn');
+  const btn = document.getElementById('endre-mic-btn');
   if (_wakeEnabled) {
     startWakeListener();
     if (btn) { btn.classList.add('wake-on'); btn.innerHTML = '🎤'; }
-    voiceToast('👂 Listening for "Hi Timi"…', 'wake');
+    voiceToast('👂 Listening for "Hi Endre"…', 'wake');
   } else {
     stopWakeListener();
     stopDictation();
@@ -7097,26 +7484,26 @@ function toggleWake() {
     voiceToastHide();
   }
 }
-window.tTimea_toggleVoice = toggleWake;
+window.tEndre_toggleVoice = toggleWake;
 
 // ── WAKE WORD DETECTED ──
 function onWakeWordDetected() {
   // Pause wake listener while dictating
   stopWakeListener();
 
-  // Open TIMEA panel if not open
-  const panel = document.getElementById('timea-panel');
+  // Open ENDRE panel if not open
+  const panel = document.getElementById('endre-panel');
   if (panel && !panel.classList.contains('open')) {
     panel.classList.add('open');
     // Also set internal open state
-    if (typeof window.tTimeaToggle === 'function') {
+    if (typeof window.tEndreToggle === 'function') {
       // Just open the panel directly
     }
   }
 
   // Brief feedback
   voiceToast('✨ Hi! Listening…', 'active');
-  const btn = document.getElementById('timea-mic-btn');
+  const btn = document.getElementById('endre-mic-btn');
   if (btn) { btn.classList.add('listening'); btn.innerHTML = '🔴'; }
 
   // Short beep / visual flash
@@ -7131,8 +7518,8 @@ function startDictation() {
   if (_dictActive) return;
   _dictActive = true;
 
-  const input = document.getElementById('timea-input');
-  const inputWrap = document.querySelector('.timea-input-inner');
+  const input = document.getElementById('endre-input');
+  const inputWrap = document.querySelector('.endre-input-inner');
   if (input) { input.value = ''; input.placeholder = '🎤 Listening…'; }
   if (inputWrap) inputWrap.classList.add('dictating');
 
@@ -7188,7 +7575,7 @@ function startDictation() {
   _dictRecog.onerror = (e) => {
     if (e.error === 'no-speech') {
       // Timeout — auto-send if we have text
-      const inp = document.getElementById('timea-input');
+      const inp = document.getElementById('endre-input');
       stopDictation(inp && inp.value.trim().length > 0);
     } else {
       stopDictation(false);
@@ -7209,18 +7596,18 @@ function stopDictation(send = false) {
 
   if (_dictRecog) { try { _dictRecog.stop(); } catch(e){} _dictRecog = null; }
 
-  const input = document.getElementById('timea-input');
-  const inputWrap = document.querySelector('.timea-input-inner');
-  const btn = document.getElementById('timea-mic-btn');
+  const input = document.getElementById('endre-input');
+  const inputWrap = document.querySelector('.endre-input-inner');
+  const btn = document.getElementById('endre-mic-btn');
 
   if (inputWrap) inputWrap.classList.remove('dictating');
-  if (input) input.placeholder = 'Ask TIMEA…';
+  if (input) input.placeholder = 'Ask ENDRE…';
   if (btn) { btn.classList.remove('listening'); btn.innerHTML = '🎤'; }
 
   if (send && input && input.value.trim()) {
     voiceToast('✉ Sending…', 'wake', 1500);
     setTimeout(() => {
-      if (typeof window.tTimea_send === 'function') window.tTimea_send();
+      if (typeof window.tEndre_send === 'function') window.tEndre_send();
     }, 300);
   } else {
     voiceToastHide();
@@ -7264,9 +7651,9 @@ function toggleWakeOrDictate() {
   // Wake mode off — click = instant dictation
   if (!_wakeEnabled) {
     // Open panel first
-    const panel = document.getElementById('timea-panel');
+    const panel = document.getElementById('endre-panel');
     if (panel && !panel.classList.contains('open')) panel.classList.add('open');
-    const btn = document.getElementById('timea-mic-btn');
+    const btn = document.getElementById('endre-mic-btn');
     if (btn) { btn.classList.add('listening'); btn.innerHTML = '🔴'; }
     voiceToast('🎤 Listening…', 'active');
     _playBeep();
@@ -7279,7 +7666,7 @@ window.addEventListener('DOMContentLoaded', () => {
   buildVoiceUI();
   // Override mic button to handle both modes
   setTimeout(() => {
-    const mic = document.getElementById('timea-mic-btn');
+    const mic = document.getElementById('endre-mic-btn');
     if (mic) mic.onclick = handleMicClick;
   }, 100);
 });
@@ -7294,7 +7681,7 @@ function handleMicClick() {
     // Turn off wake mode
     _wakeEnabled = false;
     stopWakeListener();
-    const btn = document.getElementById('timea-mic-btn');
+    const btn = document.getElementById('endre-mic-btn');
     if (btn) { btn.classList.remove('wake-on','listening'); btn.innerHTML = '🎤'; }
     voiceToastHide();
     return;
@@ -7309,11 +7696,11 @@ function _showVoiceMenu() {
   if (_menuOpen) { _hideVoiceMenu(); return; }
   _menuOpen = true;
 
-  const existing = document.getElementById('timea-voice-menu');
+  const existing = document.getElementById('endre-voice-menu');
   if (existing) existing.remove();
 
   const menu = document.createElement('div');
-  menu.id = 'timea-voice-menu';
+  menu.id = 'endre-voice-menu';
   menu.style.cssText = `
     position:fixed;bottom:122px;right:14px;
     background:var(--bg2);border:1.5px solid var(--blue);
@@ -7326,7 +7713,7 @@ function _showVoiceMenu() {
   menu.innerHTML = `
     <div style="font-size:9px;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;padding:2px 4px;border-bottom:1px solid var(--line);margin-bottom:3px">🎤 Voice Input</div>
     <button onclick="window._tVoiceWake()" style="background:rgba(26,127,75,.08);border:1px solid rgba(26,127,75,.35);border-radius:6px;padding:8px 10px;cursor:pointer;text-align:left;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;">
-      👂 Wake Word Mode<br><span style="font-weight:400;color:var(--tx3);font-size:9px">Say "Hi Timi" to activate</span>
+      👂 Wake Word Mode<br><span style="font-weight:400;color:var(--tx3);font-size:9px">Say "Hi Endre" to activate</span>
     </button>
     <button onclick="window._tVoiceNow()" style="background:rgba(26,107,191,.08);border:1px solid rgba(26,107,191,.35);border-radius:6px;padding:8px 10px;cursor:pointer;text-align:left;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;">
       🔴 Dictate Now<br><span style="font-weight:400;color:var(--tx3);font-size:9px">Start speaking immediately</span>
@@ -7342,13 +7729,13 @@ function _showVoiceMenu() {
 }
 function _hideVoiceMenu() {
   _menuOpen = false;
-  const m = document.getElementById('timea-voice-menu');
+  const m = document.getElementById('endre-voice-menu');
   if (m) m.remove();
   document.removeEventListener('click', _menuOutside);
 }
 function _menuOutside(e) {
-  const m = document.getElementById('timea-voice-menu');
-  const btn = document.getElementById('timea-mic-btn');
+  const m = document.getElementById('endre-voice-menu');
+  const btn = document.getElementById('endre-mic-btn');
   if (m && !m.contains(e.target) && e.target !== btn) _hideVoiceMenu();
 }
 
@@ -7356,23 +7743,23 @@ window._tVoiceWake = function() {
   _hideVoiceMenu();
   _wakeEnabled = true;
   startWakeListener();
-  const btn = document.getElementById('timea-mic-btn');
+  const btn = document.getElementById('endre-mic-btn');
   if (btn) { btn.classList.add('wake-on'); btn.innerHTML = '🎤'; }
-  voiceToast('👂 Listening for "Hi Timi"…', 'wake');
+  voiceToast('👂 Listening for "Hi Endre"…', 'wake');
 };
 
 window._tVoiceNow = function() {
   _hideVoiceMenu();
-  const panel = document.getElementById('timea-panel');
+  const panel = document.getElementById('endre-panel');
   if (panel && !panel.classList.contains('open')) panel.classList.add('open');
-  const btn = document.getElementById('timea-mic-btn');
+  const btn = document.getElementById('endre-mic-btn');
   if (btn) { btn.classList.add('listening'); btn.innerHTML = '🔴'; }
   voiceToast('🎤 Listening…', 'active');
   _playBeep();
   startDictation();
 };
 
-})(); // end TIMEA VOICE
+})(); // end ENDRE VOICE
 </script>
 
 </body>
