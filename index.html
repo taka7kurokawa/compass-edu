@@ -2503,7 +2503,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── A — AIRWAY ── -->
   <div class="abcde-section abcde-a" id="abcde-a-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><span class="abcde-toggle-arrow collapsed" id="abcde-a-arrow">▸</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--teal);border-color:var(--teal);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-a-arrow">▸</span></div>
     <div class="abcde-body collapsed" id="abcde-a-body">
     <div class="ig i2" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-int">Intubated<span class="field-help" data-tip="Is the patient intubated for airway protection?">?</span></label><select id="int-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
@@ -2538,8 +2538,9 @@ document.addEventListener('keydown',function(e){
       <span class="abcde-toggle-arrow collapsed" id="abcde-c-arrow">▸</span>
     </div>
     <div class="abcde-body collapsed" id="abcde-c-body">
-    <div class="ig i2" style="margin-bottom:4px">
-      <div class="f"><label data-i18n="lbl-sbp">SBP (mmHg)<span class="field-help" data-tip="Systolic Blood Pressure. Normal 100–140 mmHg. <90 = hypotension.">?</span></label><input type="number" id="sbp" placeholder="120" oninput="live()"></div>
+    <div class="ig i3" style="margin-bottom:4px">
+      <div class="f"><label data-i18n="lbl-sbp">SBP (mmHg)<span class="field-help" data-tip="Systolic Blood Pressure. Normal 100–140 mmHg. &lt;90 = hypotension.">?</span></label><input type="number" id="sbp" placeholder="120" oninput="live()"></div>
+      <div class="f"><label>DBP (mmHg)<span class="field-help" data-tip="Diastolic Blood Pressure. Normal 60–90 mmHg. Used to calculate pulse pressure and MAP.">?</span></label><input type="number" id="dbp" placeholder="80" oninput="live()"></div>
       <div class="f"><label data-i18n="lbl-hr">HR (bpm)<span class="field-help" data-tip="Heart rate. Normal 60–100 bpm. Tachycardia >100 may indicate shock.">?</span></label><input type="number" id="hr" placeholder="80" oninput="live()"></div>
     </div>
     <div class="ig i3" style="margin-bottom:4px">
@@ -2599,7 +2600,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── E — EXPOSURE / ENVIRONMENT ── -->
   <div class="abcde-section abcde-e" id="abcde-e-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><span class="abcde-toggle-arrow collapsed" id="abcde-e-arrow">▸</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--amber);border-color:var(--amber);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-e-arrow">▸</span></div>
     <div class="abcde-body collapsed" id="abcde-e-body">
     <div class="ig i2" style="margin-bottom:6px">
       <div class="f"><label data-i18n="lbl-pb">Pelvic Binder<span class="field-help" data-tip="Has a pelvic binder been applied for suspected pelvic fracture?">?</span></label><select id="pb-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
@@ -5374,6 +5375,2004 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     TIMEA — Trauma-Integrated Medical Education AI
+     Integrated into COMPASS EDU
+═══════════════════════════════════════════════════════ -->
+<style>
+/* ── TIMEA FAB BUTTON ── */
+.timea-fab {
+  position: fixed;
+  bottom: 18px;
+  right: 74px;
+  z-index: 9000;
+  width: auto;
+  height: 44px;
+  padding: 0 16px;
+  background: linear-gradient(135deg, #1a6bbf, #5b4acf);
+  border: none;
+  border-radius: 22px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 4px 20px rgba(26,107,191,.45), 0 2px 8px rgba(0,0,0,.25);
+  transition: all .2s;
+}
+.timea-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(26,107,191,.55), 0 3px 10px rgba(0,0,0,.3);
+}
+.timea-fab-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #34d399;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px #34d399;
+  animation: timea-pulse 2s infinite;
+}
+.timea-fab-dot.off { background: #f87171; box-shadow: 0 0 6px #f87171; animation: none; }
+@keyframes timea-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+
+/* ── TIMEA PANEL ── */
+.timea-panel {
+  position: fixed;
+  bottom: 72px;
+  right: 14px;
+  width: 420px;
+  max-width: calc(100vw - 20px);
+  height: 560px;
+  max-height: calc(100vh - 100px);
+  background: var(--bg2);
+  border: 1.5px solid var(--blue);
+  border-radius: 16px;
+  box-shadow: 0 16px 60px rgba(0,0,0,.3), 0 4px 20px rgba(26,107,191,.2);
+  z-index: 8999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(.92) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .25s cubic-bezier(.16,1,.3,1), opacity .2s ease;
+}
+.timea-panel.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── TIMEA PANEL HEADER ── */
+.timea-hdr {
+  background: linear-gradient(135deg, rgba(26,107,191,.12), rgba(91,74,207,.06));
+  border-bottom: 1px solid var(--line);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.timea-avatar {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #1a6bbf, #5b4acf);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; font-size: 11px;
+  color: #fff; flex-shrink: 0;
+  letter-spacing: 0;
+}
+.timea-hdr-text { flex: 1; min-width: 0; }
+.timea-name { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; color: var(--blue); letter-spacing: 1px; }
+.timea-sub { font-size: 9px; color: var(--tx3); letter-spacing: .5px; }
+.timea-hdr-btns { display: flex; gap: 5px; align-items: center; }
+.timea-hdr-btn {
+  background: var(--bg3); border: 1px solid var(--line);
+  border-radius: 5px; width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 12px; color: var(--tx3);
+  transition: all .15s;
+}
+.timea-hdr-btn:hover { border-color: var(--blue); color: var(--blue); }
+.timea-hdr-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+/* ── CONTEXT STRIP ── */
+.timea-ctx {
+  background: var(--bg3);
+  border-bottom: 1px solid var(--line);
+  padding: 5px 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.timea-ctx-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; }
+.timea-ctx-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600;
+  padding: 2px 7px; border-radius: 3px;
+  display: inline-flex; align-items: center; gap: 3px;
+  flex-shrink: 0;
+}
+.timea-ctx-badge.patient { background: rgba(26,107,191,.1); border: 1px solid rgba(26,107,191,.25); color: var(--blue); }
+.timea-ctx-badge.nodata { background: var(--bg4); border: 1px solid var(--line); color: var(--tx3); }
+.timea-read-btn {
+  margin-left: auto;
+  background: rgba(26,107,191,.08);
+  border: 1px solid rgba(26,107,191,.3);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700;
+  color: var(--blue); cursor: pointer; letter-spacing: .5px; white-space: nowrap;
+  transition: all .15s; flex-shrink: 0;
+}
+.timea-read-btn:hover { background: rgba(26,107,191,.15); }
+
+/* ── QUICK ACTIONS ── */
+.timea-quick {
+  padding: 6px 10px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: none;
+}
+.timea-quick::-webkit-scrollbar { display: none; }
+.timea-qbtn {
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600;
+  color: var(--tx3); cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: all .15s; letter-spacing: .3px;
+}
+.timea-qbtn:hover { border-color: var(--blue); color: var(--blue); background: rgba(26,107,191,.06); }
+.timea-qbtn.fill { border-color: rgba(26,127,75,.4); color: var(--green); background: rgba(26,127,75,.06); }
+.timea-qbtn.fill:hover { background: rgba(26,127,75,.12); }
+
+/* ── MESSAGES ── */
+.timea-msgs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scroll-behavior: smooth;
+}
+.timea-msgs::-webkit-scrollbar { width: 3px; }
+.timea-msgs::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
+.tmsg { display: flex; gap: 7px; animation: tmsgFade .2s ease both; }
+@keyframes tmsgFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.tmsg.user { flex-direction: row-reverse; }
+.tmsg-av {
+  width: 24px; height: 24px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 9px;
+  flex-shrink: 0; margin-top: 1px;
+}
+.tmsg.user .tmsg-av { background: var(--blue); color: #fff; }
+.tmsg.ai   .tmsg-av { background: var(--bg3); border: 1px solid var(--line); color: var(--blue); }
+.tmsg-body { max-width: calc(100% - 32px); display: flex; flex-direction: column; gap: 2px; }
+.tmsg-meta { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; color: var(--tx3); }
+.tmsg.user .tmsg-meta { text-align: right; }
+.tmsg-bubble {
+  border-radius: 8px; padding: 8px 11px;
+  font-size: 11.5px; line-height: 1.6; word-break: break-word;
+}
+.tmsg.user .tmsg-bubble {
+  background: var(--blue); color: #fff;
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 2px 8px rgba(26,107,191,.25);
+}
+.tmsg.ai .tmsg-bubble {
+  background: var(--bg2); color: var(--tx);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 2px;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.tmsg.ai .tmsg-bubble strong { font-weight: 700; }
+.tmsg.ai .tmsg-bubble code {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  background: var(--bg3); border: 1px solid var(--line);
+  border-radius: 3px; padding: 1px 4px; color: var(--blue);
+}
+.tmsg.ai .tmsg-bubble .tbadge {
+  display: inline-flex; align-items: center;
+  border-radius: 3px; padding: 1px 5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700;
+  margin: 0 2px;
+}
+.tbadge.atls { background: rgba(26,107,191,.1); border: 1px solid rgba(26,107,191,.25); color: var(--blue); }
+.tbadge.euro { background: rgba(91,74,207,.1);  border: 1px solid rgba(91,74,207,.25);  color: var(--lav); }
+.tbadge.jatec{ background: rgba(26,127,75,.1);  border: 1px solid rgba(26,127,75,.25);  color: var(--green); }
+
+/* ── AI ANALYSIS POPUP ── */
+.timea-analysis-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 9200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 12px;
+}
+.timea-analysis-overlay.show { display: flex; }
+.timea-analysis-modal {
+  background: var(--bg2);
+  border: 1.5px solid var(--blue);
+  border-radius: 14px;
+  width: 520px; max-width: 98vw;
+  max-height: 88vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 4px 20px rgba(26,107,191,.2);
+  animation: tmsgFade .3s cubic-bezier(.16,1,.3,1);
+  overflow: hidden;
+}
+.timea-analysis-hdr {
+  background: linear-gradient(135deg, rgba(26,107,191,.15), rgba(91,74,207,.08));
+  border-bottom: 1px solid var(--line);
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.timea-analysis-hdr-icon { font-size: 22px; flex-shrink: 0; }
+.timea-analysis-hdr-text { flex: 1; }
+.timea-analysis-hdr-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--blue); letter-spacing: .5px; }
+.timea-analysis-hdr-sub { font-size: 9px; color: var(--tx3); margin-top: 2px; letter-spacing: .5px; }
+.timea-analysis-close { background: rgba(192,57,43,.08); border: 1px solid rgba(192,57,43,.3); border-radius: 5px; color: var(--red); font-size: 13px; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; }
+.timea-analysis-close:hover { background: rgba(192,57,43,.18); }
+.timea-analysis-body {
+  flex: 1; overflow-y: auto; padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.timea-analysis-body::-webkit-scrollbar { width: 3px; }
+.timea-analysis-body::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
+
+/* Risk banner inside popup */
+.timea-risk-banner {
+  border-radius: 8px; padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border: 1.5px solid;
+}
+.timea-risk-banner.critical { background: rgba(192,57,43,.07); border-color: var(--red); }
+.timea-risk-banner.high { background: rgba(200,80,0,.07); border-color: #c85000; }
+.timea-risk-banner.moderate { background: rgba(194,122,0,.07); border-color: var(--amber); }
+.timea-risk-banner.low { background: rgba(26,127,75,.07); border-color: var(--green); }
+.timea-risk-icon { font-size: 20px; flex-shrink: 0; }
+.timea-risk-text { flex: 1; }
+.timea-risk-level { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.timea-risk-summary { font-size: 11px; color: var(--tx2); margin-top: 3px; line-height: 1.5; }
+
+/* Checklist section */
+.timea-checklist-section { display: flex; flex-direction: column; gap: 4px; }
+.timea-checklist-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--tx3); margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 6px; }
+.timea-checklist-title-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.timea-check-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--line);
+  border-radius: 6px; padding: 7px 10px;
+  font-size: 11px; color: var(--tx2); line-height: 1.4;
+  transition: border-color .15s;
+  cursor: default;
+}
+.timea-check-item.done { border-color: rgba(26,127,75,.3); background: rgba(26,127,75,.04); }
+.timea-check-item.urgent { border-color: rgba(192,57,43,.35); background: rgba(192,57,43,.04); }
+.timea-check-item.warn { border-color: rgba(194,122,0,.35); background: rgba(194,122,0,.04); }
+.timea-check-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.timea-check-text { flex: 1; }
+.timea-check-badge { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; padding: 1px 5px; border-radius: 3px; margin-left: 5px; display: inline-flex; }
+
+/* Footer buttons */
+.timea-analysis-footer {
+  border-top: 1px solid var(--line);
+  padding: 10px 18px;
+  display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+  background: var(--bg2);
+}
+.timea-analysis-ignore {
+  flex: 1; background: var(--bg3); border: 1px solid var(--line);
+  border-radius: 7px; padding: 9px; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  color: var(--tx3); letter-spacing: .5px; transition: all .15s; text-align: center;
+}
+.timea-analysis-ignore:hover { border-color: var(--red); color: var(--red); background: rgba(192,57,43,.05); }
+.timea-analysis-accept {
+  flex: 2; background: var(--blue); border: none;
+  border-radius: 7px; padding: 9px; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  color: #fff; letter-spacing: .5px; transition: all .15s; text-align: center;
+  box-shadow: 0 2px 8px rgba(26,107,191,.3);
+}
+.timea-analysis-accept:hover { background: var(--blued); }
+.timea-analysis-spinner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 40px 0; flex-direction: column; }
+
+/* Analyse button in quick bar */
+.timea-qbtn.analyse { border-color: rgba(91,74,207,.4); color: var(--lav); background: rgba(91,74,207,.06); }
+.timea-qbtn.analyse:hover { background: rgba(91,74,207,.14); }
+</style>
+
+<!-- TIMEA ANALYSIS POPUP MODAL -->
+<div class="timea-analysis-overlay" id="timea-analysis-overlay" onclick="if(event.target===this)tTimea_closeAnalysis()">
+  <div class="timea-analysis-modal">
+    <div class="timea-analysis-hdr">
+      <div class="timea-analysis-hdr-icon">🧭</div>
+      <div class="timea-analysis-hdr-text">
+        <div class="timea-analysis-hdr-title">TIMEA — Clinical Situation Analysis</div>
+        <div class="timea-analysis-hdr-sub" id="timea-analysis-pt-label">Loading patient…</div>
+      </div>
+      <div class="timea-analysis-close" onclick="tTimea_closeAnalysis()">✕</div>
+    </div>
+    <div class="timea-analysis-body" id="timea-analysis-body">
+      <div class="timea-analysis-spinner">
+        <div class="timea-progress-spinner" style="border-top-color:var(--blue)"></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">Generating analysis…</div>
+      </div>
+    </div>
+    <div class="timea-analysis-footer">
+      <button class="timea-analysis-ignore" onclick="tTimea_closeAnalysis()">✕ Ignore &amp; Return</button>
+      <button class="timea-analysis-accept" onclick="tTimea_closeAnalysis()">✓ Acknowledged — Continue</button>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ── TIMEA extended styles ── */
+</style>
+
+<style>
+.timea-write-all-btn {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(26,127,75,.12), rgba(26,107,191,.08));
+  border: 1.5px solid var(--green);
+  border-radius: 7px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: all .2s;
+  flex-shrink: 0;
+}
+.timea-write-all-btn:hover {
+  background: linear-gradient(135deg, rgba(26,127,75,.2), rgba(26,107,191,.12));
+  box-shadow: 0 2px 12px rgba(26,127,75,.25);
+  transform: translateY(-1px);
+}
+.timea-write-all-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.timea-write-all-icon { font-size: 14px; flex-shrink: 0; }
+.timea-write-all-text { flex: 1; text-align: left; }
+.timea-write-all-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 10px; color: var(--green); letter-spacing: .5px; }
+.timea-write-all-sub { font-size: 9px; color: var(--tx3); margin-top: 1px; }
+.timea-write-all-arrow { font-size: 10px; color: var(--green); flex-shrink: 0; }
+
+/* ── PROGRESS OVERLAY ── */
+.timea-progress-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 14px;
+}
+body.dark .timea-progress-overlay { background: rgba(0,0,0,.5); }
+body:not(.dark) .timea-progress-overlay { background: rgba(255,255,255,.85); }
+.timea-progress-overlay.show { display: flex; }
+.timea-progress-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--line);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: tSpin .7s linear infinite;
+}
+@keyframes tSpin { to { transform: rotate(360deg); } }
+.timea-progress-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--tx2); letter-spacing: .5px; text-align: center; }
+.timea-progress-sub { font-size: 10px; color: var(--tx3); text-align: center; max-width: 260px; line-height: 1.5; }
+
+/* ── FILL CONFIRM CARD ── */
+.timea-fill-card {
+  background: rgba(26,127,75,.06);
+  border: 1.5px solid rgba(26,127,75,.35);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.timea-fill-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; }
+.timea-fill-fields { font-size: 10px; color: var(--tx2); line-height: 1.7; }
+.timea-fill-btns { display: flex; gap: 5px; }
+.timea-fill-apply {
+  background: var(--green); border: none; border-radius: 5px;
+  color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  font-weight: 700; padding: 5px 12px; cursor: pointer; letter-spacing: .5px;
+  transition: all .15s;
+}
+.timea-fill-apply:hover { opacity: .85; }
+.timea-fill-dismiss {
+  background: var(--bg3); border: 1px solid var(--line); border-radius: 5px;
+  color: var(--tx3); font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  padding: 5px 10px; cursor: pointer; transition: all .15s;
+}
+.timea-fill-dismiss:hover { border-color: var(--red); color: var(--red); }
+
+/* ── TYPING INDICATOR ── */
+.timea-typing {
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 10px; background: var(--bg2);
+  border: 1px solid var(--line); border-radius: 8px;
+  width: fit-content;
+}
+.timea-tdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--tx3); animation: tdot 1.2s infinite;
+}
+.timea-tdot:nth-child(2) { animation-delay: .18s; }
+.timea-tdot:nth-child(3) { animation-delay: .36s; }
+@keyframes tdot { 0%,80%,100%{transform:scale(.6);opacity:.4} 40%{transform:scale(1);opacity:1} }
+
+/* ── INPUT ── */
+.timea-input-wrap {
+  border-top: 1px solid var(--line);
+  padding: 8px 10px;
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+  background: var(--bg2);
+}
+.timea-input-inner {
+  flex: 1;
+  background: var(--bg3);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: flex-end;
+  transition: border-color .15s;
+}
+.timea-input-inner:focus-within { border-color: var(--blue); }
+#timea-input {
+  flex: 1; background: transparent; border: none; outline: none;
+  font-family: var(--sans); font-size: 12px; color: var(--tx);
+  resize: none; max-height: 80px; min-height: 18px; line-height: 1.45;
+}
+#timea-input::placeholder { color: var(--tx3); }
+.timea-send {
+  width: 32px; height: 32px;
+  background: var(--blue); border: none; border-radius: 7px;
+  color: #fff; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .15s;
+  box-shadow: 0 2px 6px rgba(26,107,191,.3);
+}
+.timea-send:hover { background: var(--blued); transform: translateY(-1px); }
+.timea-send:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+
+/* ── API KEY MODAL ── */
+.timea-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 9500;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.timea-modal {
+  background: var(--bg2);
+  border: 1.5px solid var(--blue);
+  border-radius: 12px; padding: 22px;
+  width: 400px; max-width: 95vw;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.35);
+  animation: tmsgFade .3s ease both;
+}
+.timea-modal-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--blue); letter-spacing: 1px; }
+.timea-modal-sub { font-size: 11px; color: var(--tx3); line-height: 1.65; }
+.timea-modal-field label { display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--tx3); margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; }
+.timea-modal-field input {
+  width: 100%; background: var(--bg3); border: 1.5px solid var(--line);
+  border-radius: 7px; padding: 8px 11px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--tx); outline: none; transition: border-color .2s;
+}
+.timea-modal-field input:focus { border-color: var(--blue); }
+.timea-modal-btn {
+  background: var(--blue); border: none; border-radius: 7px;
+  color: #fff; font-weight: 700; font-size: 12px; padding: 10px;
+  cursor: pointer; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;
+  transition: all .15s;
+}
+.timea-modal-btn:hover { background: var(--blued); }
+.timea-modal-note {
+  font-size: 9px; color: var(--tx3); line-height: 1.6;
+  background: var(--bg3); border: 1px solid var(--line);
+  border-radius: 5px; padding: 7px 9px; font-family: 'JetBrains Mono', monospace;
+}
+</style>
+
+<!-- TIMEA FAB -->
+<button class="timea-fab" id="timea-fab" onclick="tTimeaToggle()">
+  <div class="timea-fab-dot off" id="timea-fab-dot"></div>
+  TIMEA AI
+</button>
+
+<!-- TIMEA PANEL -->
+<div class="timea-panel" id="timea-panel">
+  <!-- Header -->
+  <div class="timea-hdr">
+    <div class="timea-avatar">AI</div>
+    <div class="timea-hdr-text">
+      <div class="timea-name">TIMEA</div>
+      <div class="timea-sub">Trauma-Integrated Medical Education AI</div>
+    </div>
+    <div class="timea-hdr-btns">
+      <div class="timea-hdr-btn" onclick="tTimea_showKey()" title="API Key">🔑</div>
+      <div class="timea-hdr-btn danger" onclick="tTimea_clear()" title="Clear chat">⟳</div>
+      <div class="timea-hdr-btn" onclick="tTimeaToggle()" title="Close">✕</div>
+    </div>
+  </div>
+
+  <!-- Context strip -->
+  <div class="timea-ctx">
+    <span class="timea-ctx-lbl">Context:</span>
+    <span class="timea-ctx-badge nodata" id="timea-pt-badge">No patient loaded</span>
+    <button class="timea-read-btn" onclick="tTimea_readPatient()">↻ Read Patient Data</button>
+  </div>
+
+  <!-- Write Everything from Chat button -->
+  <div style="padding:6px 10px;flex-shrink:0;border-bottom:1px solid var(--line)">
+    <button class="timea-write-all-btn" id="timea-write-all-btn" onclick="tTimea_writeAll()">
+      <span class="timea-write-all-icon">📋</span>
+      <span class="timea-write-all-text">
+        <div class="timea-write-all-title">Write Everything from Chat → Form</div>
+        <div class="timea-write-all-sub">Extract all clinical data mentioned in this conversation and fill the ABCDE survey instantly</div>
+      </span>
+      <span class="timea-write-all-arrow">▶</span>
+    </button>
+  </div>
+
+  <!-- Quick actions -->
+  <div class="timea-quick">
+    <button class="timea-qbtn fill" onclick="tTimea_quickAsk('fillabcde')">✏ Fill ABCDE for me</button>
+    <button class="timea-qbtn analyse" onclick="tTimea_analyse()">🧭 Analyse Now</button>
+    <button class="timea-qbtn" onclick="tTimea_quickAsk('treatment')">💊 Treatment Plan</button>
+    <button class="timea-qbtn" onclick="tTimea_quickAsk('risk')">🔴 Assess Risk</button>
+    <button class="timea-qbtn" onclick="tTimea_quickAsk('protocols')">📋 Compare Protocols</button>
+    <button class="timea-qbtn" onclick="tTimea_quickAsk('scores')">📊 Explain Scores</button>
+    <button class="timea-qbtn" onclick="tTimea_quickAsk('mtp')">🩸 MTP Needed?</button>
+  </div>
+
+  <!-- Messages -->
+  <div class="timea-msgs" id="timea-msgs" style="position:relative">
+  <!-- Progress overlay -->
+  <div class="timea-progress-overlay" id="timea-progress">
+    <div class="timea-progress-spinner"></div>
+    <div class="timea-progress-label" id="timea-progress-label">Analysing conversation…</div>
+    <div class="timea-progress-sub" id="timea-progress-sub">TIMEA is reading your chat and extracting all clinical values</div>
+  </div>
+    <div class="tmsg ai">
+      <div class="tmsg-av">AI</div>
+      <div class="tmsg-body">
+        <div class="tmsg-meta">TIMEA</div>
+        <div class="tmsg-bubble">
+          <strong>Hi! I'm TIMEA</strong> — your trauma education AI inside COMPASS EDU.<br><br>
+          💬 <strong>Chat naturally</strong> — describe the patient scenario, mention vitals, injuries, labs and treatments in plain language.<br><br>
+          📋 <strong>Write Everything → Form</strong> — click the green button above at any time to extract <em>everything</em> from our conversation and fill the entire ABCDE survey instantly.<br><br>
+          Or use the quick-action buttons to ask for a treatment plan, risk assessment, or protocol comparison.<br><br>
+          <span style="font-size:10px;color:var(--tx3)">⚠ Educational use only. Not for clinical decisions.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="timea-input-wrap">
+    <div class="timea-input-inner">
+      <textarea id="timea-input" rows="1" placeholder="Ask TIMEA…" maxlength="2000"
+        onkeydown="tTimea_key(event)" oninput="tTimea_resize(this)"></textarea>
+    </div>
+    <button class="timea-send" id="timea-send" onclick="tTimea_send()" disabled title="Enter API key first">↑</button>
+  </div>
+</div>
+
+<!-- TIMEA API KEY MODAL -->
+<div class="timea-modal-overlay" id="timea-key-modal" style="display:none" onclick="if(event.target===this)tTimea_closeKey()">
+  <div class="timea-modal">
+    <div class="timea-modal-title">🔑 Anthropic API Key for TIMEA</div>
+    <div class="timea-modal-sub">TIMEA uses the Anthropic Claude API. Your key is stored only in this browser session.</div>
+    <div class="timea-modal-field">
+      <label>API Key</label>
+      <input type="password" id="timea-key-input" placeholder="sk-ant-api03-..." autocomplete="off" onkeydown="if(event.key==='Enter')tTimea_saveKey()">
+    </div>
+    <div class="timea-modal-note">🔒 Stored in sessionStorage only. Cleared on tab close. Sent directly to api.anthropic.com.</div>
+    <button class="timea-modal-btn" onclick="tTimea_saveKey()">✓ Connect TIMEA</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  TIMEA — embedded in COMPASS EDU
+// ═══════════════════════════════════════════════════════
+(function() {
+'use strict';
+
+let _tKey = '';
+let _tOpen = false;
+let _tHistory = [];
+let _tPatientCtx = null;
+
+// Field map: id → human label
+const FIELD_MAP = {
+  'pt-name':'Patient Name', 'dob':'Date of Birth', 'sex':'Sex', 'age':'Age',
+  'mech-type':'Trauma Type','mech-energy':'Energy Level','mech-detail':'Specific Mechanism',
+  // A
+  'int-g':'Intubated','airway-status':'Airway Status',
+  // B
+  'rr':'Respiratory Rate','pco2':'pCO2 (kPa)','po2':'pO2 (kPa)',
+  'spo2':'SpO2 (%)','ph':'pH','cd-g':'Chest Drain',
+  // C
+  'sbp':'SBP (mmHg)','dbp':'DBP (mmHg)','hr':'HR (bpm)','hgb':'Hgb (g/dL)',
+  'inr':'INR','ica':'iCa (mmol/L)','lac':'Lactate',
+  'be':'Base Excess','fib':'Fibrinogen','tr-g':'Transfused',
+  'txa-g':'TXA Given','ca-g':'Calcium Given',
+  'fast-exam':'FAST Exam','efast-done':'eFAST Done',
+  // D
+  'gcs':'GCS','pupils':'Pupils',
+  // E
+  'pb-g':'Pelvic Binder','temp-status':'Temperature',
+  'a-hd':'AIS Head','a-fc':'AIS Face','a-nk':'AIS Neck',
+  'a-th':'AIS Thorax','a-ab':'AIS Abdomen','a-sp':'AIS Spine',
+  'a-pv':'AIS Pelvis','a-ue':'AIS Upper Ext','a-le':'AIS Lower Ext',
+  // modifiers
+  'mod-elderly':'Age≥65','mod-anticoag':'Anticoagulated',
+  'mod-pregnant':'Pregnant','mod-burns':'Burns+Trauma'
+};
+
+// Fields TIMEA can fill via AI — includes patient identity fields
+const FILLABLE_FIELDS = [
+  'pt-name','dob','sex','mech-type','mech-energy','mech-detail',
+  'int-g','airway-status',
+  'rr','pco2','po2','spo2','ph','cd-g',
+  'sbp','dbp','hr','hgb','inr','ica','lac','be','fib',
+  'tr-g','txa-g','ca-g','fast-exam','efast-done',
+  'gcs','pupils',
+  'pb-g','temp-status',
+  'a-hd','a-fc','a-nk','a-th','a-ab','a-sp','a-pv','a-ue','a-le',
+  'mod-elderly','mod-anticoag','mod-pregnant','mod-burns'
+];
+
+const TIMEA_SYSTEM = `You are TIMEA (Trauma-Integrated Medical Education AI), embedded inside COMPASS EDU, a clinical trauma education platform. You are an expert in ATLS 11th Edition, European White Book on Trauma, JATEC, and trauma scoring (ISS, RTS, TRISS, GCS, AIS).
+
+CONTEXT: When patient data is provided in the message, use it to give specific, data-driven recommendations.
+
+NATURAL LANGUAGE: Users will describe patients conversationally — e.g. "45-year-old male named John Smith, high-speed RTA, BP 85/60, HR 130, GCS 11". Always extract and acknowledge these values in your response and use them for recommendations.
+
+FORM-FILLING FEATURE:
+When the user asks you to fill, write, populate, or suggest ABCDE values, you MUST output a JSON block at the end of your response inside a code block marked "FILL_FORM".
+
+MECHANISM CLASSIFICATION — mech-detail field:
+You must classify the described mechanism into ONE of these exact values based on mech-type and mech-energy:
+
+BLUNT + HIGH energy: mvc_frontal, mvc_lateral, mvc_rollover, mvc_ejection, mvc_unrestrained, motorcycle, ped_struck, fall_high, crush, blast_primary, blast_secondary, blast_tertiary
+BLUNT + MEDIUM energy: mvc_low_restrained, fall_medium, sports, bicycle_fall, assault_blunt
+BLUNT + LOW energy: ground_fall, mechanical_fall
+PENETRATING + HIGH energy: gsw_high, gsw_shotgun, blast_frag, impalement
+PENETRATING + MEDIUM energy: gsw_handgun, crossbow
+PENETRATING + LOW energy: stab_knife, stab_other, puncture
+
+Classification rules:
+- "RTA", "car accident", "motor vehicle collision", "MVC", "crash" → mvc_frontal (default) or more specific if described
+- "motorcycle", "motorbike", "bike crash" → motorcycle
+- "pedestrian hit", "hit by car" → ped_struck
+- "fall from height", "fall >2m", "fell off building/ladder" → fall_high
+- "ground level fall", "fell down", "slipped", "tripped" → ground_fall (low) or mechanical_fall
+- "stabbing", "knife", "stab" → stab_knife
+- "gunshot", "GSW", "shot" → gsw_handgun (default) or gsw_high if rifle specified
+- "blast", "explosion", "bomb" → blast_primary or blast_tertiary
+- "crush", "trapped", "industrial" → crush
+- "sports", "rugby", "football collision" → sports
+- "assault", "attack", "beaten" → assault_blunt
+
+Example JSON:
+\`\`\`FILL_FORM
+{"pt-name":"Smith, John","dob":"1979-03-15","sex":"male","mech-type":"blunt","mech-energy":"high","mech-detail":"mvc_frontal","int-g":"no","airway-status":"patent","rr":20,"spo2":94,"sbp":85,"dbp":50,"hr":125,"gcs":13,"a-th":3}
+\`\`\`
+
+Full field reference:
+- PATIENT: pt-name (text), dob (YYYY-MM-DD), sex ("male"/"female"), mech-type ("blunt"/"penetrating"), mech-energy ("high"/"medium"/"low"), mech-detail (value from list above)
+- A: int-g ("yes"/"no"), airway-status ("patent"/"threatened"/"compromised")
+- B: rr, pco2, po2, spo2, ph, cd-g ("yes"/"no")
+- C: sbp, dbp, hr, hgb, inr, ica, lac, be, fib, tr-g, txa-g, ca-g ("yes"/"no"), fast-exam ("negative"/"positive"/"indeterminate"), efast-done ("yes"/"no")
+- D: gcs (3–15), pupils ("equal"/"unequal"/"fixed")
+- E: pb-g ("yes"/"no"), temp-status ("normal"/"mild"/"severe"), a-hd/a-fc/a-nk/a-th/a-ab/a-sp/a-pv/a-ue/a-le (AIS 0–6)
+- MODIFIERS: mod-elderly, mod-anticoag, mod-pregnant, mod-burns ("yes"/"no")
+
+TREATMENT ADVICE: Always structure treatment responses with:
+1. Risk assessment (critical/high/moderate/low)
+2. Immediate actions (label with [ATLS], [EURO WB], [JATEC] where they differ)
+3. Protocol-specific differences
+4. Monitoring targets
+
+Always end with: ⚠ Educational reference only — not for clinical decisions.`;
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = sessionStorage.getItem('timea_key_compass');
+  if (saved) { _tKey = saved; _tOnKey(); }
+});
+
+// ── TOGGLE PANEL ──
+window.tTimeaToggle = function() {
+  _tOpen = !_tOpen;
+  document.getElementById('timea-panel').classList.toggle('open', _tOpen);
+  if (_tOpen && !_tKey) setTimeout(tTimea_showKey, 300);
+};
+
+// ── API KEY ──
+window.tTimea_showKey = function() {
+  document.getElementById('timea-key-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('timea-key-input').focus(), 100);
+};
+window.tTimea_closeKey = function() {
+  document.getElementById('timea-key-modal').style.display = 'none';
+};
+window.tTimea_saveKey = function() {
+  const v = document.getElementById('timea-key-input').value.trim();
+  if (!v || !v.startsWith('sk-')) {
+    document.getElementById('timea-key-input').style.borderColor = 'var(--red)';
+    return;
+  }
+  _tKey = v;
+  sessionStorage.setItem('timea_key_compass', v);
+  _tOnKey();
+  tTimea_closeKey();
+};
+function _tOnKey() {
+  document.getElementById('timea-send').disabled = false;
+  document.getElementById('timea-fab-dot').classList.remove('off');
+}
+
+// ── CLEAR CHAT ──
+window.tTimea_clear = function() {
+  _tHistory = [];
+  _tPatientCtx = null;
+  document.getElementById('timea-msgs').innerHTML = `
+    <div class="tmsg ai">
+      <div class="tmsg-av">AI</div>
+      <div class="tmsg-body">
+        <div class="tmsg-meta">TIMEA</div>
+        <div class="tmsg-bubble">Chat cleared. Click <strong>↻ Read Patient Data</strong> and ask me anything.</div>
+      </div>
+    </div>`;
+  document.getElementById('timea-pt-badge').className = 'timea-ctx-badge nodata';
+  document.getElementById('timea-pt-badge').textContent = 'No patient loaded';
+};
+
+// ── READ PATIENT DATA FROM FORM ──
+window.tTimea_readPatient = function() {
+  const fv = id => { const el = document.getElementById(id); if (!el) return null; return el.type === 'checkbox' ? (el.checked ? 'yes' : 'no') : (el.value || null); };
+
+  const data = {};
+  Object.keys(FIELD_MAP).forEach(id => {
+    const v = fv(id);
+    if (v && v !== '' && v !== 'null') data[id] = v;
+  });
+
+  _tPatientCtx = data;
+
+  // Update badge
+  const name = data['pt-name'] || 'Unknown';
+  const age = data['age'] || '?';
+  const sex = data['sex'] || '?';
+  const badge = document.getElementById('timea-pt-badge');
+  badge.className = 'timea-ctx-badge patient';
+  badge.textContent = `${name}, ${age}y, ${sex}`;
+
+  // Build summary string
+  const lines = [];
+  lines.push(`Patient: ${name}, Age ${age}, Sex ${sex}`);
+  if (data['mech-type']) lines.push(`Mechanism: ${data['mech-type']} trauma (${data['mech-energy'] || ''})`);
+  if (data['airway-status']) lines.push(`Airway: ${data['airway-status']}, Intubated: ${data['int-g']}`);
+  if (data['rr'] || data['spo2']) lines.push(`Breathing: RR ${data['rr']||'?'}/min, SpO2 ${data['spo2']||'?'}%, pH ${data['ph']||'?'}`);
+  if (data['sbp'] || data['hr']) lines.push(`Circulation: SBP ${data['sbp']||'?'} mmHg, HR ${data['hr']||'?'} bpm, Hgb ${data['hgb']||'?'} g/dL, Lactate ${data['lac']||'?'}, INR ${data['inr']||'?'}, iCa ${data['ica']||'?'}`);
+  if (data['gcs']) lines.push(`Disability: GCS ${data['gcs']}, Pupils ${data['pupils']||'?'}`);
+  const aisFields = ['a-hd','a-fc','a-nk','a-th','a-ab','a-sp','a-pv','a-ue','a-le'];
+  const aisVals = aisFields.map(f => data[f]).filter(Boolean);
+  if (aisVals.some(v=>v!=='0')) lines.push(`AIS Scores: Head ${data['a-hd']||0}, Thorax ${data['a-th']||0}, Abdomen ${data['a-ab']||0}, Spine ${data['a-sp']||0}, Pelvis ${data['a-pv']||0}, UE ${data['a-ue']||0}, LE ${data['a-le']||0}`);
+  if (data['txa-g']) lines.push(`TXA: ${data['txa-g']}, Transfused: ${data['tr-g']||'no'}, Calcium: ${data['ca-g']||'no'}`);
+  const mods = ['mod-elderly','mod-anticoag','mod-pregnant','mod-burns'].filter(m=>data[m]==='yes').map(m=>FIELD_MAP[m]);
+  if (mods.length) lines.push(`Modifiers: ${mods.join(', ')}`);
+
+  // Read current scores from monitor bar
+  const msAtls = document.getElementById('m-atls')?.textContent;
+  const msEuro = document.getElementById('m-euro')?.textContent;
+  const msJatec = document.getElementById('m-jatec')?.textContent;
+  const msIss = document.getElementById('m-iss')?.textContent;
+  const msRts = document.getElementById('m-rts')?.textContent;
+  const msSi = document.getElementById('m-si')?.textContent;
+  if (msAtls && msAtls !== '—') lines.push(`Ps(ATLS): ${msAtls}, Ps(Euro): ${msEuro}, Ps(JATEC): ${msJatec}`);
+  if (msIss && msIss !== '—') lines.push(`ISS: ${msIss}, RTS: ${msRts}, Shock Index: ${msSi}`);
+
+  _tPatientCtx = lines.join('\n');
+
+  // Show confirmation message in chat
+  tTimea_appendMsg('ai', `✅ **Patient data loaded!**\n\n${lines.join('\n')}\n\nI now have context on this patient. Ask me anything — treatment plan, protocol comparison, or say "fill the ABCDE form" to propose values.`);
+};
+
+// ── QUICK ASK ──
+window.tTimea_quickAsk = function(type) {
+  const ptCtx = _tPatientCtx ? `\n\n--- CURRENT PATIENT DATA ---\n${_tPatientCtx}\n---\n` : '';
+  const prompts = {
+    fillabcde: `Based on the patient data provided, please suggest values for the ABCDE form fields and fill them in. ${ptCtx} Provide a brief clinical rationale and use the FILL_FORM JSON block.`,
+    treatment: `Based on the current patient data, what is the recommended treatment plan according to trauma protocols? ${ptCtx}`,
+    risk: `Assess the risk level for this patient and explain what makes them high/low risk. ${ptCtx}`,
+    protocols: `Compare what ATLS, Euro WB, and JATEC protocols recommend for this patient. ${ptCtx}`,
+    scores: `Explain the current ISS, RTS, TRISS, and Ps scores for this patient and what they mean clinically. ${ptCtx}`,
+    mtp: `Based on the current data, does this patient meet criteria for Massive Transfusion Protocol activation? ${ptCtx}`
+  };
+  const text = prompts[type] || prompts.treatment;
+  const displayText = {
+    fillabcde:'✏ Fill ABCDE form based on patient',
+    treatment:'💊 What treatment does this patient need?',
+    risk:'🔴 Assess patient risk level',
+    protocols:'📋 Compare protocol recommendations',
+    scores:'📊 Explain scores for this patient',
+    mtp:'🩸 Should MTP be activated?'
+  }[type] || text;
+  document.getElementById('timea-input').value = displayText;
+  tTimea_resize(document.getElementById('timea-input'));
+  tTimea_sendRaw(text, displayText);
+};
+
+// ── KEYBOARD ──
+window.tTimea_key = function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); tTimea_send(); }
+};
+
+// ── RESIZE TEXTAREA ──
+window.tTimea_resize = function(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+};
+
+// ── SEND ──
+window.tTimea_send = function() {
+  const el = document.getElementById('timea-input');
+  const text = el.value.trim();
+  if (!text) return;
+  el.value = '';
+  tTimea_resize(el);
+
+  // Inject patient context if loaded
+  let fullPrompt = text;
+  if (_tPatientCtx) {
+    fullPrompt = text + '\n\n--- CURRENT PATIENT DATA FROM COMPASS EDU ---\n' + _tPatientCtx + '\n---';
+  }
+  tTimea_sendRaw(fullPrompt, text);
+};
+
+function tTimea_sendRaw(fullPrompt, displayText) {
+  if (!_tKey) { tTimea_showKey(); return; }
+  tTimea_appendMsg('user', displayText || fullPrompt);
+  document.getElementById('timea-send').disabled = true;
+  _tShowTyping();
+
+  _tHistory.push({ role: 'user', content: fullPrompt });
+  if (_tHistory.length > 20) _tHistory = _tHistory.slice(-20);
+
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': _tKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1200,
+      system: TIMEA_SYSTEM,
+      messages: _tHistory
+    })
+  })
+  .then(r => {
+    if (!r.ok) return r.json().then(e => { throw new Error(e.error?.message || 'HTTP ' + r.status); });
+    return r.json();
+  })
+  .then(data => {
+    const reply = data.content.filter(c=>c.type==='text').map(c=>c.text).join('\n');
+    _tHistory.push({ role: 'assistant', content: reply });
+    _tHideTyping();
+    _tHandleReply(reply);
+  })
+  .catch(err => {
+    _tHideTyping();
+    if (err.message && err.message.includes('401')) {
+      _tKey = '';
+      sessionStorage.removeItem('timea_key_compass');
+      document.getElementById('timea-send').disabled = true;
+      document.getElementById('timea-fab-dot').classList.add('off');
+    }
+    tTimea_appendMsg('ai', '⚠️ **Error:** ' + err.message + '\n\nCheck your API key or network connection.');
+  })
+  .finally(() => {
+    if (_tKey) document.getElementById('timea-send').disabled = false;
+    document.getElementById('timea-input').focus();
+  });
+}
+
+// ── HANDLE REPLY — detect FILL_FORM blocks ──
+function _tHandleReply(reply) {
+  // Strip FILL_FORM block from visible message
+  const fillMatch = reply.match(/```FILL_FORM\s*([\s\S]*?)```/);
+  const visibleReply = reply.replace(/```FILL_FORM[\s\S]*?```/, '').trim();
+
+  tTimea_appendMsg('ai', visibleReply);
+
+  if (fillMatch) {
+    try {
+      const fields = JSON.parse(fillMatch[1].trim());
+      _tShowFillCard(fields);
+    } catch(e) {
+      tTimea_appendMsg('ai', '⚠️ Could not parse form fill suggestion (invalid JSON).');
+    }
+  }
+}
+
+// ── SHOW FILL CONFIRMATION CARD ──
+function _tShowFillCard(fields) {
+  const container = document.getElementById('timea-msgs');
+  const card = document.createElement('div');
+  card.className = 'tmsg ai';
+
+  const fieldLines = Object.entries(fields).map(([id, val]) => {
+    const label = FIELD_MAP[id] || id;
+    return `<span style="color:var(--blue);font-weight:600">${label}</span>: <code style="font-family:monospace;font-size:10px">${val}</code>`;
+  }).join('<br>');
+
+  card.innerHTML = `
+    <div class="tmsg-av">AI</div>
+    <div class="tmsg-body">
+      <div class="tmsg-meta">TIMEA · Form Fill</div>
+      <div class="timea-fill-card">
+        <div class="timea-fill-title">📝 Suggested ABCDE Values (${Object.keys(fields).length} fields)</div>
+        <div class="timea-fill-fields">${fieldLines}</div>
+        <div class="timea-fill-btns">
+          <button class="timea-fill-apply" onclick="tTimea_applyFill(${JSON.stringify(JSON.stringify(fields))}, this)">✓ Apply to Form</button>
+          <button class="timea-fill-dismiss" onclick="this.closest('.timea-fill-card').style.opacity='.4'">Dismiss</button>
+        </div>
+      </div>
+    </div>`;
+  container.appendChild(card);
+  container.scrollTop = container.scrollHeight;
+}
+
+// ── APPLY FIELDS TO COMPASS FORM ──
+window.tTimea_applyFill = function(jsonStr, btn) {
+  let fields;
+  try { fields = JSON.parse(jsonStr); } catch(e) { return; }
+  const filled = _tWriteFields(fields);
+  btn.textContent = `✓ Applied ${filled} fields!`;
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+  setTimeout(tTimea_readPatient, 200);
+  tTimea_appendMsg('ai', `✅ Applied **${filled} field values** to the ABCDE form. Scores have been recalculated.`);
+};
+
+// ── SHARED FIELD WRITER (used by applyFill and autoApplyAll) ──
+function _tWriteFields(fields) {
+  let filled = 0;
+
+  // ── Step 1: write mech-type and mech-energy first, then repopulate detail dropdown ──
+  ['mech-type','mech-energy'].forEach(id => {
+    if (!(id in fields)) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const val = String(fields[id]).toLowerCase().trim();
+    const opts = Array.from(el.options);
+    const match = opts.find(o => o.value.toLowerCase() === val);
+    if (match) { el.value = match.value; filled++; }
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  // Repopulate mech-detail dropdown based on newly set type+energy
+  if (typeof window.updateMechDetail === 'function') {
+    try { window.updateMechDetail(); } catch(e) {}
+  }
+
+  // ── Step 2: write all other fields ──
+  Object.entries(fields).forEach(([id, val]) => {
+    if (['mech-type','mech-energy'].includes(id)) return; // already done
+    if (!FILLABLE_FIELDS.includes(id)) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const strVal = String(val).toLowerCase().trim();
+
+    if (el.tagName === 'SELECT') {
+      const opts = Array.from(el.options);
+      const match = opts.find(o => o.value.toLowerCase() === strVal);
+      if (match) { el.value = match.value; filled++; }
+      else if (id === 'mech-detail') {
+        // Option might not exist yet — create it temporarily so value sticks
+        const opt = document.createElement('option');
+        opt.value = strVal; opt.textContent = strVal;
+        el.appendChild(opt);
+        el.value = strVal; filled++;
+      }
+    } else if (el.type === 'checkbox') {
+      el.checked = (strVal === 'yes' || val === true);
+      filled++;
+    } else if (el.type === 'date') {
+      el.value = val;
+      if (id === 'dob' && typeof window.calcAge === 'function') window.calcAge();
+      filled++;
+    } else if (el.type === 'number' || el.type === 'text') {
+      el.value = val;
+      filled++;
+    }
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  // Expand all ABCDE sections
+  ['a','b','c','d','e'].forEach(sec => {
+    const body = document.getElementById('abcde-'+sec+'-body');
+    const arrow = document.getElementById('abcde-'+sec+'-arrow');
+    if (body && body.classList.contains('collapsed')) {
+      body.classList.remove('collapsed');
+      if (arrow) arrow.classList.remove('collapsed');
+    }
+  });
+  if (typeof window.live === 'function') { try { window.live(); } catch(e) {} }
+  return filled;
+}
+
+// ── WRITE EVERYTHING FROM CHAT ──
+window.tTimea_writeAll = function() {
+  if (!_tKey) { tTimea_showKey(); return; }
+
+  // Gather all text from current conversation
+  const allBubbles = Array.from(document.querySelectorAll('#timea-msgs .tmsg-bubble'))
+    .map(el => el.innerText || el.textContent)
+    .filter(t => t && t.length > 5)
+    .join('\n\n---\n\n');
+
+  if (!allBubbles.trim()) {
+    tTimea_appendMsg('ai', '⚠️ No conversation found yet. Start chatting with me first — describe the patient scenario, mention vitals, injuries, etc. Then click **Write Everything** to extract and fill all values.');
+    return;
+  }
+
+  // Show progress overlay
+  const overlay = document.getElementById('timea-progress');
+  const lbl = document.getElementById('timea-progress-label');
+  const sub = document.getElementById('timea-progress-sub');
+  overlay.classList.add('show');
+  lbl.textContent = 'Reading conversation…';
+  sub.textContent = 'TIMEA is scanning your chat for all clinical values';
+
+  // Disable button
+  const btn = document.getElementById('timea-write-all-btn');
+  btn.disabled = true;
+
+  // Build the extraction prompt — do NOT use _tHistory to avoid polluting it
+  const extractPrompt = `You are extracting clinical data from the following chat conversation to fill a trauma assessment form.
+
+Read EVERY message carefully and extract ALL clinical values that were mentioned — patient identity, vitals, lab values, injury scores, examination findings, treatments given, etc.
+
+Output ONLY a FILL_FORM JSON block with every field you can confidently extract. Do not include fields not mentioned.
+
+Use ONLY these exact field IDs and value rules:
+PATIENT IDENTITY:
+- pt-name: text string "Surname, Firstname" (e.g. "Smith, John")
+- dob: date string "YYYY-MM-DD" (e.g. "1980-05-14")
+- sex: "male" or "female"
+- mech-type: "blunt" or "penetrating"
+- mech-energy: "high" or "medium" or "low"
+- mech-detail: classify the described mechanism into EXACTLY ONE of these values:
+  BLUNT+HIGH: mvc_frontal, mvc_lateral, mvc_rollover, mvc_ejection, mvc_unrestrained, motorcycle, ped_struck, fall_high, crush, blast_primary, blast_secondary, blast_tertiary
+  BLUNT+MEDIUM: mvc_low_restrained, fall_medium, sports, bicycle_fall, assault_blunt
+  BLUNT+LOW: ground_fall, mechanical_fall
+  PENETRATING+HIGH: gsw_high, gsw_shotgun, blast_frag, impalement
+  PENETRATING+MEDIUM: gsw_handgun, crossbow
+  PENETRATING+LOW: stab_knife, stab_other, puncture
+  Rules: "RTA/car crash/MVC" → mvc_frontal; "motorcycle/motorbike" → motorcycle; "pedestrian hit" → ped_struck; "fall height/>2m" → fall_high; "ground fall/slip/trip" → ground_fall; "stab/knife" → stab_knife; "gunshot/GSW" → gsw_handgun; "blast/explosion" → blast_primary; "crush/trapped" → crush; "sports" → sports
+
+AIRWAY (A):
+- int-g: "yes"/"no" (intubated)
+- airway-status: "patent"/"threatened"/"compromised"
+
+BREATHING (B):
+- rr: number (respiratory rate /min)
+- pco2: number (kPa)
+- po2: number (kPa)
+- spo2: number (%)
+- ph: number
+- cd-g: "yes"/"no" (chest drain)
+
+CIRCULATION (C):
+- sbp: number (systolic BP mmHg)
+- dbp: number (diastolic BP mmHg — extract from e.g. "BP 85/60" where 60 is DBP)
+- hr: number (bpm)
+- hgb: number (g/dL)
+- inr: number
+- ica: number (mmol/L ionised calcium)
+- lac: number (lactate mmol/L)
+- be: number (base excess)
+- fib: number (fibrinogen g/L)
+- tr-g: "yes"/"no" (transfused)
+- txa-g: "yes"/"no" (TXA given)
+- ca-g: "yes"/"no" (calcium given)
+- fast-exam: "negative"/"positive"/"indeterminate"
+- efast-done: "yes"/"no"
+
+DISABILITY (D):
+- gcs: number (3-15)
+- pupils: "equal"/"unequal"/"fixed"
+
+EXPOSURE (E):
+- pb-g: "yes"/"no" (pelvic binder)
+- temp-status: "normal"/"mild"/"severe" (hypothermia status)
+- a-hd: number 0-6 (AIS head)
+- a-fc: number 0-6 (AIS face)
+- a-nk: number 0-6 (AIS neck)
+- a-th: number 0-6 (AIS thorax)
+- a-ab: number 0-6 (AIS abdomen)
+- a-sp: number 0-6 (AIS spine)
+- a-pv: number 0-6 (AIS pelvis)
+- a-ue: number 0-6 (AIS upper extremity)
+- a-le: number 0-6 (AIS lower extremity)
+
+MODIFIERS:
+- mod-elderly: "yes"/"no" (age ≥65)
+- mod-anticoag: "yes"/"no" (on anticoagulants)
+- mod-pregnant: "yes"/"no"
+- mod-burns: "yes"/"no" (burns + trauma)
+
+Output format — respond with ONLY this, no other text:
+\`\`\`FILL_FORM
+{ ... all extracted fields ... }
+\`\`\`
+
+CONVERSATION TO ANALYSE:
+---
+${allBubbles}
+---`;
+
+  // Animate progress steps
+  let step = 0;
+  const steps = [
+    ['Reading conversation…', 'Scanning all messages for clinical data'],
+    ['Extracting vitals…', 'Finding SBP, HR, SpO2, RR, GCS values'],
+    ['Extracting lab values…', 'Finding Hgb, INR, lactate, fibrinogen, iCa'],
+    ['Mapping injury scores…', 'Extracting AIS values per body region'],
+    ['Building ABCDE form…', 'Preparing field values for all sections'],
+  ];
+  const stepTimer = setInterval(() => {
+    step = (step + 1) % steps.length;
+    lbl.textContent = steps[step][0];
+    sub.textContent = steps[step][1];
+  }, 900);
+
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': _tKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: 'You are a precise clinical data extractor. Your ONLY job is to output a valid JSON FILL_FORM block. No prose, no explanation, just the code block.',
+      messages: [{ role: 'user', content: extractPrompt }]
+    })
+  })
+  .then(r => {
+    if (!r.ok) return r.json().then(e => { throw new Error(e.error?.message || 'HTTP ' + r.status); });
+    return r.json();
+  })
+  .then(data => {
+    clearInterval(stepTimer);
+    overlay.classList.remove('show');
+    btn.disabled = false;
+
+    const reply = data.content.filter(c=>c.type==='text').map(c=>c.text).join('\n');
+    const fillMatch = reply.match(/```FILL_FORM\s*([\s\S]*?)```/);
+
+    if (!fillMatch) {
+      tTimea_appendMsg('ai', '⚠️ Could not extract any clinical values from the conversation. Make sure you\'ve discussed specific patient data (e.g. "HR is 120", "SBP 80 mmHg", "GCS 12") before using this feature.');
+      return;
+    }
+
+    let fields;
+    try { fields = JSON.parse(fillMatch[1].trim()); }
+    catch(e) {
+      tTimea_appendMsg('ai', '⚠️ Extraction produced invalid data. Try again or fill manually.');
+      return;
+    }
+
+    const count = Object.keys(fields).length;
+    if (count === 0) {
+      tTimea_appendMsg('ai', '⚠️ No clinical values were found in the conversation. Describe the patient scenario with specific numbers (vitals, labs, GCS, AIS scores) and try again.');
+      return;
+    }
+
+    // AUTO-APPLY immediately — no confirmation needed
+    _tAutoApplyAll(fields);
+  })
+  .catch(err => {
+    clearInterval(stepTimer);
+    overlay.classList.remove('show');
+    btn.disabled = false;
+    tTimea_appendMsg('ai', '⚠️ **Error during extraction:** ' + err.message);
+  });
+};
+
+// ── AUTO APPLY ALL — no confirmation, instant write ──
+function _tAutoApplyAll(fields) {
+  const filled = _tWriteFields(fields);
+
+  // Build per-section summary
+  const sectionDef = [
+    ['Patient', ['pt-name','dob','sex','mech-type','mech-energy']],
+    ['Airway (A)', ['int-g','airway-status']],
+    ['Breathing (B)', ['rr','pco2','po2','spo2','ph','cd-g']],
+    ['Circulation (C)', ['sbp','dbp','hr','hgb','inr','ica','lac','be','fib','tr-g','txa-g','ca-g','fast-exam','efast-done']],
+    ['Disability (D)', ['gcs','pupils']],
+    ['Exposure (E)', ['pb-g','temp-status','a-hd','a-fc','a-nk','a-th','a-ab','a-sp','a-pv','a-ue','a-le']],
+    ['Modifiers', ['mod-elderly','mod-anticoag','mod-pregnant','mod-burns']],
+  ];
+
+  const entries = Object.entries(fields);
+  let summaryLines = [`✅ **Written ${filled} values across all ABCDE sections**\n`];
+  sectionDef.forEach(([section, ids]) => {
+    const rows = entries.filter(([id]) => ids.includes(id));
+    if (!rows.length) return;
+    summaryLines.push(`**${section}:** ` + rows.map(([id,val]) => `${FIELD_MAP[id]||id} = \`${val}\``).join(', '));
+  });
+  summaryLines.push('\n_Scores recalculated. Context auto-updated._');
+  tTimea_appendMsg('ai', summaryLines.join('\n'));
+
+  // Silently refresh context
+  setTimeout(_tRefreshCtxSilent, 400);
+}
+
+function _tRefreshCtxSilent() {
+  const fv = id => { const el=document.getElementById(id); if(!el) return null; return el.type==='checkbox'?(el.checked?'yes':'no'):(el.value||null); };
+  const data = {};
+  Object.keys(FIELD_MAP).forEach(id => { const v=fv(id); if(v&&v!==''&&v!=='null') data[id]=v; });
+  const lines = [];
+  const name=data['pt-name']||'Unknown', age=data['age']||'?', sex=data['sex']||'?';
+  lines.push(`Patient: ${name}, Age ${age}, Sex ${sex}`);
+  if (data['mech-type']) lines.push(`Mechanism: ${data['mech-type']} (${data['mech-energy']||''})`);
+  if (data['airway-status']) lines.push(`Airway: ${data['airway-status']}, Intubated: ${data['int-g']}`);
+  if (data['rr']||data['spo2']) lines.push(`Breathing: RR ${data['rr']||'?'}/min, SpO2 ${data['spo2']||'?'}%`);
+  if (data['sbp']||data['hr']) lines.push(`Circulation: SBP ${data['sbp']||'?'}/DBP ${data['dbp']||'?'} mmHg, HR ${data['hr']||'?'} bpm, Hgb ${data['hgb']||'?'} g/dL, Lactate ${data['lac']||'?'}`);
+  if (data['gcs']) lines.push(`Disability: GCS ${data['gcs']}, Pupils ${data['pupils']||'?'}`);
+  const msAtls=document.getElementById('m-atls')?.textContent, msIss=document.getElementById('m-iss')?.textContent;
+  if (msAtls&&msAtls!=='—') lines.push(`Ps(ATLS): ${msAtls}`);
+  if (msIss&&msIss!=='—') lines.push(`ISS: ${msIss}, RTS: ${document.getElementById('m-rts')?.textContent}`);
+  _tPatientCtx = lines.join('\n');
+  const badge = document.getElementById('timea-pt-badge');
+  badge.className = 'timea-ctx-badge patient';
+  badge.textContent = `${name}, ${age}y, ${sex}`;
+}
+
+
+function tTimea_appendMsg(role, text) {
+  const container = document.getElementById('timea-msgs');
+  const now = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  const el = document.createElement('div');
+  el.className = 'tmsg ' + role;
+  const rendered = role === 'ai' ? _tRender(text) : _tEscape(text);
+  el.innerHTML = `
+    <div class="tmsg-av">${role === 'user' ? 'YOU' : 'AI'}</div>
+    <div class="tmsg-body">
+      <div class="tmsg-meta">${role === 'user' ? 'You' : 'TIMEA'} · ${now}</div>
+      <div class="tmsg-bubble">${rendered}</div>
+    </div>`;
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+}
+window.tTimea_appendMsg = tTimea_appendMsg;
+
+// ── TYPING INDICATOR ──
+function _tShowTyping() {
+  const c = document.getElementById('timea-msgs');
+  const el = document.createElement('div');
+  el.className = 'tmsg ai'; el.id = 'timea-typing';
+  el.innerHTML = `<div class="tmsg-av">AI</div>
+    <div class="tmsg-body">
+      <div class="timea-typing">
+        <div class="timea-tdot"></div>
+        <div class="timea-tdot"></div>
+        <div class="timea-tdot"></div>
+      </div>
+    </div>`;
+  c.appendChild(el);
+  c.scrollTop = c.scrollHeight;
+}
+function _tHideTyping() {
+  const el = document.getElementById('timea-typing');
+  if (el) el.remove();
+}
+
+// ── RENDER MARKDOWN-ISH ──
+function _tRender(t) {
+  return t
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code>$1</code>')
+    .replace(/\[ATLS\]/g,'<span class="tbadge atls">ATLS</span>')
+    .replace(/\[EURO WB\]/g,'<span class="tbadge euro">EURO WB</span>')
+    .replace(/\[JATEC\]/g,'<span class="tbadge jatec">JATEC</span>')
+    .replace(/\n\n+/g,'<br><br>').replace(/\n/g,'<br>');
+}
+function _tEscape(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+// ── ANALYSIS POPUP ──
+window.tTimea_analyse = function() {
+  if (!_tKey) { tTimea_showKey(); return; }
+
+  const overlay = document.getElementById('timea-analysis-overlay');
+  const body = document.getElementById('timea-analysis-body');
+  const ptLabel = document.getElementById('timea-analysis-pt-label');
+
+  // Show modal with spinner
+  overlay.classList.add('show');
+  body.innerHTML = `<div class="timea-analysis-spinner"><div class="timea-progress-spinner" style="border-top-color:var(--blue)"></div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">Generating analysis…</div></div>`;
+
+  // Read live patient data
+  const fv = id => { const el=document.getElementById(id); if(!el) return null; return el.type==='checkbox'?(el.checked?'yes':'no'):(el.value||null); };
+  const data = {};
+  Object.keys(FIELD_MAP).forEach(id => { const v=fv(id); if(v&&v!==''&&v!=='null') data[id]=v; });
+  const name = data['pt-name']||'Unknown Patient';
+  const age = data['age']||'?';
+  const sex = data['sex']||'?';
+  ptLabel.textContent = `${name} · ${age}y · ${sex} · ${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
+
+  // Live scores
+  const liveScores = {
+    iss: document.getElementById('m-iss')?.textContent,
+    rts: document.getElementById('m-rts')?.textContent,
+    si: document.getElementById('m-si')?.textContent,
+    atls: document.getElementById('m-atls')?.textContent,
+    euro: document.getElementById('m-euro')?.textContent,
+    jatec: document.getElementById('m-jatec')?.textContent,
+    risk: document.getElementById('rval')?.textContent,
+  };
+
+  // Build context summary
+  const ctx = [
+    `Patient: ${name}, Age ${age}, Sex ${sex}`,
+    data['mech-type'] ? `Mechanism: ${data['mech-type']} (${data['mech-energy']||''})` : '',
+    `Airway: ${data['airway-status']||'?'}, Intubated: ${data['int-g']||'no'}`,
+    `Breathing: RR ${data['rr']||'?'}/min, SpO2 ${data['spo2']||'?'}%, pH ${data['ph']||'?'}`,
+    `Circulation: SBP ${data['sbp']||'?'}/DBP ${data['dbp']||'?'} mmHg, HR ${data['hr']||'?'} bpm, Hgb ${data['hgb']||'?'}, Lactate ${data['lac']||'?'}, INR ${data['inr']||'?'}, iCa ${data['ica']||'?'}, BE ${data['be']||'?'}`,
+    `Disability: GCS ${data['gcs']||'?'}, Pupils ${data['pupils']||'?'}`,
+    `Exposure: Temp ${data['temp-status']||'?'}, Pelvic binder ${data['pb-g']||'no'}`,
+    `Treatments: TXA ${data['txa-g']||'no'}, Transfused ${data['tr-g']||'no'}, Calcium ${data['ca-g']||'no'}, Chest drain ${data['cd-g']||'no'}`,
+    `AIS: Head ${data['a-hd']||0}, Thorax ${data['a-th']||0}, Abdomen ${data['a-ab']||0}, Spine ${data['a-sp']||0}, Pelvis ${data['a-pv']||0}, UE ${data['a-ue']||0}, LE ${data['a-le']||0}`,
+    liveScores.iss&&liveScores.iss!=='—' ? `Scores: ISS ${liveScores.iss}, RTS ${liveScores.rts}, Shock Index ${liveScores.si}, Ps(ATLS) ${liveScores.atls}, Ps(Euro) ${liveScores.euro}, Ps(JATEC) ${liveScores.jatec}` : '',
+  ].filter(Boolean).join('\n');
+
+  const analysisPrompt = `Analyse this trauma patient's current clinical situation and produce a structured checklist with status icons.
+
+PATIENT DATA:
+${ctx}
+
+Respond ONLY with valid JSON in this exact structure (no other text):
+{
+  "risk": "critical|high|moderate|low",
+  "risk_summary": "One sentence summary of the overall situation",
+  "sections": [
+    {
+      "title": "Section name (e.g. Airway, Haemorrhage Control)",
+      "color": "red|amber|green|blue",
+      "items": [
+        { "status": "done|urgent|warn|info", "text": "Checklist item text", "badge": "ATLS|EURO WB|JATEC|optional" }
+      ]
+    }
+  ],
+  "disclaimer": "⚠ Educational reference only"
+}
+
+Status icons meaning: done = ✅ already done/normal, urgent = 🚨 needs immediate action, warn = ⚠ monitor/consider, info = ℹ background info.
+Include 4-6 sections covering: Airway, Breathing, Circulation/Haemorrhage, Disability/Neuro, Priorities/Next Steps, Protocol Notes.
+Each section should have 3-6 items. Be specific to this patient's data.`;
+
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': _tKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1500,
+      system: 'You are a trauma analysis engine. Output only valid JSON. No markdown, no prose, no code blocks — raw JSON only.',
+      messages: [{ role: 'user', content: analysisPrompt }]
+    })
+  })
+  .then(r => {
+    if (!r.ok) return r.json().then(e => { throw new Error(e.error?.message || 'HTTP ' + r.status); });
+    return r.json();
+  })
+  .then(data => {
+    const raw = data.content.filter(c=>c.type==='text').map(c=>c.text).join('').trim();
+    // Strip any accidental markdown wrapping
+    const cleaned = raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
+    let analysis;
+    try { analysis = JSON.parse(cleaned); }
+    catch(e) { throw new Error('Invalid JSON from analysis: ' + cleaned.slice(0,120)); }
+    _tRenderAnalysis(analysis);
+  })
+  .catch(err => {
+    body.innerHTML = `<div style="padding:20px;text-align:center;color:var(--red);font-size:12px">⚠️ Analysis failed: ${_tEscape(err.message)}<br><br><small style="color:var(--tx3)">Try again or check your API key.</small></div>`;
+  });
+};
+
+window.tTimea_closeAnalysis = function() {
+  document.getElementById('timea-analysis-overlay').classList.remove('show');
+};
+
+function _tRenderAnalysis(a) {
+  const body = document.getElementById('timea-analysis-body');
+  const riskClass = {critical:'critical',high:'high',moderate:'moderate',low:'low'}[a.risk]||'moderate';
+  const riskIcon = {critical:'🔴',high:'🟠',moderate:'🟡',low:'🟢'}[a.risk]||'⚕';
+  const riskColor = {critical:'var(--red)',high:'#c85000',moderate:'var(--amber)',low:'var(--green)'}[a.risk]||'var(--amber)';
+
+  const statusIcon = {done:'✅',urgent:'🚨',warn:'⚠️',info:'ℹ️'};
+  const statusClass = {done:'done',urgent:'urgent',warn:'warn',info:''};
+
+  const colorDot = {red:'var(--red)',amber:'var(--amber)',green:'var(--green)',blue:'var(--blue)'};
+
+  let html = `
+    <div class="timea-risk-banner ${riskClass}">
+      <div class="timea-risk-icon">${riskIcon}</div>
+      <div class="timea-risk-text">
+        <div class="timea-risk-level" style="color:${riskColor}">${(a.risk||'').toUpperCase()} RISK</div>
+        <div class="timea-risk-summary">${_tEscape(a.risk_summary||'')}</div>
+      </div>
+    </div>`;
+
+  (a.sections||[]).forEach(sec => {
+    const dot = colorDot[sec.color]||'var(--blue)';
+    html += `<div class="timea-checklist-section">
+      <div class="timea-checklist-title">
+        <div class="timea-checklist-title-dot" style="background:${dot}"></div>
+        ${_tEscape(sec.title||'')}
+      </div>`;
+    (sec.items||[]).forEach(item => {
+      const icon = statusIcon[item.status]||'ℹ️';
+      const cls = statusClass[item.status]||'';
+      const badge = item.badge ? `<span class="timea-check-badge ${item.badge==='ATLS'?'atls':item.badge==='EURO WB'?'euro':item.badge==='JATEC'?'jatec':''}" style="${item.badge==='ATLS'?'background:rgba(26,107,191,.1);border:1px solid rgba(26,107,191,.25);color:var(--blue)':item.badge==='EURO WB'?'background:rgba(91,74,207,.1);border:1px solid rgba(91,74,207,.25);color:var(--lav)':item.badge==='JATEC'?'background:rgba(26,127,75,.1);border:1px solid rgba(26,127,75,.25);color:var(--green)':''}">${_tEscape(item.badge)}</span>` : '';
+      html += `<div class="timea-check-item ${cls}">
+        <span class="timea-check-icon">${icon}</span>
+        <span class="timea-check-text">${_tEscape(item.text||'')}${badge}</span>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  if (a.disclaimer) {
+    html += `<div style="text-align:center;font-size:9px;color:var(--tx3);font-family:'JetBrains Mono',monospace;padding-top:4px;border-top:1px solid var(--line)">${_tEscape(a.disclaimer)}</div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+})(); // end TIMEA IIFE
+
+// ═══════════════════════════════════════════════════════
+//  TIMEA VOICE — Wake word "Hi Timi" + dictation
+// ═══════════════════════════════════════════════════════
+(function() {
+'use strict';
+
+const WAKE_WORDS = ['hi timi','hey timi','hi timea','hey timea','hi timy','hey timy'];
+const STOP_WORDS = ['send it','send message','stop listening','cancel','nevermind'];
+
+let _wakeRecog = null;   // always-on background listener
+let _dictRecog = null;   // active dictation recogniser
+let _dictActive = false;
+let _wakeEnabled = false;
+let _silenceTimer = null;
+const SILENCE_TIMEOUT = 4000; // auto-send after 4s silence
+
+// ── CSS ──
+const style = document.createElement('style');
+style.textContent = `
+/* ── VOICE MIC BUTTON ── */
+.timea-mic-btn {
+  position: fixed;
+  bottom: 70px;
+  right: 14px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg3);
+  border: 1.5px solid var(--line);
+  color: var(--tx3);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 8998;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 10px var(--shadow2);
+  transition: all .2s;
+}
+.timea-mic-btn.listening {
+  background: rgba(192,57,43,.12);
+  border-color: var(--red);
+  color: var(--red);
+  animation: micPulse 1.2s ease-in-out infinite;
+}
+.timea-mic-btn.wake-on {
+  background: rgba(26,127,75,.1);
+  border-color: var(--green);
+  color: var(--green);
+}
+.timea-mic-btn:hover { transform: scale(1.08); box-shadow: 0 4px 16px var(--shadow2); }
+@keyframes micPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(192,57,43,.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(192,57,43,0); }
+}
+
+/* ── VOICE STATUS TOAST ── */
+.timea-voice-toast {
+  position: fixed;
+  bottom: 122px;
+  right: 14px;
+  background: var(--bg2);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--tx2);
+  box-shadow: 0 4px 16px var(--shadow2);
+  z-index: 8997;
+  display: none;
+  max-width: 200px;
+  text-align: center;
+  animation: tmsgFade .2s ease both;
+  line-height: 1.5;
+}
+.timea-voice-toast.show { display: block; }
+.timea-voice-toast.active {
+  border-color: var(--red);
+  background: rgba(192,57,43,.06);
+  color: var(--red);
+}
+.timea-voice-toast.wake {
+  border-color: var(--green);
+  background: rgba(26,127,75,.06);
+  color: var(--green);
+}
+
+/* ── VOICE INTERIM TEXT ── */
+#timea-voice-interim {
+  color: var(--tx3);
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* ── DICTATION INDICATOR in input ── */
+.timea-input-inner.dictating {
+  border-color: var(--red) !important;
+  animation: dictBorder 1s infinite;
+}
+@keyframes dictBorder {
+  0%,100% { box-shadow: 0 0 0 0 rgba(192,57,43,.3); }
+  50%      { box-shadow: 0 0 0 4px rgba(192,57,43,0); }
+}
+`;
+document.head.appendChild(style);
+
+// ── BUILD UI ──
+function buildVoiceUI() {
+  // Mic FAB
+  const mic = document.createElement('button');
+  mic.id = 'timea-mic-btn';
+  mic.className = 'timea-mic-btn';
+  mic.title = 'Click to toggle wake-word listener. Say "Hi Timi" to activate.';
+  mic.innerHTML = '🎤';
+  mic.onclick = toggleWake;
+  document.body.appendChild(mic);
+
+  // Status toast
+  const toast = document.createElement('div');
+  toast.id = 'timea-voice-toast';
+  toast.className = 'timea-voice-toast';
+  document.body.appendChild(toast);
+}
+
+// ── SHOW / HIDE TOAST ──
+function voiceToast(msg, type='', duration=0) {
+  const t = document.getElementById('timea-voice-toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'timea-voice-toast show' + (type ? ' ' + type : '');
+  if (duration) setTimeout(() => { t.className = 'timea-voice-toast'; }, duration);
+}
+function voiceToastHide() {
+  const t = document.getElementById('timea-voice-toast');
+  if (t) t.className = 'timea-voice-toast';
+}
+
+// ── CHECK BROWSER SUPPORT ──
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (!SpeechRecognition) {
+  // Still build the mic button but disabled
+  window.addEventListener('DOMContentLoaded', () => {
+    buildVoiceUI();
+    const mic = document.getElementById('timea-mic-btn');
+    if (mic) {
+      mic.style.opacity = '.4';
+      mic.title = 'Voice recognition not supported in this browser. Use Chrome.';
+      mic.onclick = () => voiceToast('⚠ Voice not supported. Use Chrome.', '', 3000);
+    }
+  });
+  return;
+}
+
+// ── WAKE WORD LISTENER (always-on, background) ──
+function startWakeListener() {
+  if (_wakeRecog) { try { _wakeRecog.stop(); } catch(e){} }
+
+  _wakeRecog = new SpeechRecognition();
+  _wakeRecog.continuous = true;
+  _wakeRecog.interimResults = false;
+  _wakeRecog.lang = 'en-US';
+  _wakeRecog.maxAlternatives = 5;
+
+  _wakeRecog.onresult = (e) => {
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (!e.results[i].isFinal) continue;
+      // Check all alternatives for wake word
+      for (let a = 0; a < e.results[i].length; a++) {
+        const heard = e.results[i][a].transcript.toLowerCase().trim();
+        if (WAKE_WORDS.some(w => heard.includes(w))) {
+          onWakeWordDetected();
+          return;
+        }
+      }
+    }
+  };
+
+  _wakeRecog.onerror = (e) => {
+    // Restart on non-fatal errors
+    if (['no-speech','audio-capture','network'].includes(e.error)) {
+      setTimeout(startWakeListener, 1000);
+    }
+  };
+
+  _wakeRecog.onend = () => {
+    // Keep restarting if wake mode still on
+    if (_wakeEnabled && !_dictActive) {
+      setTimeout(startWakeListener, 300);
+    }
+  };
+
+  try { _wakeRecog.start(); } catch(e) {}
+}
+
+function stopWakeListener() {
+  if (_wakeRecog) { try { _wakeRecog.stop(); } catch(e){} _wakeRecog = null; }
+}
+
+// ── TOGGLE WAKE MODE ──
+function toggleWake() {
+  _wakeEnabled = !_wakeEnabled;
+  const btn = document.getElementById('timea-mic-btn');
+  if (_wakeEnabled) {
+    startWakeListener();
+    if (btn) { btn.classList.add('wake-on'); btn.innerHTML = '🎤'; }
+    voiceToast('👂 Listening for "Hi Timi"…', 'wake');
+  } else {
+    stopWakeListener();
+    stopDictation();
+    if (btn) { btn.classList.remove('wake-on','listening'); btn.innerHTML = '🎤'; }
+    voiceToastHide();
+  }
+}
+window.tTimea_toggleVoice = toggleWake;
+
+// ── WAKE WORD DETECTED ──
+function onWakeWordDetected() {
+  // Pause wake listener while dictating
+  stopWakeListener();
+
+  // Open TIMEA panel if not open
+  const panel = document.getElementById('timea-panel');
+  if (panel && !panel.classList.contains('open')) {
+    panel.classList.add('open');
+    // Also set internal open state
+    if (typeof window.tTimeaToggle === 'function') {
+      // Just open the panel directly
+    }
+  }
+
+  // Brief feedback
+  voiceToast('✨ Hi! Listening…', 'active');
+  const btn = document.getElementById('timea-mic-btn');
+  if (btn) { btn.classList.add('listening'); btn.innerHTML = '🔴'; }
+
+  // Short beep / visual flash
+  _playBeep();
+
+  // Small delay then start dictation
+  setTimeout(startDictation, 400);
+}
+
+// ── DICTATION ──
+function startDictation() {
+  if (_dictActive) return;
+  _dictActive = true;
+
+  const input = document.getElementById('timea-input');
+  const inputWrap = document.querySelector('.timea-input-inner');
+  if (input) { input.value = ''; input.placeholder = '🎤 Listening…'; }
+  if (inputWrap) inputWrap.classList.add('dictating');
+
+  _dictRecog = new SpeechRecognition();
+  _dictRecog.continuous = true;
+  _dictRecog.interimResults = true;
+  _dictRecog.lang = 'en-US';
+  _dictRecog.maxAlternatives = 1;
+
+  let finalText = '';
+
+  _dictRecog.onresult = (e) => {
+    let interim = '';
+    finalText = '';
+
+    for (let i = 0; i < e.results.length; i++) {
+      const t = e.results[i][0].transcript;
+      if (e.results[i].isFinal) {
+        finalText += t + ' ';
+      } else {
+        interim += t;
+      }
+    }
+
+    const display = finalText + interim;
+
+    // Check for stop command
+    const lower = display.toLowerCase();
+    if (STOP_WORDS.some(w => lower.includes(w))) {
+      stopDictation(false); // don't send
+      return;
+    }
+
+    // Update input field
+    if (input) {
+      input.value = display.trim();
+      // Resize
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+    }
+
+    // Update voice toast with live transcript snippet
+    const snippet = display.length > 50 ? '…' + display.slice(-50) : display;
+    voiceToast('🎤 ' + (snippet || 'Listening…'), 'active');
+
+    // Reset silence timer
+    clearTimeout(_silenceTimer);
+    if (finalText.trim()) {
+      _silenceTimer = setTimeout(() => stopDictation(true), SILENCE_TIMEOUT);
+    }
+  };
+
+  _dictRecog.onerror = (e) => {
+    if (e.error === 'no-speech') {
+      // Timeout — auto-send if we have text
+      const inp = document.getElementById('timea-input');
+      stopDictation(inp && inp.value.trim().length > 0);
+    } else {
+      stopDictation(false);
+    }
+  };
+
+  _dictRecog.onend = () => {
+    // If we ended unexpectedly while still active, try to send what we have
+    if (_dictActive) stopDictation(true);
+  };
+
+  try { _dictRecog.start(); } catch(e) { stopDictation(false); }
+}
+
+function stopDictation(send = false) {
+  _dictActive = false;
+  clearTimeout(_silenceTimer);
+
+  if (_dictRecog) { try { _dictRecog.stop(); } catch(e){} _dictRecog = null; }
+
+  const input = document.getElementById('timea-input');
+  const inputWrap = document.querySelector('.timea-input-inner');
+  const btn = document.getElementById('timea-mic-btn');
+
+  if (inputWrap) inputWrap.classList.remove('dictating');
+  if (input) input.placeholder = 'Ask TIMEA…';
+  if (btn) { btn.classList.remove('listening'); btn.innerHTML = '🎤'; }
+
+  if (send && input && input.value.trim()) {
+    voiceToast('✉ Sending…', 'wake', 1500);
+    setTimeout(() => {
+      if (typeof window.tTimea_send === 'function') window.tTimea_send();
+    }, 300);
+  } else {
+    voiceToastHide();
+  }
+
+  // Restart wake listener
+  if (_wakeEnabled) {
+    setTimeout(startWakeListener, 600);
+  }
+}
+
+// ── SUBTLE BEEP on wake ──
+function _playBeep() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1100, ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+    setTimeout(() => ctx.close(), 500);
+  } catch(e) {}
+}
+
+// ── ALSO allow tapping mic button to start dictation directly ──
+// (if wake mode is off, click starts dictation immediately)
+function toggleWakeOrDictate() {
+  if (_dictActive) {
+    stopDictation(true);
+    return;
+  }
+  if (_wakeEnabled) {
+    toggleWake(); // turn off
+    return;
+  }
+  // Wake mode off — click = instant dictation
+  if (!_wakeEnabled) {
+    // Open panel first
+    const panel = document.getElementById('timea-panel');
+    if (panel && !panel.classList.contains('open')) panel.classList.add('open');
+    const btn = document.getElementById('timea-mic-btn');
+    if (btn) { btn.classList.add('listening'); btn.innerHTML = '🔴'; }
+    voiceToast('🎤 Listening…', 'active');
+    _playBeep();
+    startDictation();
+  }
+}
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  buildVoiceUI();
+  // Override mic button to handle both modes
+  setTimeout(() => {
+    const mic = document.getElementById('timea-mic-btn');
+    if (mic) mic.onclick = handleMicClick;
+  }, 100);
+});
+
+function handleMicClick() {
+  if (_dictActive) {
+    // Stop and send
+    stopDictation(true);
+    return;
+  }
+  if (_wakeEnabled) {
+    // Turn off wake mode
+    _wakeEnabled = false;
+    stopWakeListener();
+    const btn = document.getElementById('timea-mic-btn');
+    if (btn) { btn.classList.remove('wake-on','listening'); btn.innerHTML = '🎤'; }
+    voiceToastHide();
+    return;
+  }
+  // Show choice: wake mode or instant dictation
+  _showVoiceMenu();
+}
+
+// ── VOICE MENU (small popup near mic) ──
+let _menuOpen = false;
+function _showVoiceMenu() {
+  if (_menuOpen) { _hideVoiceMenu(); return; }
+  _menuOpen = true;
+
+  const existing = document.getElementById('timea-voice-menu');
+  if (existing) existing.remove();
+
+  const menu = document.createElement('div');
+  menu.id = 'timea-voice-menu';
+  menu.style.cssText = `
+    position:fixed;bottom:122px;right:14px;
+    background:var(--bg2);border:1.5px solid var(--blue);
+    border-radius:10px;padding:8px;z-index:9100;
+    display:flex;flex-direction:column;gap:5px;
+    box-shadow:0 8px 24px var(--shadow2);width:210px;
+    animation:tmsgFade .2s ease both;
+    font-family:'JetBrains Mono',monospace;
+  `;
+  menu.innerHTML = `
+    <div style="font-size:9px;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;padding:2px 4px;border-bottom:1px solid var(--line);margin-bottom:3px">🎤 Voice Input</div>
+    <button onclick="window._tVoiceWake()" style="background:rgba(26,127,75,.08);border:1px solid rgba(26,127,75,.35);border-radius:6px;padding:8px 10px;cursor:pointer;text-align:left;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;">
+      👂 Wake Word Mode<br><span style="font-weight:400;color:var(--tx3);font-size:9px">Say "Hi Timi" to activate</span>
+    </button>
+    <button onclick="window._tVoiceNow()" style="background:rgba(26,107,191,.08);border:1px solid rgba(26,107,191,.35);border-radius:6px;padding:8px 10px;cursor:pointer;text-align:left;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;">
+      🔴 Dictate Now<br><span style="font-weight:400;color:var(--tx3);font-size:9px">Start speaking immediately</span>
+    </button>
+    <div style="font-size:8.5px;color:var(--tx3);padding:3px 4px;line-height:1.5;border-top:1px solid var(--line);margin-top:2px">
+      After speaking, pause ${SILENCE_TIMEOUT/1000}s to auto-send<br>or say <em>"send it"</em> / <em>"cancel"</em>
+    </div>
+  `;
+  document.body.appendChild(menu);
+
+  // Close on outside click
+  setTimeout(() => document.addEventListener('click', _menuOutside), 50);
+}
+function _hideVoiceMenu() {
+  _menuOpen = false;
+  const m = document.getElementById('timea-voice-menu');
+  if (m) m.remove();
+  document.removeEventListener('click', _menuOutside);
+}
+function _menuOutside(e) {
+  const m = document.getElementById('timea-voice-menu');
+  const btn = document.getElementById('timea-mic-btn');
+  if (m && !m.contains(e.target) && e.target !== btn) _hideVoiceMenu();
+}
+
+window._tVoiceWake = function() {
+  _hideVoiceMenu();
+  _wakeEnabled = true;
+  startWakeListener();
+  const btn = document.getElementById('timea-mic-btn');
+  if (btn) { btn.classList.add('wake-on'); btn.innerHTML = '🎤'; }
+  voiceToast('👂 Listening for "Hi Timi"…', 'wake');
+};
+
+window._tVoiceNow = function() {
+  _hideVoiceMenu();
+  const panel = document.getElementById('timea-panel');
+  if (panel && !panel.classList.contains('open')) panel.classList.add('open');
+  const btn = document.getElementById('timea-mic-btn');
+  if (btn) { btn.classList.add('listening'); btn.innerHTML = '🔴'; }
+  voiceToast('🎤 Listening…', 'active');
+  _playBeep();
+  startDictation();
+};
+
+})(); // end TIMEA VOICE
 </script>
 
 </body>
