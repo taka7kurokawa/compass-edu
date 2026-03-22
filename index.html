@@ -2247,6 +2247,9 @@ function enterApp(user,inst){
     badge.innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0"></span>'+user+' · '+inst;
     var hdrR=document.querySelector('.hdr-r');
     if(hdrR)hdrR.insertBefore(badge,hdrR.firstChild);
+    // Show ENDRE FAB now that user is logged in
+    var fab=document.getElementById('endre-fab');
+    if(fab) fab.classList.add('visible');
     // Always show welcome/disclaimer overlay after login
     var wel=document.getElementById('welcome-overlay');
     if(wel) wel.style.display='flex';
@@ -2264,6 +2267,11 @@ function doLogout(){
   document.getElementById('login-password').value='';
   document.getElementById('login-btn').disabled=false;
   document.getElementById('login-btn').textContent='Sign In →';
+  // Hide ENDRE FAB and close panel
+  var fab=document.getElementById('endre-fab');
+  if(fab) fab.classList.remove('visible');
+  var panel=document.getElementById('endre-panel');
+  if(panel) panel.classList.remove('open');
 }
 document.addEventListener('keydown',function(e){
   var ol=document.getElementById('compass-login');
@@ -5391,6 +5399,7 @@ document.addEventListener('DOMContentLoaded', function() {
   width: auto;
   height: 44px;
   padding: 0 16px;
+  display: none !important;
   background: linear-gradient(135deg, #1a6bbf, #5b4acf);
   border: none;
   border-radius: 22px;
@@ -5409,6 +5418,9 @@ document.addEventListener('DOMContentLoaded', function() {
 .endre-fab:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(26,107,191,.55), 0 3px 10px rgba(0,0,0,.3);
+}
+.endre-fab.visible {
+  display: flex !important;
 }
 .endre-fab-dot {
   width: 7px; height: 7px; border-radius: 50%;
