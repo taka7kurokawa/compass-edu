@@ -2241,6 +2241,13 @@ function enterApp(user,inst){
     badge.innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0"></span>'+user+' · '+inst;
     var hdrR=document.querySelector('.hdr-r');
     if(hdrR)hdrR.insertBefore(badge,hdrR.firstChild);
+    // Show welcome overlay if not previously dismissed
+    try{
+      if(localStorage.getItem('compassedu-welcome-dismissed')!=='1'){
+        var wel=document.getElementById('welcome-overlay');
+        if(wel)wel.style.display='flex';
+      }
+    }catch(e){}
   },620);
 }
 function doLogout(){
@@ -2685,7 +2692,7 @@ document.addEventListener('keydown',function(e){
 <div class="toast-container" id="toast-container"></div>
 
 <!-- WELCOME MODAL OVERLAY -->
-<div class="welcome-overlay" id="welcome-overlay">
+<div class="welcome-overlay" id="welcome-overlay" style="display:none">
   <div class="welcome-modal">
     <div style="display:flex;align-items:center;gap:14px">
       <div class="welcome-icon">🧭</div>
