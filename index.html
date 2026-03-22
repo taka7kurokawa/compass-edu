@@ -448,7 +448,7 @@ body.dark .f input, body.dark .f select { background: var(--bg3); }
 .pt-name-input:focus { outline: none; border-bottom-color: var(--blue); }
 .pt-name-input::placeholder { color: var(--tx3); font-size: 13px; }
 .pt-name-row { margin-bottom: 10px; }
-.pt-meta-row { display: grid; grid-template-columns: 1fr 1fr auto 1fr; gap: 6px; align-items: end; }
+.pt-meta-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px; align-items: end; }
 .pt-age-box { display: flex; flex-direction: column; align-items: center; }
 .pt-age-display {
   background: rgba(26,107,191,.1); border: 1.5px solid var(--blue); border-radius: 6px;
@@ -2392,7 +2392,7 @@ document.addEventListener('keydown',function(e){
   <div class="step-item active" id="step-patient" onclick="scrollToSection('pt-id-card')">
     <span class="step-dot"></span> Patient
   </div>
-  <div class="step-line"></div>
+  <div style="width:2px;height:20px;background:var(--line2);border-radius:1px;flex-shrink:0;margin:0 4px"></div>
   <div class="step-item" id="step-airway" onclick="scrollToSection('abcde-a-sec')">
     <span class="step-dot"></span> A · Airway
   </div>
@@ -2412,7 +2412,7 @@ document.addEventListener('keydown',function(e){
   <div class="step-item" id="step-exposure" onclick="scrollToSection('abcde-e-sec')">
     <span class="step-dot"></span> E · Exposure
   </div>
-  <div class="step-line"></div>
+  <div style="width:2px;height:20px;background:var(--line2);border-radius:1px;flex-shrink:0;margin:0 4px"></div>
   <div class="step-item" id="step-analyze" onclick="scrollToSection('abtn')">
     <span class="step-dot"></span> Analyze
   </div>
@@ -2436,10 +2436,7 @@ document.addEventListener('keydown',function(e){
         <label data-i18n="lbl-dob">Date of Birth</label>
         <input type="date" id="dob" oninput="calcAge()" style="font-size:11px">
       </div>
-      <div class="f">
-        <label data-i18n="lbl-age">Age (yrs)</label>
-        <input type="number" id="age" placeholder="—" min="0" max="120" step="0.1" oninput="live()">
-      </div>
+      <input type="hidden" id="age" value="">
       <div class="pt-age-box">
         <div class="pt-age-display" id="age-display">—</div>
         <div class="pt-age-lbl">yrs</div>
@@ -2454,19 +2451,54 @@ document.addEventListener('keydown',function(e){
       </div>
     </div>
     <div class="ig i2" style="margin-top:8px;margin-bottom:0">
-      <div class="f"><label data-i18n="lbl-mech">Mechanism of Injury</label>
-        <select id="mech">
-          <option value="high_energy" data-i18n="opt-high">High Energy</option>
-          <option value="medium_energy" data-i18n="opt-mid">Middle Energy</option>
-          <option value="low_energy" data-i18n="opt-low">Low Energy</option>
+      <div class="f"><label data-i18n="lbl-mech">Trauma Type (TRISS)<span class="field-help" data-tip="Blunt vs Penetrating drives the TRISS regression coefficient selection. This is the most impactful MOI variable.">?</span></label>
+        <select id="mech-type" onchange="updateMechEnergy();live()">
+          <option value="blunt">Blunt</option>
+          <option value="penetrating">Penetrating</option>
         </select>
       </div>
+      <div class="f"><label>Energy Level<span class="field-help" data-tip="Determines protocol activation thresholds and resuscitation aggressiveness.">?</span></label>
+        <select id="mech-energy" onchange="updateMechDetail();live()">
+          <option value="high">High Energy</option>
+          <option value="medium">Medium Energy</option>
+          <option value="low">Low Energy</option>
+        </select>
+      </div>
+    </div>
+    <div class="ig i1" style="margin-top:6px;margin-bottom:0">
+      <div class="f"><label>Specific Mechanism<span class="field-help" data-tip="Drives injury pattern anticipation and protocol-specific recommendations.">?</span></label>
+        <select id="mech-detail" onchange="live()" style="font-size:12px!important">
+          <option value="">— Select specific mechanism —</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:6px" id="mech-modifiers">
+      <label style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--tx2);cursor:pointer;background:var(--bg3);border:1px solid var(--line);border-radius:5px;padding:3px 8px">
+        <input type="checkbox" id="mod-elderly" onchange="live()" style="width:14px;height:14px;min-height:14px!important;accent-color:var(--amber)"> Age ≥65
+      </label>
+      <label style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--tx2);cursor:pointer;background:var(--bg3);border:1px solid var(--line);border-radius:5px;padding:3px 8px">
+        <input type="checkbox" id="mod-anticoag" onchange="live()" style="width:14px;height:14px;min-height:14px!important;accent-color:var(--red)"> Anticoagulated
+      </label>
+      <label style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--tx2);cursor:pointer;background:var(--bg3);border:1px solid var(--line);border-radius:5px;padding:3px 8px">
+        <input type="checkbox" id="mod-pregnant" onchange="live()" style="width:14px;height:14px;min-height:14px!important;accent-color:var(--lav)"> Pregnant
+      </label>
+      <label style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--tx2);cursor:pointer;background:var(--bg3);border:1px solid var(--line);border-radius:5px;padding:3px 8px">
+        <input type="checkbox" id="mod-burns" onchange="live()" style="width:14px;height:14px;min-height:14px!important;accent-color:#d4650a"> Burns + Trauma
+      </label>
+    </div>
+    <div class="ig i2" style="margin-top:6px;margin-bottom:0">
       <div class="toi-wrap">
         <label>Time of Injury</label>
         <input type="time" id="toi" class="toi-input" oninput="updateTOI()">
         <div class="toi-elapsed" id="toi-elapsed">—</div>
       </div>
     </div>
+  </div>
+
+  <!-- ABCDE ASSESSMENT DIVIDER -->
+  <div style="display:flex;align-items:center;gap:10px;margin:14px 0 10px;padding:0 2px">
+    <div style="font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;white-space:nowrap">ABCDE Primary Survey</div>
+    <div style="flex:1;height:2px;background:linear-gradient(90deg,var(--blue),var(--line))"></div>
   </div>
 
   <!-- ── A — AIRWAY ── -->
@@ -2680,7 +2712,10 @@ document.addEventListener('keydown',function(e){
   <div class="sp-divider"></div>
   <div class="sp-row">
     <span class="sp-label">Export</span>
-    <button onclick="exportPDF();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--teal);color:var(--teal);background:rgba(14,138,122,.06)">📄 PDF Report</button>
+    <div style="display:flex;gap:4px">
+      <button onclick="exportPDF();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--teal);color:var(--teal);background:rgba(14,138,122,.06);font-size:10px;padding:4px 8px">📄 PDF</button>
+      <button onclick="exportCSV();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--green);color:var(--green);background:rgba(26,127,75,.06);font-size:10px;padding:4px 8px">📊 Excel/CSV</button>
+    </div>
   </div>
   <div class="sp-divider"></div>
   <div class="sp-row">
@@ -2907,11 +2942,18 @@ const COHORT=[
   {id:"SZTE-0050",age:42.2,sex:"M",mech:"blunt",gcs:15,hgb:15.1,plt:386,lac:2.4,be:0,ais_h:4,ais_nk:1,outcome:"unknown"}
 ];
 
-// ═══ TRISS COEFFICIENTS ═══
+// ═══ TRISS COEFFICIENTS (Blunt / Penetrating) ═══
 const C={
-  atls: {b0:-1.2470,b1:0.9544,b2:-0.0768,b3:-1.9052},
-  euro: {b0:-2.5355,b1:0.9934,b2:-0.0651,b3:-1.1360},
-  jatec:{b0:-2.4534,b1:1.0631,b2:-0.0720,b3:-0.9230}
+  blunt:{
+    atls: {b0:-1.2470,b1:0.9544,b2:-0.0768,b3:-1.9052},
+    euro: {b0:-2.5355,b1:0.9934,b2:-0.0651,b3:-1.1360},
+    jatec:{b0:-2.4534,b1:1.0631,b2:-0.0720,b3:-0.9230}
+  },
+  penetrating:{
+    atls: {b0:-0.6029,b1:1.1430,b2:-0.1516,b3:-2.6676},
+    euro: {b0:-1.8314,b1:1.0800,b2:-0.1148,b3:-1.7400},
+    jatec:{b0:-1.5490,b1:1.1200,b2:-0.1310,b3:-1.4600}
+  }
 };
 function gcsC(g){return g>=14?4:g>=11?3:g>=8?2:g>=6?1:0}
 function sbpC(s){return s>=90?4:s>=76?3:s>=50?2:s>=1?1:0}
@@ -2960,11 +3002,12 @@ function live(){
     const rt=rts(gcs,sbp,rr);
     document.getElementById('m-rts').textContent=rt.toFixed(2);
     sc('m-rts','var(--tx)');
+    const ttype=fv('mech-type')||'blunt';
     ['atls','euro','jatec'].forEach((k,i)=>{
       const elId=['m-atls','m-euro','m-jatec'][i];
       const el=document.getElementById(elId);
       if(!activeProtos.has(k)){el.textContent='—';el.style.color='var(--tx3)';return;}
-      const p=ps(rt,iss,age,C[k]);const pct=Math.round(p*100);
+      const p=ps(rt,iss,age,C[ttype][k]);const pct=Math.round(p*100);
       el.textContent=pct+'%';
       sc(elId,p>0.85?'var(--green)':p>0.6?'var(--amber)':p>0.3?'#d4650a':'var(--red)');
     });
@@ -2974,7 +3017,7 @@ function live(){
       document.getElementById('m-si-b').textContent=+si<0.6?'Normal':+si<1.0?'Elevated':+si<1.4?'High':'Critical';
       sc('m-si',+si<0.6?'var(--green)':+si<1.0?'var(--amber)':+si<1.4?'#d4650a':'var(--red)');
     }
-    const activePsVals=[...activeProtos].map(k=>ps(rt,iss,age,C[k]));
+    const activePsVals=[...activeProtos].map(k=>ps(rt,iss,age,C[ttype][k]));
     const avg=activePsVals.reduce((s,v)=>s+v,0)/activePsVals.length;
     updateRisk(avg,sbp,gcs,iss);
     updateCohortCompare(rt,iss,age,sbp,hr,gcs);
@@ -3449,10 +3492,11 @@ async function analyze(silent=false){
   const hgb=fn('hgb'),inr=fn('inr'),lac=fn('lac'),be=fn('be'),ica=fn('ica'),fib=fn('fib');
   const a=getAIS();const iss=calcISS(a);
   const rt=sbp!==null&&gcs!==null?rts(gcs,sbp,rr):null;
+  const ttype=fv('mech-type')||'blunt';
   const pss={
-    atls:rt&&age&&activeProtos.has('atls')?ps(rt,iss,age,C.atls):null,
-    euro:rt&&age&&activeProtos.has('euro')?ps(rt,iss,age,C.euro):null,
-    jatec:rt&&age&&activeProtos.has('jatec')?ps(rt,iss,age,C.jatec):null
+    atls:rt&&age&&activeProtos.has('atls')?ps(rt,iss,age,C[ttype].atls):null,
+    euro:rt&&age&&activeProtos.has('euro')?ps(rt,iss,age,C[ttype].euro):null,
+    jatec:rt&&age&&activeProtos.has('jatec')?ps(rt,iss,age,C[ttype].jatec):null
   };
   const top3=COHORT.map(p=>{const pi=cohortISS(p);const d=Math.abs((iss||0)-pi)*3+Math.abs((age||50)-(p.age||50))*0.3+Math.abs((gcs||15)-(p.gcs||15))*2;return{...p,iss:pi,dist:d}}).sort((a,b)=>a.dist-b.dist).slice(0,3);
   const sim=top3.map(p=>`${p.id}(age ${p.age},GCS ${p.gcs},ISS ${p.iss},${p.outcome})`).join('; ');
@@ -3461,13 +3505,25 @@ async function analyze(silent=false){
 Format: {"risk":"critical|high|moderate|low","summary":"one sentence describing the protocol picture","triss":{"interpretation":"..."},"actions":[{"phase":"IMMEDIATE|<30 MIN|<1 HOUR|<4 HOURS|MONITOR","action":"...","protocols":[${activeProtoNames.map(p=>`"${p}"`).join(',')}],"trigger":"...","conflict":false}],"conflicts":[{"topic":"...","atls":"...","euro_wb":"...","jatec":"..."}],"under_treatment_flags":[{"item":"...","severity":"critical|moderate|low","protocol":"..."}],"atls_summary":["..."],"euro_summary":["..."],"jatec_summary":["..."]}
 Only include keys for active protocols. COHORT: 102 Hungarian trauma patients. Observed mortality 15.3%. Similar cases: ${sim}.
 IMPORTANT: Frame all action fields as "Protocol X suggests..." or "Per [protocol]: ..." — never as direct clinical commands. This is an educational tool; use phrasing like "would indicate", "protocol suggests", "guideline-based threshold met for".
-THRESHOLDS: ATLS: SBP<90→shock; GCS≤8→intubate; INR>1.5→MTP; TXA if SBP<90/SI>1 within 3h; iCa<1.1→replace; Hgb<7(stable) or <10(unstable)→transfuse. Euro WB adds: lactate>2 or BE<-3→TXA; fibrinogen<1.5→replace; CT≤30min target. JATEC: GCS≤12+HD instability→intubate; INR>1.5→fibrinogen first; noradrenaline only if SBP<60.`;
-  const msg=`Patient: ${fv('pt-name')||'Unknown'} | Age:${age||'?'} Sex:${fv('sex')||'?'} Mech:${fv('mech')} Time since injury:${getTSI()} min
+THRESHOLDS: ATLS: SBP<90→shock; GCS≤8→intubate; INR>1.5→MTP; TXA if SBP<90/SI>1 within 3h; iCa<1.1→replace; Hgb<7(stable) or <10(unstable)→transfuse. Euro WB adds: lactate>2 or BE<-3→TXA; fibrinogen<1.5→replace; CT≤30min target. JATEC: GCS≤12+HD instability→intubate; INR>1.5→fibrinogen first; noradrenaline only if SBP<60.
+MECHANISM-SPECIFIC: Use the mechanism of injury to tailor protocol comparisons. For blunt trauma: TRISS uses blunt coefficients. For penetrating: different TRISS coefficients apply (generally lower Ps for same ISS). High-energy mechanisms (ejection, fall>6m, GSW rifle) warrant full trauma activation per all protocols. Consider injury pattern anticipation based on specific mechanism (e.g. MVC lateral→splenic/hepatic, fall>6m→calcaneal/aortic). If modifiers present: Elderly≥65→lower activation thresholds (ATLS/Euro), anticoag→treat ground-level fall as high-energy equivalent, pregnant→left lateral tilt/two patients (ATLS Ch.42), burns+trauma→fluid targets conflict (Parkland vs restrictive).`;
+  const mechType=fv('mech-type')||'blunt';
+  const mechEnergy=fv('mech-energy')||'high';
+  const mechDetailEl=document.getElementById('mech-detail');
+  const mechDetailText=mechDetailEl&&mechDetailEl.selectedIndex>0?mechDetailEl.options[mechDetailEl.selectedIndex].text:'Not specified';
+  const modifiers=[];
+  if(document.getElementById('mod-elderly')?.checked) modifiers.push('Elderly ≥65');
+  if(document.getElementById('mod-anticoag')?.checked) modifiers.push('Anticoagulated');
+  if(document.getElementById('mod-pregnant')?.checked) modifiers.push('Pregnant');
+  if(document.getElementById('mod-burns')?.checked) modifiers.push('Burns+Trauma');
+  const mechStr=`${mechType} / ${mechEnergy} energy / ${mechDetailText}${modifiers.length?' ['+modifiers.join(', ')+']':''}`;
+  const msg=`Patient: ${fv('pt-name')||'Unknown'} | Age:${age||'?'} Sex:${fv('sex')||'?'} Mechanism:${mechStr} Time since injury:${getTSI()} min
 Vitals: SBP=${sbp||'?'} HR=${hr||'?'} RR=${rr||'?'} GCS=${gcs||'?'}
 Labs: Hgb=${hgb||'?'}g/dL INR=${inr||'?'} iCa=${ica||'?'}mmol/L Lac=${lac||'?'} BE=${be||'?'} Fib=${fib||'?'} pH=${fn('ph')||'?'} pCO2=${fn('pco2')||'?'}kPa pO2=${fn('po2')||'?'}kPa
 AIS: Hd=${a.hd} Fc=${a.fc} Nk=${a.nk} Th=${a.th} Ab=${a.ab} Sp=${a.sp} Pv=${a.pv} UE=${a.ue} LE=${a.le}
 Calculated: ISS=${iss} RTS=${rt?.toFixed(2)||'?'} Ps(ATLS)=${pss.atls?(pss.atls*100).toFixed(1)+'%':'?'} Ps(Euro)=${pss.euro?(pss.euro*100).toFixed(1)+'%':'?'} Ps(JATEC)=${pss.jatec?(pss.jatec*100).toFixed(1)+'%':'?'}
-Given: TXA=${fv('txa-g')} PelvicBinder=${fv('pb-g')} Intubated=${fv('int-g')} Transfused=${fv('tr-g')} Calcium=${fv('ca-g')} ChestDrain=${fv('cd-g')}`;
+Given: TXA=${fv('txa-g')} PelvicBinder=${fv('pb-g')} Intubated=${fv('int-g')} Transfused=${fv('tr-g')} Calcium=${fv('ca-g')} ChestDrain=${fv('cd-g')} FAST=${fv('fast-exam')||'not done'} eFAST=${fv('efast-done')}
+Modifiers: ${modifiers.length?modifiers.join(', '):'None'}`;
   if(!silent)document.getElementById('cp').innerHTML=`<div class="loading"><div class="spin"></div><div class="lt">Comparing ${activeProtoNames.length} protocols…</div></div>`;
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,system:sys,messages:[{role:'user',content:msg}]})});
@@ -3712,10 +3768,11 @@ function maybePushLivePoint() {
   const a = getAIS(); const iss = calcISS(a);
   const rt = rts(gcs, sbp, rr);
   const tsi = getTSI();
+  const ttype = fv('mech-type') || 'blunt';
   const pss = {
-    atls: activeProtos.has('atls') ? ps(rt, iss, age, C.atls) : null,
-    euro: activeProtos.has('euro') ? ps(rt, iss, age, C.euro) : null,
-    jatec: activeProtos.has('jatec') ? ps(rt, iss, age, C.jatec) : null
+    atls: activeProtos.has('atls') ? ps(rt, iss, age, C[ttype].atls) : null,
+    euro: activeProtos.has('euro') ? ps(rt, iss, age, C[ttype].euro) : null,
+    jatec: activeProtos.has('jatec') ? ps(rt, iss, age, C[ttype].jatec) : null
   };
   // Push point for current time-since-injury
   if (pss.atls != null) liveChartData.atls.push({ t: tsi, ps: pss.atls });
@@ -4192,7 +4249,11 @@ function exportPDF(){
   const dob      = g('dob') || '—';
   const age      = g('age');
   const sex      = g('sex');
-  const mech     = g('mech').replace('_',' ');
+  const mechType = g('mech-type') || 'blunt';
+  const mechEnergy = g('mech-energy') || 'high';
+  const mechDetailEl2 = document.getElementById('mech-detail');
+  const mechDetail = mechDetailEl2 && mechDetailEl2.selectedIndex > 0 ? mechDetailEl2.options[mechDetailEl2.selectedIndex].text : '—';
+  const mech = mechType.charAt(0).toUpperCase() + mechType.slice(1) + ' / ' + mechEnergy + ' energy' + (mechDetail !== '—' ? ' / ' + mechDetail : '');
   const toi      = g('toi') || '—';
   const toiEl    = document.getElementById('toi-elapsed')?.textContent || '—';
   // Scores from monitor bar
@@ -4545,6 +4606,184 @@ window.addEventListener("beforeinstallprompt",e=>{
   if(!win) alert('Please allow popups to export the PDF report.');
   setTimeout(()=>URL.revokeObjectURL(url), 60000);
 }
+
+// ═══ EXPORT TO CSV / EXCEL ═══
+function exportCSV() {
+  const ts = new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+  const name = fv('pt-name') || 'Unknown';
+  const dob = fv('dob') || '';
+  const age = fn('age');
+  const sex = fv('sex') || '';
+  const mechType = fv('mech-type') || 'blunt';
+  const mechEnergy = fv('mech-energy') || '';
+  const mechDetailSel = document.getElementById('mech-detail');
+  const mechDetail = mechDetailSel ? mechDetailSel.options[mechDetailSel.selectedIndex]?.text : '';
+  const modElderly = document.getElementById('mod-elderly')?.checked ? 'Yes' : 'No';
+  const modAnticoag = document.getElementById('mod-anticoag')?.checked ? 'Yes' : 'No';
+  const modPregnant = document.getElementById('mod-pregnant')?.checked ? 'Yes' : 'No';
+  const modBurns = document.getElementById('mod-burns')?.checked ? 'Yes' : 'No';
+
+  // Vitals
+  const sbp=fn('sbp'), hr=fn('hr'), rr=fn('rr'), gcs=fn('gcs');
+  const spo2=fn('spo2'), ph=fn('ph'), pco2=fn('pco2'), po2=fn('po2');
+  const hgb=fn('hgb'), inr=fn('inr'), ica=fn('ica'), lac=fn('lac'), be=fn('be'), fib=fn('fib');
+  const airwayStatus = fv('airway-status');
+  const intubated = fv('int-g');
+  const chestDrain = fv('cd-g');
+  const transfused = fv('tr-g');
+  const txaGiven = fv('txa-g');
+  const caGiven = fv('ca-g');
+  const fastExam = fv('fast-exam');
+  const pupils = fv('pupils');
+  const pelvicBinder = fv('pb-g');
+  const tempStatus = fv('temp-status');
+
+  // AIS
+  const a = getAIS();
+  const iss = calcISS(a);
+
+  // Scores
+  let rtVal='', psAtls='', psEuro='', psJatec='', siVal='';
+  if (sbp!==null && gcs!==null && age!==null) {
+    const rt = rts(gcs, sbp, rr);
+    rtVal = rt.toFixed(2);
+    const ttype = mechType;
+    psAtls = (ps(rt,iss,age,C[ttype].atls)*100).toFixed(1)+'%';
+    psEuro = (ps(rt,iss,age,C[ttype].euro)*100).toFixed(1)+'%';
+    psJatec = (ps(rt,iss,age,C[ttype].jatec)*100).toFixed(1)+'%';
+    if (hr!==null && sbp>0) siVal = (hr/sbp).toFixed(2);
+  }
+
+  // Build CSV rows
+  const rows = [];
+  const esc = v => { const s=String(v??''); return s.includes(',')||s.includes('"')||s.includes('\n') ? '"'+s.replace(/"/g,'""')+'"' : s; };
+
+  // Header section
+  rows.push(['COMPASS EDU — Patient Assessment Export']);
+  rows.push(['Generated', new Date().toLocaleString()]);
+  rows.push(['']);
+
+  // Patient demographics
+  rows.push(['PATIENT DEMOGRAPHICS']);
+  rows.push(['Name', name]);
+  rows.push(['Date of Birth', dob]);
+  rows.push(['Age (yrs)', age??'']);
+  rows.push(['Sex', sex]);
+  rows.push(['']);
+
+  // Mechanism of Injury
+  rows.push(['MECHANISM OF INJURY']);
+  rows.push(['Trauma Type', mechType]);
+  rows.push(['Energy Level', mechEnergy]);
+  rows.push(['Specific Mechanism', mechDetail]);
+  rows.push(['Modifier: Age ≥65', modElderly]);
+  rows.push(['Modifier: Anticoagulated', modAnticoag]);
+  rows.push(['Modifier: Pregnant', modPregnant]);
+  rows.push(['Modifier: Burns + Trauma', modBurns]);
+  rows.push(['']);
+
+  // A - Airway
+  rows.push(['A — AIRWAY']);
+  rows.push(['Airway Status', airwayStatus]);
+  rows.push(['Intubated', intubated]);
+  rows.push(['']);
+
+  // B - Breathing
+  rows.push(['B — BREATHING']);
+  rows.push(['RR (/min)', rr??'']);
+  rows.push(['SpO₂ (%)', spo2??'']);
+  rows.push(['pCO₂ (kPa)', pco2??'']);
+  rows.push(['pO₂ (kPa)', po2??'']);
+  rows.push(['pH', ph??'']);
+  rows.push(['Chest Drain', chestDrain]);
+  rows.push(['']);
+
+  // C - Circulation
+  rows.push(['C — CIRCULATION']);
+  rows.push(['SBP (mmHg)', sbp??'']);
+  rows.push(['HR (bpm)', hr??'']);
+  rows.push(['Hgb (g/dL)', hgb??'']);
+  rows.push(['INR', inr??'']);
+  rows.push(['iCa (mmol/L)', ica??'']);
+  rows.push(['Lactate', lac??'']);
+  rows.push(['Base Excess', be??'']);
+  rows.push(['Fibrinogen', fib??'']);
+  rows.push(['Transfused', transfused]);
+  rows.push(['TXA Given', txaGiven]);
+  rows.push(['Calcium Given', caGiven]);
+  rows.push(['FAST Exam', fastExam]);
+  rows.push(['']);
+
+  // D - Disability
+  rows.push(['D — DISABILITY']);
+  rows.push(['GCS Total', gcs??'']);
+  rows.push(['Pupils', pupils]);
+  rows.push(['']);
+
+  // E - Exposure
+  rows.push(['E — EXPOSURE & ENVIRONMENT']);
+  rows.push(['Pelvic Binder', pelvicBinder]);
+  rows.push(['Temperature', tempStatus]);
+  rows.push(['AIS Head', a.hd]);
+  rows.push(['AIS Face', a.fc]);
+  rows.push(['AIS Neck', a.nk]);
+  rows.push(['AIS Thorax', a.th]);
+  rows.push(['AIS Abdomen', a.ab]);
+  rows.push(['AIS Spine', a.sp]);
+  rows.push(['AIS Pelvis', a.pv]);
+  rows.push(['AIS Upper Ext', a.ue]);
+  rows.push(['AIS Lower Ext', a.le]);
+  rows.push(['']);
+
+  // Calculated Scores
+  rows.push(['CALCULATED SCORES']);
+  rows.push(['ISS', iss]);
+  rows.push(['RTS', rtVal]);
+  rows.push(['Shock Index', siVal]);
+  rows.push(['Ps — ATLS (MTOS)', psAtls]);
+  rows.push(['Ps — Euro WB (EuroTARN)', psEuro]);
+  rows.push(['Ps — JATEC (Nakahara)', psJatec]);
+  rows.push(['']);
+
+  // Vitals Log
+  if (vitalsLog && vitalsLog.length > 0) {
+    rows.push(['VITALS LOG ('+vitalsLog.length+' entries)']);
+    rows.push(['Time','SBP','HR','RR','SpO₂','pH','GCS','Pupils','Shock Index']);
+    vitalsLog.forEach(e => {
+      rows.push([e.label, e.sbp??'', e.hr??'', e.rr??'', e.spo2??'', e.ph!=null?e.ph.toFixed(2):'', e.gcs??'', e.pupils??'', e.si??'']);
+    });
+    rows.push(['']);
+  }
+
+  // Footer
+  rows.push(['']);
+  rows.push(['COMPASS EDU · Educational Use Only · Not for Clinical Decision-Making']);
+
+  // Convert to CSV
+  const csv = rows.map(r => r.map(esc).join(',')).join('\n');
+
+  // Add BOM for Excel UTF-8 compatibility
+  const BOM = '\uFEFF';
+  const blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+
+  // Download
+  const a2 = document.createElement('a');
+  a2.href = url;
+  a2.download = 'COMPASS_EDU_' + (name.replace(/[^a-zA-Z0-9]/g,'_')||'patient') + '_' + ts + '.csv';
+  document.body.appendChild(a2);
+  a2.click();
+  document.body.removeChild(a2);
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+  showToast({
+    type: 'success',
+    title: 'Export Complete',
+    msg: 'CSV file downloaded. Open in Excel or import to Google Sheets.',
+    icon: '📊',
+    duration: 5000
+  });
+}
 </script>
 
 <script>
@@ -4661,6 +4900,85 @@ function updateAbcdeSummary(key) {
 }
 
 // ── SCROLL TO SECTION ──
+// ═══════════════════════════════════════
+// MECHANISM OF INJURY — HIERARCHICAL DROPDOWNS
+// ═══════════════════════════════════════
+const MOI_DATA = {
+  blunt: {
+    high: [
+      {v:'mvc_frontal',  t:'MVC — Frontal impact', tip:'Sternal #, cardiac contusion, aortic injury'},
+      {v:'mvc_lateral',  t:'MVC — Lateral/T-bone', tip:'Splenic (L), hepatic (R), pelvic #'},
+      {v:'mvc_rollover', t:'MVC — Rollover', tip:'Multi-system, high c-spine risk'},
+      {v:'mvc_ejection', t:'MVC — Ejection', tip:'6-8x mortality increase'},
+      {v:'mvc_unrestrained', t:'MVC — Unrestrained occupant', tip:'Higher energy transfer'},
+      {v:'motorcycle',   t:'Motorcycle/bicycle collision', tip:'Open #, degloving, TBI'},
+      {v:'ped_struck',   t:'Pedestrian/cyclist struck >30km/h', tip:"Waddell's triad (children)"},
+      {v:'fall_high',    t:'Fall >6m (or >3× body height)', tip:'Calcaneal #, burst vertebral #, aortic injury'},
+      {v:'crush',        t:'Crush injury (structural/industrial)', tip:'Rhabdomyolysis, compartment syndrome'},
+      {v:'blast_primary',t:'Blast — Primary (pressure wave)', tip:'Lung blast, TM rupture, bowel perf'},
+      {v:'blast_secondary',t:'Blast — Secondary (fragments)', tip:'Penetrating-like fragment injuries'},
+      {v:'blast_tertiary',t:'Blast — Tertiary (body displacement)', tip:'Ejection-like pattern, traumatic amputation'},
+    ],
+    medium: [
+      {v:'mvc_low_restrained', t:'MVC — Low-speed (<30km/h), restrained', tip:'Seatbelt sign: mesenteric/bowel injury'},
+      {v:'fall_medium',  t:'Fall 2–6m', tip:'Wrist # (FOOSH), hip # in elderly'},
+      {v:'sports',       t:'Sports collision (contact, equestrian)', tip:'Splenic rupture, concussion, c-spine'},
+      {v:'bicycle_fall', t:'Bicycle fall (no vehicle)', tip:'Handlebar injury: pancreas/duodenum'},
+      {v:'assault_blunt',t:'Assault — blunt weapon', tip:'Focal: skull #, rib #'},
+    ],
+    low: [
+      {v:'ground_fall',  t:'Ground-level fall (<2m)', tip:'Elderly: hip #, SDH, high mortality on anticoag'},
+      {v:'mechanical_fall',t:'Mechanical fall (trip/slip)', tip:'Geriatric concern — most common in Japan (JATEC)'},
+    ]
+  },
+  penetrating: {
+    high: [
+      {v:'gsw_high',     t:'GSW — High velocity (rifle, >600m/s)', tip:'Massive cavitation, distant tissue damage'},
+      {v:'gsw_shotgun',  t:'GSW — Close range / shotgun', tip:'Massive local destruction'},
+      {v:'blast_frag',   t:'Blast fragments / shrapnel', tip:'Multiple penetrating wounds, unpredictable'},
+      {v:'impalement',   t:'Impalement (industrial, rebar)', tip:'Do NOT remove pre-hospital — surgical only'},
+    ],
+    medium: [
+      {v:'gsw_handgun',  t:'GSW — Handgun (<400m/s)', tip:'Lower cavitation, trajectory-dependent'},
+      {v:'crossbow',     t:'Crossbow / arrow', tip:'Impalement principles apply'},
+    ],
+    low: [
+      {v:'stab_knife',   t:'Stab wound — knife/blade', tip:'Track-limited. Protocols differ on exploration approach'},
+      {v:'stab_other',   t:'Stab — other sharp object (glass, screwdriver)', tip:'Lower depth, retained FB risk'},
+      {v:'puncture',     t:'Needle / puncture', tip:'PTX risk (thoracic), vascular if near major vessels'},
+    ]
+  }
+};
+
+function updateMechEnergy() {
+  const type = fv('mech-type') || 'blunt';
+  const energySel = document.getElementById('mech-energy');
+  // Energy options are the same for both but we trigger detail update
+  updateMechDetail();
+}
+
+function updateMechDetail() {
+  const type = fv('mech-type') || 'blunt';
+  const energy = fv('mech-energy') || 'high';
+  const detailSel = document.getElementById('mech-detail');
+  if (!detailSel) return;
+
+  const options = MOI_DATA[type]?.[energy] || [];
+  detailSel.innerHTML = '<option value="">— Select specific mechanism —</option>';
+  options.forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o.v;
+    opt.textContent = o.t;
+    opt.title = o.tip || '';
+    detailSel.appendChild(opt);
+  });
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', function() {
+  updateMechDetail();
+});
+
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -4681,11 +4999,15 @@ function scrollToSection(id) {
 function updateStepProgress() {
   const steps = {
     'step-patient': () => {
-      const age = document.getElementById('age')?.value;
+      const dob = document.getElementById('dob')?.value;
       const sex = document.getElementById('sex')?.value;
-      return age && sex;
+      return dob && sex;
     },
-    'step-airway': () => true,
+    'step-airway': () => {
+      const intub = document.getElementById('int-g')?.value;
+      const airway = document.getElementById('airway-status')?.value;
+      return (intub && intub === 'yes') || (airway && airway !== 'patent');
+    },
     'step-breathing': () => {
       const rr = document.getElementById('rr')?.value;
       return !!rr;
