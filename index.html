@@ -2511,7 +2511,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── A — AIRWAY ── -->
   <div class="abcde-section abcde-a" id="abcde-a-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--teal);border-color:var(--teal);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-a-arrow">▸</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('a')"><span class="abcde-letter">A</span><span class="abcde-label">Airway</span><div class="abcde-summary" id="abcde-a-summary"></div><div style="margin-left:auto;display:flex;align-items:center;gap:10px"><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--teal);border-color:var(--teal);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-a-arrow">▸</span></div></div>
     <div class="abcde-body collapsed" id="abcde-a-body">
     <div class="ig i2" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-int">Intubated<span class="field-help" data-tip="Is the patient intubated for airway protection?">?</span></label><select id="int-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
@@ -2522,7 +2522,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── B — BREATHING ── -->
   <div class="abcde-section abcde-b" id="abcde-b-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-b-arrow">▸</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('b')"><span class="abcde-letter">B</span><span class="abcde-label">Breathing</span><div class="abcde-summary" id="abcde-b-summary"></div><div style="margin-left:auto;display:flex;align-items:center;gap:10px"><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-b-arrow">▸</span></div></div>
     <div class="abcde-body collapsed" id="abcde-b-body">
     <div class="ig i3" style="margin-bottom:4px">
       <div class="f"><label data-i18n="lbl-rr">RR (/min)<span class="field-help" data-tip="Respiratory rate: breaths per minute. Normal 12–20.">?</span></label><input type="number" id="rr" placeholder="16" oninput="live()"></div>
@@ -2542,8 +2542,10 @@ document.addEventListener('keydown',function(e){
     <div class="abcde-hdr" onclick="toggleAbcde('c')">
       <span class="abcde-letter">C</span><span class="abcde-label">Circulation</span>
       <div class="abcde-summary" id="abcde-c-summary"></div>
-      <button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--blue);border-color:var(--blue);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button>
-      <span class="abcde-toggle-arrow collapsed" id="abcde-c-arrow">▸</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--red);border-color:var(--red);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px">+ LOG</button>
+        <span class="abcde-toggle-arrow collapsed" id="abcde-c-arrow">▸</span>
+      </div>
     </div>
     <div class="abcde-body collapsed" id="abcde-c-body">
     <div class="ig i3" style="margin-bottom:4px">
@@ -2597,7 +2599,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── D — DISABILITY ── -->
   <div class="abcde-section abcde-d" id="abcde-d-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--lav);border-color:var(--lav);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-d-arrow">▸</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('d')"><span class="abcde-letter">D</span><span class="abcde-label">Disability</span><div class="abcde-summary" id="abcde-d-summary"></div><div style="margin-left:auto;display:flex;align-items:center;gap:10px"><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--lav);border-color:var(--lav);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-d-arrow">▸</span></div></div>
     <div class="abcde-body collapsed" id="abcde-d-body">
     <div class="ig i2" style="margin-bottom:0">
       <div class="f"><label data-i18n="lbl-gcs">GCS Total<span class="field-help" data-tip="Glasgow Coma Scale (3–15). 15 = alert. ≤8 = severe TBI, consider intubation.">?</span></label><input type="number" id="gcs" placeholder="15" min="3" max="15" oninput="live()"></div>
@@ -2608,7 +2610,7 @@ document.addEventListener('keydown',function(e){
 
   <!-- ── E — EXPOSURE / ENVIRONMENT ── -->
   <div class="abcde-section abcde-e" id="abcde-e-sec">
-    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--amber);border-color:var(--amber);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px;margin-left:auto">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-e-arrow">▸</span></div>
+    <div class="abcde-hdr" onclick="toggleAbcde('e')"><span class="abcde-letter">E</span><span class="abcde-label">Exposure &amp; Environment</span><div class="abcde-summary" id="abcde-e-summary"></div><div style="margin-left:auto;display:flex;align-items:center;gap:10px"><button class="cam-btn" onclick="event.stopPropagation();logVitals()" title="Log current vitals to timeline" style="background:var(--amber);border-color:var(--amber);color:#fff;font-size:10px;width:auto;padding:0 8px;font-family:var(--mono);font-weight:700;letter-spacing:.5px">+ LOG</button><span class="abcde-toggle-arrow collapsed" id="abcde-e-arrow">▸</span></div></div>
     <div class="abcde-body collapsed" id="abcde-e-body">
     <div class="ig i2" style="margin-bottom:6px">
       <div class="f"><label data-i18n="lbl-pb">Pelvic Binder<span class="field-help" data-tip="Has a pelvic binder been applied for suspected pelvic fracture?">?</span></label><select id="pb-g"><option value="no" data-i18n="opt-no">No</option><option value="yes" data-i18n="opt-yes">Yes</option></select></div>
@@ -2638,6 +2640,7 @@ document.addEventListener('keydown',function(e){
 
 <!-- CENTER PANEL -->
 <div class="cp" id="cp">
+
   <!-- Live mortality chart - collapsible -->
   <div class="mort-chart-card" id="live-mort-card">
     <div class="mort-chart-title">
@@ -2661,7 +2664,7 @@ document.addEventListener('keydown',function(e){
   <!-- Vitals timeline chart — shown after first log -->
   <div class="mort-chart-card" id="vitals-chart-card" style="display:none">
     <div class="mort-chart-title">
-      <span>💓 Haemodynamic Trend — SBP / HR / RR / GCS over time</span>
+      <span>💓 Haemodynamic Trend — SBP / HR / RR / GCS / SpO₂ over time</span>
       <span id="vitals-chart-count" style="font-family:var(--mono);font-size:10px;color:var(--tx3)"></span>
     </div>
     <canvas id="vitals-chart-canvas" style="width:100%;height:220px;display:block"></canvas>
@@ -2725,6 +2728,11 @@ document.addEventListener('keydown',function(e){
       <button onclick="exportPDF();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--teal);color:var(--teal);background:rgba(14,138,122,.06);font-size:10px;padding:4px 8px">📄 PDF</button>
       <button onclick="exportCSV();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--green);color:var(--green);background:rgba(26,127,75,.06);font-size:10px;padding:4px 8px">📊 Excel/CSV</button>
     </div>
+  </div>
+  <div class="sp-divider"></div>
+  <div class="sp-row">
+    <span class="sp-label">Share Patient</span>
+    <button onclick="showQRModal();toggleSettingsPanel()" class="icon-btn" style="border-color:var(--blue);color:var(--blue);background:rgba(26,107,191,.06);font-size:10px;padding:4px 8px">📲 QR Code</button>
   </div>
   <div class="sp-divider"></div>
   <div class="sp-row">
@@ -3936,10 +3944,11 @@ function drawVitalsChart() {
 
   // Series config: {key, col, min, max, label, unit, rightAxis}
   const series = [
-    { key:'sbp', col:'#1a6bbf', min:40,  max:220, label:'SBP', unit:'mmHg', right:false },
-    { key:'hr',  col:'#c0392b', min:30,  max:180, label:'HR',  unit:'bpm',  right:false },
-    { key:'rr',  col:'#1a7f4b', min:0,   max:40,  label:'RR',  unit:'/min', right:true  },
-    { key:'gcs', col:'#5b4acf', min:3,   max:15,  label:'GCS', unit:'',     right:true  },
+    { key:'sbp',  col:'#1a6bbf', min:40,  max:220, label:'SBP',  unit:'mmHg', right:false },
+    { key:'hr',   col:'#c0392b', min:30,  max:180, label:'HR',   unit:'bpm',  right:false },
+    { key:'rr',   col:'#1a7f4b', min:0,   max:40,  label:'RR',   unit:'/min', right:true  },
+    { key:'gcs',  col:'#5b4acf', min:3,   max:15,  label:'GCS',  unit:'',     right:true  },
+    { key:'spo2', col:'#0e8a7a', min:70,  max:100, label:'SpO₂', unit:'%',    right:true  },
   ];
 
   // Left axis: SBP/HR share 0-220 range, Right axis: RR 0-40, GCS 3-15 (normalised)
@@ -5319,12 +5328,32 @@ function declineWelcome() {
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Override live() to include step progress updates
+  // Override live() to include step progress updates + auto-log debounce
   if (typeof window.live === 'function') {
     const origLive = window.live;
+    let _autoLogTimer = null;
     window.live = function() {
       origLive.apply(this, arguments);
       try { updateStepProgress(); } catch(e) {}
+      // Auto-log vitals 3 seconds after last change if any vital field is filled
+      clearTimeout(_autoLogTimer);
+      _autoLogTimer = setTimeout(function() {
+        const sbp = parseFloat(document.getElementById('sbp')?.value);
+        const hr  = parseFloat(document.getElementById('hr')?.value);
+        const rr  = parseFloat(document.getElementById('rr')?.value);
+        const gcs = parseFloat(document.getElementById('gcs')?.value);
+        const spo2= parseFloat(document.getElementById('spo2')?.value);
+        // Only auto-log if at least 2 core vitals are filled and value has changed
+        const filledCount = [sbp,hr,rr,gcs,spo2].filter(v=>!isNaN(v)).length;
+        if (filledCount >= 2) {
+          // Check if last log entry is different from current values
+          const last = vitalsLog.length ? vitalsLog[vitalsLog.length-1] : null;
+          const changed = !last || last.sbp !== sbp || last.hr !== hr || last.gcs !== gcs || last.spo2 !== spo2 || last.rr !== rr;
+          if (changed) {
+            if (typeof window.logVitals === 'function') window.logVitals();
+          }
+        }
+      }, 3000);
     };
   }
 
@@ -6840,30 +6869,25 @@ window.tEndre_analyse = function() {
     liveScores.iss&&liveScores.iss!=='—' ? `Scores: ISS ${liveScores.iss}, RTS ${liveScores.rts}, Shock Index ${liveScores.si}, Ps(ATLS) ${liveScores.atls}, Ps(Euro) ${liveScores.euro}, Ps(JATEC) ${liveScores.jatec}` : '',
   ].filter(Boolean).join('\n');
 
-  const analysisPrompt = `Analyse this trauma patient's current clinical situation and produce a structured checklist with status icons.
+  const analysisPrompt = `Output ONLY this JSON for the trauma patient below. No extra keys. No triss. No summary. No interpretation.
 
 PATIENT DATA:
 ${ctx}
 
-Respond ONLY with valid JSON in this exact structure (no other text):
+JSON — copy this structure exactly, fill in the values:
 {
-  "risk": "critical|high|moderate|low",
-  "risk_summary": "One sentence summary of the overall situation",
+  "risk": "critical",
   "sections": [
-    {
-      "title": "Section name (e.g. Airway, Haemorrhage Control)",
-      "color": "red|amber|green|blue",
-      "items": [
-        { "status": "done|urgent|warn|info", "text": "Checklist item text", "badge": "ATLS|EURO WB|JATEC|optional" }
-      ]
-    }
+    { "title": "Airway", "color": "red", "items": [{ "status": "urgent", "text": "60 chars max", "badge": "ATLS" }] },
+    { "title": "Breathing", "color": "amber", "items": [{ "status": "warn", "text": "60 chars max" }] },
+    { "title": "Circulation", "color": "red", "items": [{ "status": "urgent", "text": "60 chars max", "badge": "EURO WB" }] },
+    { "title": "Disability", "color": "amber", "items": [{ "status": "warn", "text": "60 chars max" }] },
+    { "title": "Priorities", "color": "blue", "items": [{ "status": "info", "text": "60 chars max", "badge": "JATEC" }] }
   ],
-  "disclaimer": "⚠ Educational reference only"
+  "disclaimer": "Educational only"
 }
 
-Status icons meaning: done = ✅ already done/normal, urgent = 🚨 needs immediate action, warn = ⚠ monitor/consider, info = ℹ background info.
-Include 4-6 sections covering: Airway, Breathing, Circulation/Haemorrhage, Disability/Neuro, Priorities/Next Steps, Protocol Notes.
-Each section should have 3-6 items. Be specific to this patient's data.`;
+ALLOWED keys only: risk, sections, disclaimer. risk = critical|high|moderate|low. status = done|urgent|warn|info. Max 3 items per section. badge optional.`;
 
   fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -6875,9 +6899,12 @@ Each section should have 3-6 items. Be specific to this patient's data.`;
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 1500,
-      system: 'You are a trauma analysis engine. Output only valid JSON. No markdown, no prose, no code blocks — raw JSON only.',
-      messages: [{ role: 'user', content: analysisPrompt }]
+      max_tokens: 4000,
+      system: 'You are a JSON generator. Output ONLY a raw JSON object. Allowed keys: risk, sections, disclaimer. FORBIDDEN keys: summary, triss, interpretation, scores, ps, probability, notes. No markdown. No prose.',
+      messages: [
+        { role: 'user', content: analysisPrompt },
+        { role: 'assistant', content: '{"risk":"' }
+      ]
     })
   })
   .then(r => {
@@ -6886,11 +6913,66 @@ Each section should have 3-6 items. Be specific to this patient's data.`;
   })
   .then(data => {
     const raw = data.content.filter(c=>c.type==='text').map(c=>c.text).join('').trim();
-    // Strip any accidental markdown wrapping
-    const cleaned = raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
-    let analysis;
-    try { analysis = JSON.parse(cleaned); }
-    catch(e) { throw new Error('Invalid JSON from analysis: ' + cleaned.slice(0,120)); }
+
+    // Prepend the assistant prefill — model continues from '{"risk":"'
+    let cleaned = '{"risk":"' + raw;
+
+    // Strip markdown fences if any
+    cleaned = cleaned.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
+
+    // Try to repair truncation before parsing
+    function repairJSON(s) {
+      // Remove any trailing incomplete string or key
+      s = s.replace(/,\s*"[^"]*$/, '');
+      s = s.replace(/:\s*"[^"]*$/, ':""');
+      s = s.replace(/:\s*$/, ':null');
+      // Balance brackets and braces
+      const lc = (s.match(/\[/g)||[]).length - (s.match(/\]/g)||[]).length;
+      const bc = (s.match(/\{/g)||[]).length - (s.match(/\}/g)||[]).length;
+      for(let i=0;i<lc;i++) s += ']';
+      for(let i=0;i<bc;i++) s += '}';
+      return s;
+    }
+
+    let raw_obj;
+    try { raw_obj = JSON.parse(cleaned); }
+    catch(e) {
+      try { raw_obj = JSON.parse(repairJSON(cleaned)); }
+      catch(e2) {
+        // Last resort: extract sections array directly with regex
+        const secMatch = cleaned.match(/"sections"\s*:\s*(\[[\s\S]*)/);
+        if (secMatch) {
+          try {
+            let secStr = repairJSON(secMatch[1]);
+            raw_obj = {
+              risk: (cleaned.match(/"risk"\s*:\s*"(\w+)"/) || [])[1] || 'high',
+              risk_summary: (cleaned.match(/"(?:risk_summary|summary)"\s*:\s*"([^"]{0,120})"/) || [])[1] || '',
+              sections: JSON.parse(secStr)
+            };
+          } catch(e3) {
+            throw new Error('Could not parse response. Please retry.');
+          }
+        } else {
+          throw new Error('Could not parse response. Please retry.');
+        }
+      }
+    }
+
+    // Normalise keys — accept "summary" or "risk_summary", ignore "triss" and other extras
+    const analysis = {
+      risk: raw_obj.risk || 'high',
+      risk_summary: raw_obj.risk_summary || raw_obj.summary || '',
+      sections: Array.isArray(raw_obj.sections) ? raw_obj.sections : [],
+      disclaimer: raw_obj.disclaimer || 'Educational reference only'
+    };
+
+    // Filter out any malformed sections
+    analysis.sections = analysis.sections
+      .filter(s => s && s.title && Array.isArray(s.items))
+      .map(s => ({ ...s, items: s.items.filter(i => i && i.text) }));
+
+    if (analysis.sections.length === 0) throw new Error('No sections in response. Please retry.');
+
     _tRenderAnalysis(analysis);
   })
   .catch(err => {
@@ -6918,7 +7000,7 @@ function _tRenderAnalysis(a) {
       <div class="endre-risk-icon">${riskIcon}</div>
       <div class="endre-risk-text">
         <div class="endre-risk-level" style="color:${riskColor}">${(a.risk||'').toUpperCase()} RISK</div>
-        <div class="endre-risk-summary">${_tEscape(a.risk_summary||'')}</div>
+        <div class="endre-risk-summary">${_tEscape(a.risk_summary||a.summary||'')}</div>
       </div>
     </div>`;
 
@@ -7772,6 +7854,376 @@ window._tVoiceNow = function() {
 };
 
 })(); // end ENDRE VOICE
+</script>
+
+<!-- ═══ LIVE VITALS TREND CHART ═══ -->
+<script>
+(function(){
+'use strict';
+
+let _vChart = null;
+let _vOpen = true;
+let _vLogs = []; // each entry: {tsi, sbp, hr, rr, spo2, gcs, lac, si}
+
+const VLINES = [
+  { id:'sbp',  label:'SBP (mmHg)',  color:'#c0392b', yAxis:'yLeft',  min:40,  max:200 },
+  { id:'hr',   label:'HR (bpm)',    color:'#e67e22', yAxis:'yLeft',  min:30,  max:200 },
+  { id:'rr',   label:'RR (/min)',   color:'#1a6bbf', yAxis:'yRight', min:5,   max:45  },
+  { id:'spo2', label:'SpO₂ (%)',    color:'#0e8a7a', yAxis:'yRight', min:70,  max:100 },
+  { id:'gcs',  label:'GCS',         color:'#5b4acf', yAxis:'yRight', min:3,   max:15  },
+  { id:'lac',  label:'Lactate',     color:'#c27a00', yAxis:'yRight', min:0,   max:12  },
+  { id:'si',   label:'Shock Index', color:'#7b2d8b', yAxis:'yRight', min:0,   max:3   },
+];
+
+function g(id){ const e=document.getElementById(id); return e&&e.value?parseFloat(e.value):null; }
+
+function getTSI() {
+  const toi = document.getElementById('toi');
+  if (!toi || !toi.value) return null;
+  const parts = toi.value.split(':');
+  if (parts.length < 2) return null;
+  const toiMin = parseInt(parts[0])*60 + parseInt(parts[1]);
+  const nowMin = new Date().getHours()*60 + new Date().getMinutes();
+  let diff = nowMin - toiMin;
+  if (diff < 0) diff += 1440;
+  return diff; // minutes since injury
+}
+
+function formatTSI(min) {
+  if (min === null) return '—';
+  if (min < 60) return min + 'min';
+  return Math.floor(min/60) + 'h ' + (min%60) + 'min';
+}
+
+function captureSnapshot() {
+  const sbp  = g('sbp'), hr = g('hr'), rr = g('rr');
+  const spo2 = g('spo2'), gcs = g('gcs'), lac = g('lac');
+  if ([sbp,hr,rr,spo2,gcs].every(v=>v===null)) return;
+  const tsi = getTSI();
+  const now = new Date();
+  const label = tsi !== null ? formatTSI(tsi) :
+    now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  _vLogs.push({
+    label,
+    tsi: tsi !== null ? tsi : _vLogs.length,
+    sbp, hr, rr, spo2, gcs, lac,
+    si: (sbp&&hr) ? Math.round((hr/sbp)*100)/100 : null
+  });
+  redraw();
+}
+
+function redraw() {
+  const canvas = document.getElementById('vitals-live-canvas');
+  const legend = document.getElementById('vitals-live-legend');
+  const status = document.getElementById('live-vitals-status');
+  if (!canvas) return;
+
+  if (_vLogs.length === 0) {
+    if (status) status.textContent = 'log vitals to populate';
+    if (_vChart) { _vChart.destroy(); _vChart = null; }
+    if (legend) legend.innerHTML = '';
+    return;
+  }
+
+  if (status) status.textContent = _vLogs.length + ' log' + (_vLogs.length>1?'s':'') + ' · ' + _vLogs[_vLogs.length-1].label;
+
+  const labels = _vLogs.map(e => e.label);
+
+  const datasets = VLINES
+    .filter(l => _vLogs.some(e => e[l.id] !== null))
+    .map(l => ({
+      label: l.label,
+      data: _vLogs.map(e => e[l.id]),
+      borderColor: l.color,
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      pointRadius: 4,
+      pointBackgroundColor: l.color,
+      pointHoverRadius: 6,
+      tension: 0.3,
+      spanGaps: true,
+      yAxisID: l.yAxis
+    }));
+
+  if (_vChart) _vChart.destroy();
+  _vChart = new Chart(canvas, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: items => 'T: ' + items[0].label,
+            label: ctx => ' ' + ctx.dataset.label + ': ' + (ctx.parsed.y !== null ? ctx.parsed.y : '—')
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(156,163,175,0.1)' },
+          ticks: { color: '#9ca3af', font: { size: 9 }, maxRotation: 0 },
+          title: { display: true, text: 'time since injury', color: '#9ca3af', font: { size: 9 } }
+        },
+        yLeft: {
+          position: 'left',
+          grid: { color: 'rgba(156,163,175,0.1)' },
+          ticks: { color: '#9ca3af', font: { size: 9 } },
+          title: { display: true, text: 'SBP / HR', color: '#9ca3af', font: { size: 9 } }
+        },
+        yRight: {
+          position: 'right',
+          grid: { display: false },
+          ticks: { color: '#9ca3af', font: { size: 9 } },
+          title: { display: true, text: 'RR / SpO₂ / GCS / Lac / SI', color: '#9ca3af', font: { size: 9 } }
+        }
+      }
+    }
+  });
+
+  if (legend) {
+    legend.innerHTML = datasets.map(d =>
+      `<span style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--tx3)">
+        <span style="width:12px;height:3px;background:${d.borderColor};border-radius:2px;display:inline-block"></span>
+        ${d.label}
+      </span>`
+    ).join('');
+  }
+}
+
+window.toggleLiveVitals = function() {
+  _vOpen = !_vOpen;
+  const wrap = document.getElementById('vitals-live-wrap');
+  const legend = document.getElementById('vitals-live-legend');
+  const arrow = document.getElementById('vitals-live-arrow');
+  if (wrap) wrap.style.display = _vOpen ? '' : 'none';
+  if (legend) legend.style.display = _vOpen ? '' : 'none';
+  if (arrow) arrow.style.transform = _vOpen ? '' : 'rotate(-90deg)';
+};
+
+// Hook into logVitals — each manual or auto-log captures a snapshot
+const _hookLog = setInterval(() => {
+  if (typeof window.logVitals !== 'function') return;
+  clearInterval(_hookLog);
+  const origLog = window.logVitals;
+  window.logVitals = function() {
+    origLog.apply(this, arguments);
+    try { captureSnapshot(); } catch(e) {}
+  };
+  // Also hook resetAll to clear vitals chart
+  if (typeof window.resetAll === 'function') {
+    const origReset = window.resetAll;
+    window.resetAll = function() {
+      origReset.apply(this, arguments);
+      _vLogs = [];
+      if (_vChart) { _vChart.destroy(); _vChart = null; }
+      const legend = document.getElementById('vitals-live-legend');
+      const status = document.getElementById('live-vitals-status');
+      if (legend) legend.innerHTML = '';
+      if (status) status.textContent = 'log vitals to populate';
+    };
+  }
+}, 300);
+
+})(); // end live vitals
+</script>
+
+<!-- ═══ QR CODE SHARE MODAL ═══ -->
+<style>
+.qr-overlay { position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px); }
+.qr-overlay.show { display:flex; }
+.qr-modal { background:var(--bg2);border:1.5px solid var(--blue);border-radius:14px;width:340px;max-width:95vw;display:flex;flex-direction:column;box-shadow:0 16px 48px rgba(0,0,0,.4);overflow:hidden; }
+.qr-hdr { background:linear-gradient(135deg,rgba(26,107,191,.12),rgba(26,107,191,.04));border-bottom:1px solid var(--line);padding:12px 16px;display:flex;align-items:center;justify-content:space-between; }
+.qr-title { font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;color:var(--blue);letter-spacing:.5px; }
+.qr-close { background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.3);border-radius:5px;color:var(--red);font-size:13px;width:26px;height:26px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+.qr-close:hover { background:rgba(192,57,43,.18); }
+.qr-body { padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px; }
+.qr-canvas-wrap { background:#fff;border-radius:10px;padding:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center; }
+.qr-pt-label { font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:.5px;text-align:center; }
+.qr-fields-count { font-size:10px;color:var(--tx3);text-align:center; }
+.qr-instruction { background:rgba(26,107,191,.06);border:1px solid rgba(26,107,191,.2);border-radius:7px;padding:8px 12px;font-size:10px;color:var(--tx2);line-height:1.6;text-align:center;width:100%; }
+.qr-btn-row { display:flex;gap:8px;width:100%; }
+.qr-save-btn { flex:1;background:var(--blue);border:none;border-radius:7px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:9px;cursor:pointer;letter-spacing:.5px;transition:all .15s; }
+.qr-save-btn:hover { background:var(--blued); }
+.qr-dismiss-btn { flex:1;background:var(--bg3);border:1px solid var(--line);border-radius:7px;color:var(--tx3);font-family:'JetBrains Mono',monospace;font-size:10px;padding:9px;cursor:pointer;transition:all .15s; }
+.qr-dismiss-btn:hover { border-color:var(--red);color:var(--red); }
+.qr-disclaimer { font-size:9px;color:var(--tx3);text-align:center;line-height:1.5;font-family:'JetBrains Mono',monospace; }
+</style>
+
+<div class="qr-overlay" id="qr-overlay" onclick="if(event.target===this)closeQRModal()">
+  <div class="qr-modal">
+    <div class="qr-hdr">
+      <div class="qr-title">📲 Share Patient Data — QR Code</div>
+      <button class="qr-close" onclick="closeQRModal()">✕</button>
+    </div>
+    <div class="qr-body">
+      <div class="qr-pt-label" id="qr-pt-label">Generating…</div>
+      <div class="qr-canvas-wrap">
+        <canvas id="qr-canvas" width="200" height="200"></canvas>
+      </div>
+      <div class="qr-fields-count" id="qr-fields-count"></div>
+      <div class="qr-instruction">
+        Scan with any QR reader to open COMPASS EDU on another device with this patient's data pre-loaded. Works on any device with a browser — no app required.
+      </div>
+      <div class="qr-btn-row">
+        <button class="qr-save-btn" onclick="saveQRImage()">⬇ Save as Image</button>
+        <button class="qr-dismiss-btn" onclick="closeQRModal()">Close</button>
+      </div>
+      <div class="qr-disclaimer">⚠ Educational data only · Not for clinical use · Encoded locally in browser</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+const QR_FIELDS = [
+  'pt-name','dob','sex','mech-type','mech-energy','mech-detail',
+  'int-g','airway-status','rr','pco2','po2','spo2','ph','cd-g',
+  'sbp','dbp','hr','hgb','inr','ica','lac','be','fib',
+  'tr-g','txa-g','ca-g','fast-exam','efast-done',
+  'gcs','pupils','pb-g','temp-status',
+  'a-hd','a-fc','a-nk','a-th','a-ab','a-sp','a-pv','a-ue','a-le',
+  'mod-elderly','mod-anticoag','mod-pregnant','mod-burns','toi'
+];
+
+// Short keys to keep URL compact
+const S = {
+  'pt-name':'pn','dob':'db','sex':'sx','mech-type':'mt','mech-energy':'me','mech-detail':'md',
+  'int-g':'ig','airway-status':'aw','rr':'rr','pco2':'pc','po2':'po','spo2':'sp','ph':'ph','cd-g':'cd',
+  'sbp':'sb','dbp':'dp','hr':'hr','hgb':'hg','inr':'ir','ica':'ic','lac':'la','be':'be','fib':'fi',
+  'tr-g':'tr','txa-g':'tx','ca-g':'ca','fast-exam':'fe','efast-done':'ef',
+  'gcs':'gc','pupils':'pu','pb-g':'pb','temp-status':'ts',
+  'a-hd':'ah','a-fc':'af','a-nk':'an','a-th':'at','a-ab':'aa','a-sp':'as','a-pv':'av','a-ue':'au','a-le':'al',
+  'mod-elderly':'xe','mod-anticoag':'xa','mod-pregnant':'xp','mod-burns':'xb','toi':'ti'
+};
+const L = {}; Object.entries(S).forEach(([k,v])=>{ L[v]=k; });
+
+function collectData() {
+  const out = {}; let count = 0;
+  QR_FIELDS.forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    const val = el.type==='checkbox' ? (el.checked?'1':'') : (el.value||'');
+    if (val) { out[S[id]||id] = val; count++; }
+  });
+  return {out, count};
+}
+
+window.showQRModal = function() {
+  const overlay = document.getElementById('qr-overlay');
+  overlay.classList.add('show');
+  const canvas = document.getElementById('qr-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,200,200);
+  ctx.fillStyle = '#f0f0f0'; ctx.fillRect(0,0,200,200);
+  ctx.fillStyle = '#888'; ctx.font='11px monospace'; ctx.textAlign='center';
+  ctx.fillText('Generating…',100,105);
+
+  const ptName = document.getElementById('pt-name')?.value || 'Unknown';
+  const ptAge  = document.getElementById('age-display')?.textContent || '';
+  const ptSex  = document.getElementById('sex')?.value || '';
+  document.getElementById('qr-pt-label').textContent =
+    ptName + (ptAge&&ptAge!=='—'?' · '+ptAge+'y':'') + (ptSex?' · '+ptSex:'');
+
+  const {out, count} = collectData();
+  document.getElementById('qr-fields-count').textContent = count + ' fields encoded';
+
+  const base = window.location.href.split('?')[0];
+  const qs = Object.entries(out).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(v)).join('&');
+  const url = base + '?qr=1&' + qs;
+
+  if (url.length > 2953) {
+    ctx.clearRect(0,0,200,200);
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,200,200);
+    ctx.fillStyle='#c0392b'; ctx.font='11px monospace'; ctx.textAlign='center';
+    ctx.fillText('Data too large for QR.',100,90);
+    ctx.fillText('Remove empty fields.',100,108);
+    document.getElementById('qr-fields-count').textContent = '⚠ '+url.length+' chars — reduce to <2953';
+    return;
+  }
+
+  // Draw using qrcode.js
+  setTimeout(()=>{
+    try {
+      const tmp = document.createElement('div');
+      tmp.style.cssText='position:absolute;left:-9999px';
+      document.body.appendChild(tmp);
+      new QRCode(tmp,{text:url,width:200,height:200,colorDark:'#0f4d8f',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+      setTimeout(()=>{
+        const src = tmp.querySelector('canvas') || tmp.querySelector('img');
+        if (src) {
+          if (src.tagName==='CANVAS') {
+            ctx.drawImage(src,0,0);
+          } else {
+            const img=new Image(); img.onload=()=>ctx.drawImage(img,0,0,200,200); img.src=src.src;
+          }
+        }
+        document.body.removeChild(tmp);
+        canvas.dataset.qrUrl = url;
+      },150);
+    } catch(e) {
+      ctx.clearRect(0,0,200,200);
+      ctx.fillStyle='#fff'; ctx.fillRect(0,0,200,200);
+      ctx.fillStyle='#888'; ctx.font='10px monospace'; ctx.textAlign='center';
+      ctx.fillText('QR library unavailable.',100,100);
+    }
+  },50);
+};
+
+window.closeQRModal = function() {
+  document.getElementById('qr-overlay').classList.remove('show');
+};
+
+window.saveQRImage = function() {
+  const canvas = document.getElementById('qr-canvas');
+  const pt = (document.getElementById('pt-name')?.value||'patient').replace(/\W+/g,'_').toLowerCase();
+  const a = document.createElement('a');
+  a.download = 'compass_qr_'+pt+'_'+new Date().toISOString().slice(0,10)+'.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+};
+
+// ── AUTO-LOAD FROM QR PARAMS ON PAGE OPEN ──
+(function autoLoad(){
+  const p = new URLSearchParams(window.location.search);
+  if (!p.get('qr')) return;
+  const data = {};
+  p.forEach((v,k)=>{ if(k!=='qr') data[L[k]||k]=v; });
+  if (!Object.keys(data).length) return;
+
+  function fill() {
+    Object.entries(data).forEach(([id,val])=>{
+      const el=document.getElementById(id); if(!el) return;
+      if (el.type==='checkbox') el.checked=(val==='1');
+      else if (el.tagName==='SELECT') {
+        const m=Array.from(el.options).find(o=>o.value.toLowerCase()===val.toLowerCase());
+        if(m) el.value=m.value;
+      } else el.value=val;
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+      el.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+    if(typeof window.calcAge==='function') window.calcAge();
+    if(typeof window.updateMechDetail==='function') window.updateMechDetail();
+    if(typeof window.live==='function') window.live();
+    ['a','b','c','d','e'].forEach(s=>{
+      const b=document.getElementById('abcde-'+s+'-body'),a=document.getElementById('abcde-'+s+'-arrow');
+      if(b&&b.classList.contains('collapsed')){b.classList.remove('collapsed');if(a)a.classList.remove('collapsed');}
+    });
+    if(typeof window.showToast==='function')
+      window.showToast({type:'success',title:'✅ Patient loaded via QR',msg:Object.keys(data).length+' fields restored.',duration:4000});
+  }
+
+  // Hook into enterApp so fill runs after login
+  const _orig = window.enterApp;
+  window.enterApp = function(u,i){ _orig(u,i); setTimeout(fill,900); };
+})();
+
+})(); // end QR module
 </script>
 
 </body>
